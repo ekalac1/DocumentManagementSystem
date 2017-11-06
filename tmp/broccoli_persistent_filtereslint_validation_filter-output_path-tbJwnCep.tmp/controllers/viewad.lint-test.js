@@ -1,0 +1,4 @@
+QUnit.test('controllers/viewad.js', function(assert) {
+  assert.expect(1);
+  assert.ok(false, 'controllers/viewad.js should pass ESLint\n\n17:72 - \'x\' is defined but never used. (no-unused-vars)\n26:56 - \'err\' is defined but never used. (no-unused-vars)\n52:69 - \'x\' is defined but never used. (no-unused-vars)\n63:22 - \'err\' is defined but never used. (no-unused-vars)\n79:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n82:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n84:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n87:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n90:43 - \'x\' is defined but never used. (no-unused-vars)\n95:2 - Mixed spaces and tabs. (no-mixed-spaces-and-tabs)\n105:44 - \'x\' is defined but never used. (no-unused-vars)\n113:26 - \'err\' is defined but never used. (no-unused-vars)');
+});

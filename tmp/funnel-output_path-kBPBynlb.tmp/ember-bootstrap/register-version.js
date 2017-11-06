@@ -1,0 +1,1 @@
+/Users/elza/Projects/Posao_FE/tmp/funnel-input_base_path-iEDJkM5Z.tmp/ember-bootstrap/register-version.template

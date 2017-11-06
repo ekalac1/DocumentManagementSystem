@@ -1,0 +1,1 @@
+/Users/elza/Projects/Posao_FE/node_modules/ember-data/addon/adapter.js

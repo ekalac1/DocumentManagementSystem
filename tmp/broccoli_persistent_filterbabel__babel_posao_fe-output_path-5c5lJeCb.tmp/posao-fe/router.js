@@ -1,0 +1,34 @@
+define('posao-fe/router', ['exports', 'posao-fe/config/environment'], function (exports, _environment) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+
+  var Router = Ember.Router.extend({
+    location: _environment.default.locationType,
+    rootURL: _environment.default.rootURL
+  });
+
+  Router.map(function () {
+    this.route('index', { path: '/' });
+    this.route('registracija', { path: '/registracija' });
+    this.route('login', { path: '/login' });
+    this.route('personal-adverts', { path: '/moji-oglasi' });
+    this.route('dodaj-oglas', { path: '/dodaj-oglas' });
+    this.route('viewad', { path: '/ad/:id' });
+    this.route('profile');
+    this.route('kreiraj-template', { path: '/kreiraj-template' });
+    this.route('edit-kategorije');
+    this.route('outbox');
+    this.route('pregled-notifikacija');
+    this.route('pregled-korisnika');
+    this.route('pregled-profila-public');
+
+    this.route('unauthorized');
+    this.route("error", { path: "*path" });
+  });
+
+  exports.default = Router;
+});

@@ -1,0 +1,134 @@
+<div class="registrationPage">
+
+  <!-- Background Image -->
+  <div class="img img-responsive pozadinaDodavanjeOglasa cover-screen"></div>
+  
+  <div class="container">
+    <div class="row">
+
+      <form class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <div class="col-xs-12 distinct-page-form">
+          <div class="text-center">
+            <h1>Kreiranje oglasa</h1>
+            <hr class="h-divider" />
+          </div>
+          <div>
+            <!-- Kategorija -->
+            <div class="form-group pomjereniTextBox">
+                <label for="category">Kategorija oglasa:</label><br>
+                {{#if kategorijaError}}
+                  <span class="greskaUnosa">Trebate unijeti kategoriju!</span>
+                {{/if}}
+
+                <select class="form-control" name="kategorija" onchange={{action "selectKategorija" value="target.value"}}>
+                  <option value="-1" >-</option>
+                  {{#each model.kategorije as |kategorija|}}      
+                    <option value={{kategorija.id}}>{{kategorija.naziv}}</option>
+                  {{/each}}
+                </select>
+            </div>
+
+            <!-- Template -->
+            <div class="form-group pomjereniTextBox">
+                <label for="category">Template oglasa:</label><br>
+
+                {{#if templateError}}
+                  <span class="greskaUnosa">Trebate unijeti template!</span>
+                {{/if}}
+
+                <select class="form-control" name="template" onchange={{action "selectTemplate" value="target.value"}}>
+                  <option value="-1" >-</option>
+                  {{#each model.templatei as |template|}}      
+                    <option value={{template.id}}>{{template.naziv}}</option>
+                  {{/each}}
+                </select>
+            </div>
+
+            <!-- Lokacija -->
+            <div class="form-group pomjereniTextBox">
+              <label for="category">Lokacija:</label><br>
+
+              {{#if lokacijaError}}
+                <span class="greskaUnosa">Trebate unijeti lokaciju!</span>
+              {{/if}}
+
+              <select class="form-control" name="lokacija" onchange={{action "selectLokacija" value="target.value"}}>
+                  <option value="-1" >-</option>
+                  {{#each model.lokacije as |lokacija|}}      
+                    <option value={{lokacija.id}}>{{lokacija.naziv}}</option>
+                  {{/each}}
+              </select>
+            </div>
+
+            <!-- Naziv oglasa -->
+            <div class="form-group pomjereniTextBox">
+              <label for="inputNaziv1">Naziv oglasa:</label><br>
+
+              {{#if nazivError}}
+                <span class="greskaUnosa">Trebate unijeti naziv oglasa!</span>
+              {{/if}}
+
+              {{input type="text" class="form-control" id="inputNaziv1" placeholder="Naziv" value=naziv}}
+            </div>
+
+            <!-- Opis -->
+            <div class="form-group firma">
+              <label for="inputOpis">Opis:</label><br>
+
+              {{#if opisError}}
+                  <span class="greskaUnosa">Trebate unijeti opis!</span>
+              {{/if}}
+              
+              {{textarea class="form-control" id="inputOpis" value=opis}}
+            </div>
+
+            <!-- Trajanje oglasa -->
+            <div class="form-group datum">
+              <label class="marginaWTF" for="inputDateTime">Trajanje oglasa:</label><br>
+
+              {{#if datumError}}
+                <span class="greskaUnosa">Trebate unijeti trajanje oglasa kao pozitivan cijeli broj.</span>
+              {{/if}}
+
+              <div class='input-group datum date' id='inputDateTime'>
+                  {{input type='number' class="form-control datum" value=trajanje}}   
+              </div>
+            </div>
+
+            <!-- Polja oglasa -->
+
+            {{#each polja as |polje index|}}
+            <div class="form-group pomjereniTextBox">
+              <label for={{polje.staje}}>{{polje.staje}}:</label><br>
+
+              {{#if templateError}}
+                <span class="greskaUnosa">Trebate unijeti polje!</span>
+              {{/if}}
+
+              {{input type="text" class="form-control" placeholder=polje.staje value=polje.vrijednost}}
+            </div>
+            {{/each}}
+
+            <!-- Error providers -->
+            <div class="form-group text-center">
+              {{#if poljaError}}
+                <span class="greskaUnosa">Morate ispuniti sva polja.</span>
+              {{/if}}
+
+              {{#if serverError}}
+              <span class="greskaUnosa">Došlo je do greške prilikom unosa oglasa.</span>
+              <span class="greskaUnosa">{{serverErrorText}}</span>
+              {{/if}}
+              {{#if serverSuccess}}
+              <span class="greskaUnosa">Uspješno kreiran oglas.</span>
+              {{/if}}
+
+              <button type="submit" class="btn btn-success" {{action 'register'}}>Dodaj</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

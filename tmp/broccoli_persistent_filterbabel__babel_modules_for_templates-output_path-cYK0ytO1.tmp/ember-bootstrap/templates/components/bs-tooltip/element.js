@@ -1,0 +1,6 @@
+define("ember-bootstrap/templates/components/bs-tooltip/element", ["exports"], function (exports) {
+  "use strict";
+
+  exports.__esModule = true;
+  exports.default = Ember.HTMLBars.template({ "id": "hjeX1h88", "block": "{\"statements\":[[6,[\"ember-popper\"],null,[[\"id\",\"class\",\"ariaRole\",\"placement\",\"renderInPlace\",\"target\",\"modifiers\",\"popperContainer\",\"onCreate\",\"onUpdate\"],[[28,[\"id\"]],[28,[\"popperClass\"]],[28,[\"ariaRole\"]],[28,[\"placement\"]],[28,[\"renderInPlace\"]],[28,[\"target\"]],[28,[\"popperModifiers\"]],\"#ember-bootstrap-wormhole\",[33,[\"action\"],[[28,[null]],\"updatePlacement\"],null],[33,[\"action\"],[[28,[null]],\"updatePlacement\"],null]]],{\"statements\":[[0,\"  \"],[11,\"div\",[]],[15,\"class\",\"tooltip-arrow\"],[13],[14],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"tooltip-inner\"],[13],[0,\"\\n    \"],[18,\"default\"],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null]],\"locals\":[],\"named\":[],\"yields\":[\"default\"],\"hasPartials\":false}", "meta": { "moduleName": "ember-bootstrap/templates/components/bs-tooltip/element.hbs" } });
+});
