@@ -7,7 +7,7 @@ let App;
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
-#promjena
+
 
 App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
