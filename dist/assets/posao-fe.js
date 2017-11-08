@@ -1233,12 +1233,7 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 		usernameError: false,
 		passwordError: false,
 		emailError: false,
-		telefonError: false,
 		imeError: false,
-		prezimeError: false,
-		firmaError: false,
-		cvError: false,
-		tipError: false,
 		serverSuccess: false,
 		serverError: false,
 		serverErrorText: "",
@@ -1252,21 +1247,11 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 			var _usernameError = false;
 			var _passwordError = false;
 			var _emailError = false;
-			var _telefonError = false;
 			var _imeError = false;
-			var _prezimeError = false;
-			var _firmaError = false;
-			var _cvError = false;
-			var _tipError = false;
 			var _ponovljeniPassError = false;
 
 			//email unicode
 			var re1 = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-			if (this.get("tip") == null) {
-				ispravno = false;
-				_tipError = true;
-			}
 
 			if (this.get("username") == null || this.get("username").length < 1 || !this.get("username").match(/^[0-9a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\-_\.]{2,30}$/i)) {
 				ispravno = false;
@@ -1293,45 +1278,15 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 				_emailError = true;
 			}
 
-			if (!_tipError && this.get("tip") == "Nezaposleni") {
-				if (this.get("cv") == null || this.get("cv").replace(/\s/g, "").length < 1 || this.get("cv").length < 50 || !this.get("cv").match(/^[ 0-9a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\ \_\+\-\*\:\.\,\;\?\!\$\#\(\)\[\]\{\}\=\@]{1,500}$/im)) {
-					ispravno = false;
-					_cvError = true;
-				}
-			}
-
-			if (!_tipError && this.get("tip") == "Poslodavac") {
-				if (this.get("telefon") == null || !this.get("telefon").match(/^\d{9}$/) && !this.get("telefon").match(/^\d{8}$/)) {
-					ispravno = false;
-					_telefonError = true;
-				}
-
-				if (this.get("nazivFirme") == null || this.get("nazivFirme").replace(/\s/g, "").length < 1 || !this.get("nazivFirme").match(/^[ 0-9a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\-_\.]{2,30}$/i)) {
-					ispravno = false;
-					_firmaError = true;
-				}
-			}
-
 			if (this.get("ime") == null || this.get("ime").length > 15 || this.get("ime").replace(/\s/g, "").length < 1 || !this.get("ime").match(/^[ a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\-]{2,30}$/i)) {
 				ispravno = false;
 				_imeError = true;
 			}
 
-			if (this.get("prezime") == null || this.get("prezime").length > 30 || this.get("prezime").replace(/\s/g, "").length < 1 || !this.get("prezime").match(/^[ a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\-]{2,30}$/i)) {
-				ispravno = false;
-				_prezimeError = true;
-			}
-
 			this.set("usernameError", _usernameError);
 			this.set("passwordError", _passwordError);
 			this.set("emailError", _emailError);
-			this.set("telefonError", _telefonError);
 			this.set("imeError", _imeError);
-			this.set("prezimeError", _prezimeError);
-			this.set("firmaError", _firmaError);
-			this.set("cvError", _cvError);
-			this.set("firmaError", _firmaError);
-			this.set("tipError", _tipError);
 			this.set("ponovljeniPassError", _ponovljeniPassError);
 
 			return ispravno;
@@ -1354,22 +1309,7 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 
 		actions: {
 			register: function register() {
-				var korisnik = this.getProperties('username', 'password', 'email');
-
-				if (this.getProperties('tip').tip === "Nezaposleni") {
-					var nezaposleni = this.getProperties('ime', 'prezime', 'cv');
-					//nezaposleni.cv = this.cv;
-					nezaposleni.privatanProfil = 0; //trenutno hardkodirano, treba promijeniti
-					korisnik.poslodavac = null;
-					korisnik.admin = null;
-					korisnik.nezaposleni = nezaposleni;
-				} else if (this.getProperties('tip').tip === "Poslodavac") {
-					var poslodavac = this.getProperties('ime', 'prezime', 'telefon', 'nazivFirme');
-					poslodavac.skriveniPodaci = {}; //trenutno hardkodirano, treba promijeniti
-					korisnik.nezaposleni = null;
-					korisnik.admin = null;
-					korisnik.poslodavac = poslodavac;
-				}
+				var korisnik = this.getProperties('username', 'password', 'email', 'ime');
 
 				if (this.validiraj()) {
 					this.register(korisnik);
@@ -2983,7 +2923,7 @@ define("posao-fe/templates/registracija", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "yhAf3Vkr", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"registrationPage\"],[13],[0,\"\\n\"],[4,\" Background Image \"],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"row\"],[13],[0,\"\\n      \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n          \"],[11,\"h1\",[]],[13],[0,\"Kreiranje korisničkog računa\"],[14],[0,\"\\n          \"],[4,\"<p>i<i>The expert in anything was once a begginer</i></p>,\"],[0,\"\\n          \"],[11,\"hr\",[]],[15,\"class\",\"h-divider\"],[13],[14],[0,\"\\n        \"],[14],[0,\"\\n\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12\"],[13],[0,\"\\n\\n           \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputIme1\"],[13],[0,\"Ime i prezime:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"imeError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Ime se može sastojati samo od slova i znaka -!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"inputIme1\",\"Ime\",[28,[\"ime\"]]]]],false],[0,\"\\n\\n          \"],[14],[0,\"\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputUsername1\"],[13],[0,\"Korisničko ime:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"usernameError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[1,[26,[\"imeVarijable\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"inputUsername1\",\"Username\",[28,[\"username\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputPassword3\"],[13],[0,\"Lozinka:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"passwordError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Password mora imati minimalno 6 karaktera i to samo slova, brojeve i znakove +-_*:.,;?!$#!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"password\",\"form-control\",\"inputPassword3\",\"Password\",[28,[\"password\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputEmail3\"],[13],[0,\"Email:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"emailError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Morate unijeti validan email!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"email\",\"form-control\",\"inputEmail3\",\"Email\",[28,[\"email\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputPassword3_pon\"],[13],[0,\"Ponovite lozinku:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"ponovljeniPassError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Unosi lozinke se ne podudaraju.\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"password\",\"form-control\",\"inputPassword3_pon\",\"Password\",[28,[\"ponovljeniPass\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n          \\n\"],[6,[\"if\"],[[28,[\"serverSuccess\"]]],null,{\"statements\":[[0,\"            \"],[11,\"p\",[]],[13],[0,\"Uspješno ste registrovani!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[6,[\"if\"],[[28,[\"serverError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"p\",[]],[13],[0,\"Nažalost, došlo je do greške prilikom registracije.\"],[14],[0,\"\\n            \"],[11,\"p\",[]],[13],[1,[26,[\"serverErrorText\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"                    \\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group text-center\"],[13],[0,\"\\n              \"],[11,\"button\",[]],[15,\"type\",\"submit\"],[15,\"class\",\"btn btn-success\"],[5,[\"action\"],[[28,[null]],\"register\"]],[13],[0,\"Registruj se\"],[14],[0,\"\\n          \"],[14],[0,\"\\n        \"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/registracija.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "Lz2P1q3d", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"registrationPage\"],[13],[0,\"\\n\"],[4,\" Background Image \"],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"row\"],[13],[0,\"\\n      \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n          \"],[11,\"h1\",[]],[13],[0,\"Kreiranje korisničkog računa\"],[14],[0,\"\\n          \"],[11,\"hr\",[]],[15,\"class\",\"h-divider\"],[13],[14],[0,\"\\n        \"],[14],[0,\"\\n\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12\"],[13],[0,\"\\n\\n           \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputIme1\"],[13],[0,\"Ime i prezime:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"imeError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Ime se može sastojati samo od slova i znaka -!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"inputIme1\",\"Ime\",[28,[\"ime\"]]]]],false],[0,\"\\n\\n          \"],[14],[0,\"\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputUsername1\"],[13],[0,\"Korisničko ime:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"usernameError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[1,[26,[\"imeVarijable\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"inputUsername1\",\"Username\",[28,[\"username\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputPassword3\"],[13],[0,\"Lozinka:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"passwordError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Password mora imati minimalno 6 karaktera i to samo slova, brojeve i znakove +-_*:.,;?!$#!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"password\",\"form-control\",\"inputPassword3\",\"Password\",[28,[\"password\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputEmail3\"],[13],[0,\"Email:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"emailError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Morate unijeti validan email!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"email\",\"form-control\",\"inputEmail3\",\"Email\",[28,[\"email\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n\\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[11,\"label\",[]],[15,\"for\",\"inputPassword3_pon\"],[13],[0,\"Ponovite lozinku:\"],[14],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"ponovljeniPassError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"span\",[]],[15,\"class\",\"greskaUnosa\"],[13],[0,\"Unosi lozinke se ne podudaraju.\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"password\",\"form-control\",\"inputPassword3_pon\",\"Password\",[28,[\"ponovljeniPass\"]]]]],false],[0,\"\\n          \"],[14],[0,\"\\n          \\n\"],[6,[\"if\"],[[28,[\"serverSuccess\"]]],null,{\"statements\":[[0,\"            \"],[11,\"p\",[]],[13],[0,\"Uspješno ste registrovani!\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[6,[\"if\"],[[28,[\"serverError\"]]],null,{\"statements\":[[0,\"            \"],[11,\"p\",[]],[13],[0,\"Nažalost, došlo je do greške prilikom registracije.\"],[14],[0,\"\\n            \"],[11,\"p\",[]],[13],[1,[26,[\"serverErrorText\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"                    \\n          \"],[11,\"div\",[]],[15,\"class\",\"form-group text-center\"],[13],[0,\"\\n              \"],[11,\"button\",[]],[15,\"type\",\"submit\"],[15,\"class\",\"btn btn-success\"],[5,[\"action\"],[[28,[null]],\"register\"]],[13],[0,\"Registruj se\"],[14],[0,\"\\n          \"],[14],[0,\"\\n        \"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/registracija.hbs" } });
 });
 
 
@@ -3007,6 +2947,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+53b7231f"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+7da2114c"});
 }
 //# sourceMappingURL=posao-fe.map
