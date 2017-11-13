@@ -4,6 +4,9 @@ export default Ember.Route.extend({
 	korisnikService: Ember.inject.service('korisnik-service'),
 	oglasiService: Ember.inject.service('oglasi-service'),
 	session: Ember.inject.service('session'),
+	serverError: false,
+	serverErrorText: "",
+	serverSuccess: false,
 
 	beforeModel: function(transition) {
 
@@ -13,8 +16,9 @@ export default Ember.Route.extend({
 	},
 
 	model: function(params, transition) {
+		var self = this;
 		let username = this.get("session.data.authenticated.username");
-		let _profil = this.get('oglasiService').all(username)
+		let _profil = this.get('oglasiService').all(username);
 
 		 return Ember.RSVP.hash({
          	oglas: _profil,

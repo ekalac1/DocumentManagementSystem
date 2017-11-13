@@ -1171,6 +1171,7 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 
 		validiraj: function validiraj() {
 
+			//ne diraj, koristis
 			var ispravno = true;
 
 			var _usernameError = false;
@@ -2356,6 +2357,9 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 		korisnikService: Ember.inject.service('korisnik-service'),
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
+		serverError: false,
+		serverErrorText: "",
+		serverSuccess: false,
 
 		beforeModel: function beforeModel(transition) {
 
@@ -2365,6 +2369,7 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 		},
 
 		model: function model(params, transition) {
+			var self = this;
 			var username = this.get("session.data.authenticated.username");
 			var _profil = this.get('oglasiService').all(username);
 
@@ -2615,13 +2620,15 @@ define('posao-fe/services/lokacija-service', ['exports', 'posao-fe/services/base
         }
     });
 });
-define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/oglas', 'posao-fe/globals'], function (exports, _baseService, _oglas, _globals) {
+define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/oglas'], function (exports, _baseService, _oglas) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
     exports.default = _baseService.default.extend({
+
+        //sve je uredu ovdje, ne diraj
 
         all: function all(username) {
             var oglasi = [];
@@ -2635,28 +2642,7 @@ define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-s
         },
         postavi: function postavi(oglas) {
             return this.ajax({ url: 'content/save', type: "POST", data: JSON.stringify(oglas) });
-        },
-
-        zatvori: function zatvori(id) {
-            return this.ajax({ url: 'oglasi/close?id=' + id, type: "POST", data: {} });
-        },
-
-        search: function search(name, kategorijaId, filter, asc) {
-            var query = "oglasi/search?";
-
-            var oglasi = [];
-            this.ajax({ url: query, type: "GET" }).then(function (data) {
-                data.forEach(function (oglas) {
-                    oglas.datumObjave = (0, _globals.default)(oglas.datumObjave);
-                    var date = new Date(oglas.datumIsteka);
-                    oglas.datumIsteka = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.';
-                    oglasi.addObject(_oglas.default.create(oglas));
-                });
-            });
-
-            return oglasi;
         }
-
     });
 });
 define('posao-fe/services/poruke-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/poruka', 'posao-fe/globals'], function (exports, _baseService, _poruka, _globals) {
@@ -2776,7 +2762,7 @@ define("posao-fe/templates/error", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "N2NMRgra", "block": "{\"statements\":[[11,\"p\",[]],[13],[0,\"Pokušali ste pristupiti sadržaju koji ne postoji ili je došlo do greške.\"],[14]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/error.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "vXQcAS5x", "block": "{\"statements\":[[0,\"\\n\"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n    \"],[11,\"p\",[]],[13],[0,\"Pokušali ste pristupiti sadržaju koji ne postoji ili je došlo do greške.\"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/error.hbs" } });
 });
 define("posao-fe/templates/index", ["exports"], function (exports) {
   "use strict";
@@ -2800,7 +2786,7 @@ define("posao-fe/templates/profile", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "2lUStg9k", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n  \\t\"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"  \\t\\t\\t\"],[11,\"tr\",[]],[15,\"class\",\"table-row\"],[13],[0,\"\\n  \\t\\t\\t\\t\"],[11,\"td\",[]],[15,\"class\",\"col-md-6\"],[13],[0,\"\\n  \\t\\t\\t\\t\\t\"],[11,\"h4\",[]],[15,\"class\",\"title\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n  \\t                \"],[11,\"p\",[]],[15,\"class\",\"desc\"],[13],[0,\"Tip podatka: \"],[1,[28,[\"oglas\",\"datatype\"]],false],[14],[0,\"\\n  \\t\\t\\t\\t\"],[14],[0,\"\\n  \\t\\t\\t\"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"  \\t\"],[14],[0,\"\\n  \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\\n\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "wbTIJ4VZ", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[15,\"class\",\"table-row\"],[13],[0,\"\\n          \"],[11,\"td\",[]],[15,\"class\",\"col-md-6\"],[13],[0,\"\\n            \"],[11,\"h4\",[]],[15,\"class\",\"title\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n            \"],[11,\"p\",[]],[15,\"class\",\"desc\"],[13],[0,\"Tip podatka: \"],[1,[28,[\"oglas\",\"datatype\"]],false],[14],[0,\"\\n          \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
 });
 define("posao-fe/templates/registracija", ["exports"], function (exports) {
   "use strict";
@@ -2832,6 +2818,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+8da83bf7"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+4d8e7d1f"});
 }
 //# sourceMappingURL=posao-fe.map

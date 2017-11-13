@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
 
 	validiraj: function(){
 
-
+   //ne diraj, koristis
 		let ispravno = true;
 
 		let _usernameError = false;
@@ -23,11 +23,11 @@ export default Ember.Controller.extend({
 		let _emailError = false;
 		let _imeError = false;
 		let _ponovljeniPassError = false;
-		
+
 		//email unicode
 		let re1 = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-		
+
 		if (this.get("username") == null || this.get("username").length < 1 || !this.get("username").match(/^[0-9a-z\u0106\u0107\u010C\u010D\u0110\u0111\u0160\u0161\u017D-\u017F\u212A\-_\.]{2,30}$/i)){
 			ispravno = false;
 			_usernameError = true;
@@ -48,10 +48,10 @@ export default Ember.Controller.extend({
 			if (this.get("ponovljeniPass") == null || (this.get("ponovljeniPass") !== this.get("password")))
 			{
 					ispravno = false;
-					_ponovljeniPassError = true;				
+					_ponovljeniPassError = true;
 			}
 		}
-		
+
 		if (this.get("email") == null || !re1.test(this.get("email"))){
 			ispravno = false;
 			_emailError = true;
@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
 		}
 
 		this.set("usernameError", _usernameError);
-		this.set("passwordError", _passwordError);		
+		this.set("passwordError", _passwordError);
 		this.set("emailError", _emailError);
 		this.set("imeError", _imeError);
 		this.set("ponovljeniPassError", _ponovljeniPassError);
@@ -93,7 +93,7 @@ export default Ember.Controller.extend({
     actions: {
     	register: function(){
 			let korisnik = this.getProperties('username', 'password', 'email', 'ime');
-			
+
 			if (this.validiraj()){
 				this.register(korisnik);
 			}
