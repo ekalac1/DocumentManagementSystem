@@ -1,5 +1,5 @@
 <!-- Background Image -->
-    <div class="img img-responsive pozadinaRegistracije cover-screen"></div>
+<div class="img img-responsive pozadinaRegistracije cover-screen"></div>
 
 <div class="wrap">
   <nav class="navbar navbar-default">
@@ -17,33 +17,55 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class={{collapsedStr}} id="bs-example-navbar-collapse-1">
-      {{#if session.isAuthenticated}}
+        {{#if session.isAuthenticated}}
         <div class="navbar-form navbar-right">
-          <span class="dobrodosli">Dobro došli, 
+          <span class="dobrodosli">Dobro došli,
             {{#link-to "profile" class="registracija-link"}}
-              {{session.data.authenticated.username}}
+            {{session.data.authenticated.username}}
             {{/link-to}}
             &ensp;
           </span>
+          <div class="col-xs-5 ">
+            {{#if session.isAuthenticated}}
+            {{#file-picker fileLoaded="fileLoaded"
+            readAs="readAsDataURL"
+            preview = false}}
+            <p>Drag here or click to upload a file</<p>
+            {{/file-picker}}
+            {{/if}}
+          </div>
+          <div class="col-xs-5">
+            {{#if serverSuccess}}
+            <p>Uspješno ste sačuvali fajl</p>
+            {{/if}}
+            {{#if serverError}}
+            <p>Nažalost, došlo je do greške prilikom učitavanja fajla.</p>
+            <p>{{serverErrorText}}</p>
+            {{/if}}
+          </div>
           <button class="btn btn-default login-button" {{action 'logout'}}>Odjava</button>
         </div>
-        {{else}}
-        <form class="navbar-form navbar-right login-form" {{action 'loginNormal' on='submit'}}>
-          {{#if credentialsError}}
+        <div class="navbar-form navbar-right">
+
+          </div>
+
+          {{else}}
+          <form class="navbar-form navbar-right login-form" {{action 'loginNormal' on='submit'}}>
+            {{#if credentialsError}}
             <span class="registracija-link" style="color: red !important;">Pogrešni pristupni podaci</span>
-          {{/if}} 
-          {{#link-to "registracija" class="registracija-link"}}Nemaš profil?&ensp;Registruj se!{{/link-to}}
-          <div class="form-group">
-            {{input type="text" class="form-control" placeholder="Korisničko ime" value=identification}}
-          </div>
-          <div class="form-group">
-            {{input type="password" class="form-control" placeholder="Lozinka" value=password}}
-          </div>
-          <button type="submit" class="btn btn-default login-button">Prijava</button>
-        </form>
-        {{/if}}
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  {{outlet}}
-</div>
+            {{/if}}
+            {{#link-to "registracija" class="registracija-link"}}Nemaš profil?&ensp;Registruj se!{{/link-to}}
+            <div class="form-group">
+              {{input type="text" class="form-control" placeholder="Korisničko ime" value=identification}}
+            </div>
+            <div class="form-group">
+              {{input type="password" class="form-control" placeholder="Lozinka" value=password}}
+            </div>
+            <button type="submit" class="btn btn-default login-button">Prijava</button>
+          </form>
+          {{/if}}
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    {{outlet}}
+  </div>

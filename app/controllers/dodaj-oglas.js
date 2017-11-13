@@ -44,14 +44,6 @@ export default Ember.Controller.extend({
             _lokacijaError = true;
         }
 
-
-        //suvišno?
-
-        //if (this.get("template") == null){
-        //    ispravno = false;
-        //    _templateError = true;
-        //}
-
         if (this.get("trajanje") == null || Number.parseInt(this.get('trajanje')) < 1){
             ispravno = false;
             _datumError = true;

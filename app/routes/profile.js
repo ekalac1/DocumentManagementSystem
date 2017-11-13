@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	korisnikService: Ember.inject.service('korisnik-service'),
+	oglasiService: Ember.inject.service('oglasi-service'),
 	session: Ember.inject.service('session'),
 
 	beforeModel: function(transition) {
@@ -11,13 +12,12 @@ export default Ember.Route.extend({
 		}
 	},
 
-
 	model: function(params, transition) {
 		let username = this.get("session.data.authenticated.username");
-		let _profil = this.get('korisnikService').profil(username);
-	
-		return Ember.RSVP.hash({
-        	profil: _profil,
-    	})
+		let _profil = this.get('oglasiService').all(username)
+
+		 return Ember.RSVP.hash({
+         	oglas: _profil,
+  	})
 	}
 })
