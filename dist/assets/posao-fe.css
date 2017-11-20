@@ -107,7 +107,7 @@ body {
   box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.4);
 }
 .navbar, .navbar-brand {
-  font-family: 'Montserrat', sans-serif !important; 
+  font-family: 'Montserrat', sans-serif !important;
 }
 .navbar-brand {
   font-size: 1.5em;
@@ -133,7 +133,7 @@ body {
   margin-bottom: -20px;
 }
 .login-form > a:hover {
-  color: #efe743; 
+  color: #efe743;
 }
 .login-button {
   text-transform: uppercase;
@@ -246,7 +246,7 @@ body {
   text-decoration: none;
 }
 .dobrodosli{
-  color: #ededed;  
+  color: #ededed;
 }
 /* ---------------- Registracija----------------------*/
 
@@ -290,6 +290,12 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.tbl_txt{
+    margin-top: 5%;
+}
+.tbl_btn{
+    margin-top: 10%;
 }
 .pomjereniTextBox{
   display: inline-block;
@@ -399,7 +405,7 @@ margin-left:2%;
     .collapse.in{
         display:block !important;
     }
-    
+
     /* Login forma */
     .login-form { padding-right: inherit; }
 

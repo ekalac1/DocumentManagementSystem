@@ -1106,38 +1106,38 @@ define('posao-fe/controllers/dodaj-oglas', ['exports'], function (exports) {
     });
 });
 define('posao-fe/controllers/index', ['exports', 'posao-fe/models/oglas'], function (exports, _oglas) {
-      'use strict';
+  'use strict';
 
-      Object.defineProperty(exports, "__esModule", {
-            value: true
-      });
-      exports.default = Ember.Controller.extend({
-            session: Ember.inject.service('session'),
-            oglasiService: Ember.inject.service('oglasi-service'),
-            actions: {
-                  fileLoaded: function fileLoaded(file) {
-                        var oglas = {};
-                        var self = this;
-                        oglas.fileName = file.name;
-                        oglas.content = file.data;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Controller.extend({
+    session: Ember.inject.service('session'),
+    oglasiService: Ember.inject.service('oglasi-service'),
+    actions: {
+      fileLoaded: function fileLoaded(file) {
+        var oglas = {};
+        var self = this;
+        oglas.fileName = file.name;
+        oglas.content = file.data;
 
-                        oglas.datatype = file.type;
+        oglas.datatype = file.type;
 
-                        oglas.owner = 28;
+        oglas.owner = 28;
 
-                        console.log(file.data);
-                        this.get("oglasiService").postavi(oglas).then(function (x) {
-                              self.set("serverSuccess", true);
-                              self.set("serverError", false);
-                              self.set("serverErrorText", "");
-                        }).catch(function (err) {
-                              self.set("serverSuccess", false);
-                              self.set("serverError", true);
-                              self.set("serverErrorText", err.responseText);
-                        });
-                  }
-            }
-      });
+        console.log(file.data);
+        this.get("oglasiService").postavi(oglas).then(function (x) {
+          self.set("serverSuccess", true);
+          self.set("serverError", false);
+          self.set("serverErrorText", "");
+        }).catch(function (err) {
+          self.set("serverSuccess", false);
+          self.set("serverError", true);
+          self.set("serverErrorText", err.responseText);
+        });
+      }
+    }
+  });
 });
 define('posao-fe/controllers/profile', ['exports'], function (exports) {
   'use strict';
@@ -1380,34 +1380,34 @@ define('posao-fe/controllers/viewad', ['exports'], function (exports) {
     });
 });
 define('posao-fe/globals', ['exports'], function (exports) {
-  'use strict';
+    'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  var getTimeAgo = function getTimeAgo(timestamp) {
-    var date = new Date(timestamp);
-    var seconds = Math.floor((new Date() - date) / 1000);
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    var getTimeAgo = function getTimeAgo(timestamp) {
+        var date = new Date(timestamp);
+        var seconds = Math.floor((new Date() - date) / 1000);
 
-    // manje od minute
-    if (seconds < 60) return 'Sada';
+        // manje od minute
+        if (seconds < 60) return 'Sada';
 
-    // manje od sata
-    if (seconds < 3600) return 'Prije ' + Math.floor(seconds / 60) + 'm';
+        // manje od sata
+        if (seconds < 3600) return 'Prije ' + Math.floor(seconds / 60) + 'm';
 
-    // manje od dana
-    if (seconds < 86400) {
-      return "Prije " + Math.floor(seconds / 3600) + 'h';
-    }
+        // manje od dana
+        if (seconds < 86400) {
+            return "Prije " + Math.floor(seconds / 3600) + 'h';
+        }
 
-    // manje od 2 dana
-    if (seconds < 172800) return "Jučer";
+        // manje od 2 dana
+        if (seconds < 172800) return "Jučer";
 
-    // vrati datum
-    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.';
-  };
+        // vrati datum
+        return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.';
+    };
 
-  exports.default = getTimeAgo;
+    exports.default = getTimeAgo;
 });
 define('posao-fe/helpers/and', ['exports', 'ember-truth-helpers/helpers/and'], function (exports, _and) {
   'use strict';
@@ -2339,13 +2339,37 @@ define('posao-fe/routes/error', ['exports'], function (exports) {
   exports.default = Ember.Route.extend({});
 });
 define('posao-fe/routes/index', ['exports'], function (exports) {
-  'use strict';
+	'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  var $ = Ember.$;
-  exports.default = Ember.Route.extend({});
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var $ = Ember.$;
+	exports.default = Ember.Route.extend({
+		korisnikService: Ember.inject.service('korisnik-service'),
+		oglasiService: Ember.inject.service('oglasi-service'),
+		session: Ember.inject.service('session'),
+		serverError: false,
+		serverErrorText: "",
+		serverSuccess: false,
+
+		beforeModel: function beforeModel(transition) {
+
+			if (!this.get('session.isAuthenticated')) {
+				return this.transitionTo("unauthorized");
+			}
+		},
+
+		model: function model(params, transition) {
+			var self = this;
+			var username = this.get("session.data.authenticated.username");
+			var _profil = this.get('oglasiService').share(username);
+
+			return Ember.RSVP.hash({
+				oglas: _profil
+			});
+		}
+	});
 });
 define('posao-fe/routes/profile', ['exports'], function (exports) {
 	'use strict';
@@ -2637,12 +2661,21 @@ define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-s
                     oglasi.addObject(_oglas.default.create(oglas));
                 });
             });
-
             return oglasi;
         },
         postavi: function postavi(oglas) {
             return this.ajax({ url: 'content/save', type: "POST", data: JSON.stringify(oglas) });
+        },
+        share: function share(username) {
+            var oglasi = [];
+            this.ajax({ url: 'content/workspace?user=' + username, type: "GET" }).then(function (data) {
+                data.forEach(function (oglas) {
+                    oglasi.addObject(_oglas.default.create(oglas));
+                });
+            });
+            return oglasi;
         }
+
     });
 });
 define('posao-fe/services/poruke-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/poruka', 'posao-fe/globals'], function (exports, _baseService, _poruka, _globals) {
@@ -2770,7 +2803,7 @@ define("posao-fe/templates/index", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "iR3aoMei", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"main-page\"],[13],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"row\"],[13],[0,\"\\n      \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n          \"],[11,\"h1\",[]],[13],[0,\"Welcome \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n          \"],[11,\"br\",[]],[13],[14],[0,\"\\n          \"],[11,\"p\",[]],[13],[0,\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum\"],[14],[0,\"\\n        \"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/index.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "RPB9bwMK", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"main-page\"],[13],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n      \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n        \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n          \"],[11,\"h1\",[]],[13],[0,\"Welcome \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n          \"],[11,\"br\",[]],[13],[14],[0,\"\\n          \"],[11,\"p\",[]],[13],[0,\"**Lista svih dokumenata koji su vam vidljivi**\"],[14],[0,\"\\n          \"],[11,\"p\",[]],[13],[0,\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum\"],[14],[0,\"\\n        \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"        \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n              \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n                \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"                  \"],[11,\"tr\",[]],[13],[0,\"\\n                      \"],[11,\"td\",[]],[13],[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14],[14],[0,\"\\n                      \"],[11,\"td\",[]],[13],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[14],[0,\"\\n                      \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[13],[0,\"Rename\"],[14],[14],[0,\"\\n                  \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"                \"],[14],[0,\"\\n              \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/index.hbs" } });
 });
 define("posao-fe/templates/main", ["exports"], function (exports) {
   "use strict";
@@ -2786,7 +2819,7 @@ define("posao-fe/templates/profile", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "wbTIJ4VZ", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[15,\"class\",\"table-row\"],[13],[0,\"\\n          \"],[11,\"td\",[]],[15,\"class\",\"col-md-6\"],[13],[0,\"\\n            \"],[11,\"h4\",[]],[15,\"class\",\"title\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n            \"],[11,\"p\",[]],[15,\"class\",\"desc\"],[13],[0,\"Tip podatka: \"],[1,[28,[\"oglas\",\"datatype\"]],false],[14],[0,\"\\n          \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "uo04e71F", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n        \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n          \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"            \"],[11,\"tr\",[]],[13],[0,\"\\n                \"],[11,\"td\",[]],[13],[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14],[14],[0,\"\\n                \"],[11,\"td\",[]],[13],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[14],[0,\"\\n                \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[13],[0,\"Rename\"],[14],[14],[0,\"\\n                \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[13],[0,\"Delete\"],[14],[14],[0,\"\\n            \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"          \"],[14],[0,\"\\n        \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
 });
 define("posao-fe/templates/registracija", ["exports"], function (exports) {
   "use strict";
@@ -2818,6 +2851,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+27c5cb7b"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+564aac89"});
 }
 //# sourceMappingURL=posao-fe.map

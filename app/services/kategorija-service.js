@@ -10,13 +10,12 @@ export default BaseService.extend({
         		kategorije.addObject(Kategorija.create(kategorija));
         	})
         });
-    
+
         return kategorije;
     },
 
     update: function(kategorija, kategorijaId) {
         return this.ajax({ url: `kategorije/update?id=${kategorijaId}`, type: "POST", data: JSON.stringify(kategorija)});
-
     },
 
     delete: function(id) {
