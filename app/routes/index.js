@@ -7,9 +7,9 @@ export default Ember.Route.extend({
 
 	beforeModel: function(transition) {
 
-		if(!this.get('session.isAuthenticated')) {
-			return this.transitionTo("unauthorized");
-		}
+		// if(!this.get('session.isAuthenticated')) {
+		// 	return this.transitionTo("unauthorized");
+		// }
 	},
 
 	model: function(params, transition) {

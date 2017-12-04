@@ -28,5 +28,8 @@ export default BaseService.extend({
     },
     delete: function(username, oglasId) {
       return this.ajax({url: `content/workspace?user=${username}&document=${oglasId}`, type: "DELETE"})
+    },
+    rename: function(username, oglasId, documentName) {
+      return this.ajax({url: `content/workspace?user=${username}&document=${oglasId}&name=${documentName}`, type: "POST"})
     }
 });

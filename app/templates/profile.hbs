@@ -9,26 +9,29 @@
 
   {{#if model.oglas.length}}
   <form class="distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 ">
-        <table class="table table-blue">
-          <tbody>
-            {{#each model.oglas as |oglas|}}
-            <tr>
-                <td>
-                  {{#if (eq oglas.datatype "text/plain")}}<img class="img-responsive" src="../assets/images/txt.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "image/png")}}<img class="img-responsive" src="../assets/images/png.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "application/pdf")}}<img class="img-responsive" src="../assets/images/pdf.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "image/jpeg")}}<img class="img-responsive" src="../assets/images/jpg.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "image/jpg")}}<img class="img-responsive" src="../assets/images/jpg.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}}<img class="img-responsive" src="../assets/images/doc.png" alt="txt">{{/if}}
-                  {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}}<img class="img-responsive" src="../assets/images/xls.png" alt="txt">{{/if}}
-                </td>
-                <td><p class = "tbl_txt">{{oglas.fileName}}</p></td>
-                <td><button type="button" class="btn btn-primary tbl_btn">Rename</button></td>
-                <td><button type="button" class="btn btn-primary tbl_btn"{{action 'delete' oglas.id}}>Delete</button></td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
+    <table class="table table-blue">
+      <tbody>
+        {{#each model.oglas as |oglas|}}
+        <tr>
+          <td>
+            {{#if (eq oglas.datatype "text/plain")}}<img class="img-responsive" src="../assets/images/txt.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "image/png")}}<img class="img-responsive" src="../assets/images/png.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "application/pdf")}}<img class="img-responsive" src="../assets/images/pdf.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "image/jpeg")}}<img class="img-responsive" src="../assets/images/jpg.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "image/jpg")}}<img class="img-responsive" src="../assets/images/jpg.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}}<img class="img-responsive" src="../assets/images/doc.png" alt="txt">{{/if}}
+            {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}}<img class="img-responsive" src="../assets/images/xls.png" alt="txt">{{/if}}
+          </td>
+          <td><p class = "tbl_txt">{{oglas.fileName}}</p></td>
+          <td><button type="button" class="btn btn-primary tbl_btn" {{action "toggleBody" oglas.id}}>Rename</button></td>
+          {{#if isShowingBody}}
+              {{input type="text" class="form-control" id="newName" placeholder="Novo ime" value=ime}}
+          {{/if}}
+          <td><button type="button" class="btn btn-primary tbl_btn"{{action 'delete' oglas.id}}>Delete</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </form>
   {{/if}}
 </div>

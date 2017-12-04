@@ -50,7 +50,7 @@
           </div>
 
           {{else}}
-          <form class="navbar-form navbar-right login-form" {{action 'loginNormal' on='submit'}}>
+          <form class="navbar-form navbar-right login-form" {{action 'login' on='submit'}}>
             {{#if credentialsError}}
             <span class="registracija-link" style="color: red !important;">Pogrešni pristupni podaci</span>
             {{/if}}
