@@ -888,6 +888,7 @@ define('posao-fe/controllers/application', ['exports'], function (exports) {
                     self.set("serverSuccess", true);
                     self.set("serverError", false);
                     self.set("serverErrorText", "");
+                    window.location.reload(true);
                 }).catch(function (err) {
                     self.set("serverSuccess", false);
                     self.set("serverError", true);
@@ -1147,8 +1148,9 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
     actions: {
       delete: function _delete(oglasId) {
         var korisnikId = this.get("session.data.authenticated.username");
-        this.get("oglasiService").delete(korisnikId, oglasId);
-        this.rerender();
+        this.get("oglasiService").delete(korisnikId, oglasId).then(function (x) {
+          window.location.reload(true);
+        }).catch(function (err) {});
       }
     }
   });
@@ -2869,6 +2871,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+8139fc66"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+bc9bc605"});
 }
 //# sourceMappingURL=posao-fe.map

@@ -26,12 +26,15 @@ export default Ember.Controller.extend({
         self.set("serverSuccess", true);
         self.set("serverError", false);
         self.set("serverErrorText", "");
+        window.location.reload(true);
       }).catch(err => {
           self.set("serverSuccess", false);
           self.set("serverError", true);
           self.set("serverErrorText", err.responseText);
-
       });
+
+
+
     },
 
         login: function(credentials, doRedirect) {

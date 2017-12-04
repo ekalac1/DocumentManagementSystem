@@ -6,8 +6,10 @@ export default Ember.Controller.extend({
   actions: {
     delete: function(oglasId) {
       let korisnikId = this.get("session.data.authenticated.username");
-        this.get("oglasiService").delete(korisnikId, oglasId)
-        this.rerender() 
+        this.get("oglasiService").delete(korisnikId, oglasId).then(x => {
+          window.location.reload(true);
+        }).catch(err => {
+        });
 }
     }
 });
