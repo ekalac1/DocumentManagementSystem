@@ -25,7 +25,8 @@ export default BaseService.extend({
             });
         });
         return oglasi;
+    },
+    delete: function(username, oglasId) {
+      return this.ajax({url: `content/workspace?user=${username}&document=${oglasId}`, type: "DELETE"})
     }
-
-
 });

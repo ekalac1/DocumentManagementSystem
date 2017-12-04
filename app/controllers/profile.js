@@ -4,5 +4,10 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   oglasiService: Ember.inject.service('oglasi-service'),
   actions: {
+    delete: function(oglasId) {
+      let korisnikId = this.get("session.data.authenticated.username");
+        this.get("oglasiService").delete(korisnikId, oglasId)
+        this.rerender() 
+}
     }
 });

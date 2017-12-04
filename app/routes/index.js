@@ -2,12 +2,8 @@ import Ember from 'ember';
 import $ from 'jquery';
 
 export default Ember.Route.extend({
-	korisnikService: Ember.inject.service('korisnik-service'),
 	oglasiService: Ember.inject.service('oglasi-service'),
 	session: Ember.inject.service('session'),
-	serverError: false,
-	serverErrorText: "",
-	serverSuccess: false,
 
 	beforeModel: function(transition) {
 

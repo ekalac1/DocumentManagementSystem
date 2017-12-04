@@ -10,10 +10,8 @@ export default Ember.Controller.extend({
         var self = this;
         oglas.fileName = file.name
         oglas.content = file.data
-
         oglas.datatype = file.type
-
-        oglas.owner = 28
+        oglas.owner = session.data.authenticated.username
 
   			console.log(file.data);
         this.get("oglasiService").postavi(oglas).then(x => {
@@ -26,6 +24,6 @@ export default Ember.Controller.extend({
             self.set("serverErrorText", err.responseText);
 
         });
-  		}
+  		},
   	}
 });

@@ -24,7 +24,7 @@
                 </td>
                 <td><p class = "tbl_txt">{{oglas.fileName}}</p></td>
                 <td><button type="button" class="btn btn-primary tbl_btn">Rename</button></td>
-                <td><button type="button" class="btn btn-primary tbl_btn">Delete</button></td>
+                <td><button type="button" class="btn btn-primary tbl_btn"{{action 'delete' oglas.id}}>Delete</button></td>
             </tr>
             {{/each}}
           </tbody>
