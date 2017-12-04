@@ -895,9 +895,9 @@ define('posao-fe/controllers/application', ['exports'], function (exports) {
         });
       },
 
-      login: function login(credentials, doRedirect) {
+      login: function login(doRedirect) {
         var self = this;
-        var credentials = this.getProperties('identification', 'password');
+        credentials = this.getProperties('identification', 'password');
         this.authenticate(credentials).then(function (value) {
           self.set('credentialsError', false);
           window.location.reload(true);
@@ -924,7 +924,7 @@ define('posao-fe/controllers/application', ['exports'], function (exports) {
     }
   });
 });
-define('posao-fe/controllers/index', ['exports', 'posao-fe/models/oglas'], function (exports, _oglas) {
+define('posao-fe/controllers/index', ['exports'], function (exports) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -940,9 +940,8 @@ define('posao-fe/controllers/index', ['exports', 'posao-fe/models/oglas'], funct
         oglas.fileName = file.name;
         oglas.content = file.data;
         oglas.datatype = file.type;
-        oglas.owner = session.data.authenticated.username;
+        oglas.owner = this.get("session.data.authenticated.username");
 
-        console.log(file.data);
         this.get("oglasiService").postavi(oglas).then(function (x) {
           self.set("serverSuccess", true);
           self.set("serverError", false);
@@ -957,7 +956,6 @@ define('posao-fe/controllers/index', ['exports', 'posao-fe/models/oglas'], funct
         this.toggleProperty('isShowingBody');
         var username = this.get("session.data.authenticated.username");
         var newName = this.get("ime");
-        console.log(newName);
         if (newName != null) {
           this.get("oglasiService").rename(username, documentId, newName).then(function (x) {
             window.location.reload(true);
@@ -2077,13 +2075,11 @@ define('posao-fe/routes/index', ['exports'], function (exports) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var $ = Ember.$;
 	exports.default = Ember.Route.extend({
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
 
 		model: function model(params, transition) {
-			var self = this;
 			var username = this.get("session.data.authenticated.username");
 			var documents = this.get('oglasiService').share(username);
 
@@ -2114,7 +2110,6 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 		},
 
 		model: function model(params, transition) {
-			var self = this;
 			var username = this.get("session.data.authenticated.username");
 			var _profil = this.get('oglasiService').all(username);
 
@@ -2169,43 +2164,43 @@ define('posao-fe/services/ajax', ['exports', 'ember-ajax/services/ajax'], functi
   });
 });
 define('posao-fe/services/base-service', ['exports', 'posao-fe/config/environment'], function (exports, _environment) {
-    'use strict';
+  'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    var $ = Ember.$;
-    exports.default = Ember.Service.extend({
-        session: Ember.inject.service('session'),
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var $ = Ember.$;
+  exports.default = Ember.Service.extend({
+    session: Ember.inject.service('session'),
 
-        ajax: function ajax(params) {
+    ajax: function ajax(params) {
 
-            var token = this.get('session.data.authenticated.token');
-            if (token !== undefined) {
-                params.beforeSend = function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + token);
-                };
-            }
+      var token = this.get('session.data.authenticated.token');
+      if (token !== undefined) {
+        params.beforeSend = function (request) {
+          request.setRequestHeader("Authorization", "Bearer " + token);
+        };
+      }
 
-            params.url = _environment.default.apiHost + '/' + params.url;
-            params.contentType = "application/json";
-            return $.ajax(params);
-        },
+      params.url = _environment.default.apiHost + '/' + params.url;
+      params.contentType = "application/json";
+      return $.ajax(params);
+    },
 
-        ajaxWithoutContentType: function ajaxWithoutContentType(params) {
+    ajaxWithoutContentType: function ajaxWithoutContentType(params) {
 
-            var token = this.get('session.data.authenticated.token');
-            if (token !== undefined) {
-                params.beforeSend = function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + token);
-                };
-            }
+      var token = this.get('session.data.authenticated.token');
+      if (token !== undefined) {
+        params.beforeSend = function (request) {
+          request.setRequestHeader("Authorization", "Bearer " + token);
+        };
+      }
 
-            params.url = _environment.default.apiHost + '/' + params.url;
+      params.url = _environment.default.apiHost + '/' + params.url;
 
-            return $.ajax(params);
-        }
-    });
+      return $.ajax(params);
+    }
+  });
 });
 define('posao-fe/services/cookies', ['exports', 'ember-cookies/services/cookies'], function (exports, _cookies) {
   'use strict';
@@ -2228,8 +2223,8 @@ define('posao-fe/services/file-queue', ['exports', 'ember-file-upload/services/f
     }
   });
 });
-define('posao-fe/services/korisnik-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/korisnik', 'posao-fe/models/nezaposleni', 'posao-fe/models/poslodavac', 'posao-fe/models/izvjestaj'], function (exports, _baseService, _korisnik, _nezaposleni, _poslodavac, _izvjestaj) {
-    'use strict';
+define("posao-fe/services/korisnik-service", ["exports", "posao-fe/services/base-service"], function (exports, _baseService) {
+    "use strict";
 
     Object.defineProperty(exports, "__esModule", {
         value: true
@@ -2237,60 +2232,8 @@ define('posao-fe/services/korisnik-service', ['exports', 'posao-fe/services/base
     exports.default = _baseService.default.extend({
 
         register: function register(korisnik) {
-            return this.ajax({ url: 'korisnici/register', type: "POST", data: JSON.stringify(korisnik) });
-        },
-
-        profil: function profil(username) {
-            var korisnik = _korisnik.default.create({});
-
-            this.ajax({ url: 'korisnici/get/exact?name=' + username, type: "GET" }).then(function (data) {
-                data.password = "";
-                korisnik.setProperties(data);
-            });
-
-            return korisnik;
-        },
-
-        update: function update(korisnik, id) {
-            return this.ajax({ url: 'korisnici/update?id=' + id, type: "POST", data: JSON.stringify(korisnik) });
-        },
-
-        delete: function _delete(korisnikid, korisnikPass) {
-            return this.ajax({ url: 'korisnici/delete?id=' + korisnikid + '&pw=' + korisnikPass,
-                type: "DELETE", data: JSON.stringify({}) });
-        },
-
-        izvjestaj: function izvjestaj() {
-            var izvjestaj = _izvjestaj.default.create({});
-            this.ajax({ url: 'izvjestaj', type: "GET" }).then(function (data) {
-                izvjestaj.setProperties(data);
-            });
-
-            return izvjestaj;
-        },
-
-        all: function all() {
-            var korisnici = [];
-            this.ajax({ url: 'korisnici/get/all', type: "GET" }).then(function (data) {
-                data.forEach(function (korisnik) {
-                    korisnici.addObject(_korisnik.default.create(korisnik));
-                });
-            });
-
-            return korisnici;
-        },
-
-        nezaposleni: function nezaposleni() {
-            var korisnici = [];
-            this.ajax({ url: 'korisnici/nezaposleni', type: "GET" }).then(function (data) {
-                data.forEach(function (korisnik) {
-                    korisnici.addObject(_korisnik.default.create(korisnik));
-                });
-            });
-
-            return korisnici;
+            return this.ajax({ url: "korisnici/register", type: "POST", data: JSON.stringify(korisnik) });
         }
-
     });
 });
 define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/oglas'], function (exports, _baseService, _oglas) {
@@ -2440,6 +2383,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+5b2cf7de"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+f8f19de3"});
 }
 //# sourceMappingURL=posao-fe.map

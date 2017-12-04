@@ -15,12 +15,11 @@ export default Ember.Route.extend({
 	},
 
 	model: function(params, transition) {
-		var self = this;
 		let username = this.get("session.data.authenticated.username");
 		let _profil = this.get('oglasiService').all(username);
 
-		 return Ember.RSVP.hash({
-         	oglas: _profil,
-  	})
+		return Ember.RSVP.hash({
+			oglas: _profil,
+		})
 	}
 })

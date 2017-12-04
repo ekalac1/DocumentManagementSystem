@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
 
 	validiraj: function(){
 
-   //ne diraj, koristis
+		//ne diraj, koristis
 		let ispravno = true;
 
 		let _usernameError = false;
@@ -47,8 +47,8 @@ export default Ember.Controller.extend({
 		{
 			if (this.get("ponovljeniPass") == null || (this.get("ponovljeniPass") !== this.get("password")))
 			{
-					ispravno = false;
-					_ponovljeniPassError = true;
+				ispravno = false;
+				_ponovljeniPassError = true;
 			}
 		}
 
@@ -77,26 +77,26 @@ export default Ember.Controller.extend({
 		var self = this;
 		this.set("serverErrorText", "");
 
-        this.get('korisnikService').register(korisnik).then(data => {
-        	self.set("serverSuccess", true);
-        	self.set("serverError", false);
+		this.get('korisnikService').register(korisnik).then(data => {
+			self.set("serverSuccess", true);
+			self.set("serverError", false);
 			self.set("serverErrorText", "");
 
-        }).catch(err => {
-        	self.set("serverError", true);
-        	self.set("serverSuccess", false);
+		}).catch(err => {
+			self.set("serverError", true);
+			self.set("serverSuccess", false);
 			self.set("serverErrorText", err.responseText);
 
-        });
-    },
-
-    actions: {
-    	register: function(){
+		});
+	},
+	
+	actions: {
+		register: function(){
 			let korisnik = this.getProperties('username', 'password', 'email', 'ime');
 
 			if (this.validiraj()){
 				this.register(korisnik);
 			}
-    	}
-    }
+		}
+	}
 });

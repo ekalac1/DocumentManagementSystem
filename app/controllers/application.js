@@ -33,9 +33,9 @@ export default Ember.Controller.extend({
       });
     },
 
-    login: function(credentials, doRedirect) {
+    login: function(doRedirect) {
       var self = this;
-      var credentials = this.getProperties('identification', 'password');
+      credentials = this.getProperties('identification', 'password');
       this.authenticate(credentials).then(function(value) {
         self.set('credentialsError', false);
         window.location.reload(true);
