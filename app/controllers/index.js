@@ -25,5 +25,18 @@ export default Ember.Controller.extend({
 
         });
   		},
-  	}
+    toggleBody(documentId) {
+      this.toggleProperty('isShowingBody');
+      var username = this.get("session.data.authenticated.username");
+      var newName= this.get("ime") ;
+      console.log(newName);
+      if (newName != null)
+      {
+        this.get("oglasiService").rename(username, documentId, newName).then(x => {
+         window.location.reload(true);
+        }).catch(err => {
+        });
+      }
+    }
+  }
 });

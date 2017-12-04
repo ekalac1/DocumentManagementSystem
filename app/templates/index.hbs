@@ -26,7 +26,10 @@
                         {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}}<img class="img-responsive" src="../assets/images/xls.png" alt="txt">{{/if}}
                       </td>
                       <td><p class = "tbl_txt">{{oglas.fileName}}</p></td>
-                      <td><button type="button" class="btn btn-primary tbl_btn">Rename</button></td>
+                      <td><button type="button" class="btn btn-primary tbl_btn"{{action "toggleBody" oglas.id}}>Rename</button></td>
+                      {{#if isShowingBody}}
+                          {{input type="text" class="form-control" id="newName" placeholder="Novo ime" value=ime}}
+                      {{/if}}
                   </tr>
                   {{/each}}
                 </tbody>
