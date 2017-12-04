@@ -4,6 +4,7 @@ import Oglas from '../models/oglas';
 export default BaseService.extend({
 
 //sve je uredu ovdje, ne diraj
+//nije moguće preimenovati, ali sve se ovdje tiče contenta, kako nazivamo dokument u projektu
 
     all: function(username) {
         var oglasi = [];

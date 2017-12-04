@@ -2,7 +2,7 @@
 
   <!-- Background Image -->
   <div class="img img-responsive pozadinaDodavanjeOglasa cover-screen"></div>
-  
+
   <div class="container">
     <div class="row">
 
@@ -22,7 +22,7 @@
 
                 <select class="form-control" name="kategorija" onchange={{action "selectKategorija" value="target.value"}}>
                   <option value="-1" >-</option>
-                  {{#each model.kategorije as |kategorija|}}      
+                  {{#each model.kategorije as |kategorija|}}
                     <option value={{kategorija.id}}>{{kategorija.naziv}}</option>
                   {{/each}}
                 </select>
@@ -38,7 +38,7 @@
 
                 <select class="form-control" name="template" onchange={{action "selectTemplate" value="target.value"}}>
                   <option value="-1" >-</option>
-                  {{#each model.templatei as |template|}}      
+                  {{#each model.templatei as |template|}}
                     <option value={{template.id}}>{{template.naziv}}</option>
                   {{/each}}
                 </select>
@@ -54,7 +54,7 @@
 
               <select class="form-control" name="lokacija" onchange={{action "selectLokacija" value="target.value"}}>
                   <option value="-1" >-</option>
-                  {{#each model.lokacije as |lokacija|}}      
+                  {{#each model.lokacije as |lokacija|}}
                     <option value={{lokacija.id}}>{{lokacija.naziv}}</option>
                   {{/each}}
               </select>
@@ -78,7 +78,7 @@
               {{#if opisError}}
                   <span class="greskaUnosa">Trebate unijeti opis!</span>
               {{/if}}
-              
+
               {{textarea class="form-control" id="inputOpis" value=opis}}
             </div>
 
@@ -91,7 +91,7 @@
               {{/if}}
 
               <div class='input-group datum date' id='inputDateTime'>
-                  {{input type='number' class="form-control datum" value=trajanje}}   
+                  {{input type='number' class="form-control datum" value=trajanje}}
               </div>
             </div>
 
@@ -131,4 +131,3 @@
     </div>
   </div>
 </div>
-

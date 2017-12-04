@@ -864,7 +864,6 @@ define('posao-fe/controllers/application', ['exports'], function (exports) {
   });
   exports.default = Ember.Controller.extend({
     session: Ember.inject.service('session'),
-    porukeService: Ember.inject.service('poruke-service'),
     oglasiService: Ember.inject.service('oglasi-service'),
     collapsedBool: false,
     credentialsError: false,
@@ -924,173 +923,6 @@ define('posao-fe/controllers/application', ['exports'], function (exports) {
       }
     }
   });
-});
-define('posao-fe/controllers/dodaj-oglas', ['exports'], function (exports) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = Ember.Controller.extend({
-        templateService: Ember.inject.service('template-service'),
-        oglasiService: Ember.inject.service('oglasi-service'),
-        session: Ember.inject.service('session'),
-        kategorija: null,
-        lokacija: null,
-        template: null,
-        trajanje: null,
-        naziv: "",
-        opis: "",
-        polja: [],
-        kategorijaError: false,
-        lokacijaError: false,
-        templateError: false,
-        datumError: false,
-        nazivError: false,
-        opisError: false,
-        poljaError: false,
-        serverError: false,
-        serverErrorText: "",
-        serverSuccess: false,
-
-        validacija: function validacija() {
-
-            var ispravno = true;
-
-            var _kategorijaError = false;
-            var _lokacijaError = false;
-            var _templateError = false;
-            var _datumError = false;
-            var _nazivError = false;
-            var _opisError = false;
-            var _poljaError = false;
-
-            if (this.get("kategorija") == null) {
-                ispravno = false;
-                _kategorijaError = true;
-            }
-
-            if (this.get("lokacija") == null) {
-                ispravno = false;
-                _lokacijaError = true;
-            }
-
-            if (this.get("trajanje") == null || Number.parseInt(this.get('trajanje')) < 1) {
-                ispravno = false;
-                _datumError = true;
-            }
-
-            if (this.get("naziv").replace(/\s/g, "") == "") {
-                ispravno = false;
-                _nazivError = true;
-            }
-
-            if (this.get("opis").replace(/\s/g, "") == "") {
-                ispravno = false;
-                _opisError = true;
-            }
-
-            if (isNaN(this.get("trajanje")) || this.get("trajanje") < 1 || !this.get("trajanje").toString().match(/^\d+$/)) {
-                ispravno = false;
-                _datumError = true;
-            }
-
-            this.get("polja").forEach(function (polje) {
-                if (polje.vrijednost == null || polje.vrijednost.replace(/\s/g, "") === "") {
-                    ispravno = false;
-                    _poljaError = true;
-                }
-            });
-
-            this.set("kategorijaError", _kategorijaError);
-            this.set("templateError", _templateError);
-            this.set("lokacijaError", _lokacijaError);
-            this.set("datumError", _datumError);
-            this.set("nazivError", _nazivError);
-            this.set("opisError", _opisError);
-            this.set("poljaError", _poljaError);
-
-            return ispravno;
-        },
-
-        register: function register() {
-            this.set("serverErrorText", "");
-
-            var oglas = {};
-            var self = this;
-            oglas.poslodavacId = this.get("session.data.authenticated.userid");
-            oglas.lokacija = this.get("lokacija");
-
-            oglas.kategorije = this.get("kategorija");
-
-            //hardkodirano
-            oglas.sakriven = "0";
-            oglas.oglasPrijave = new Array();
-
-            oglas.zatvoren = "0";
-            oglas.uspjesan = "0";
-            oglas.prioritet = "0";
-
-            oglas.naziv = this.get("naziv");
-            oglas.opis = this.get("opis");
-            oglas.oglasPodaci = this.get("polja");
-            oglas.datumIsteka = null;
-            var trajanjeOglasa = Number.parseInt(this.get("trajanje"));
-            var trajanjeOglasa = this.get("trajanje");
-            oglas.vrijemeTrajanja = trajanjeOglasa;
-            this.get("oglasiService").postavi(oglas).then(function (x) {
-                self.set("serverSuccess", true);
-                self.set("serverError", false);
-                self.set("serverErrorText", "");
-            }).catch(function (err) {
-                self.set("serverSuccess", false);
-                self.set("serverError", true);
-                self.set("serverErrorText", err.responseText);
-            });
-        },
-
-        actions: {
-            selectKategorija: function selectKategorija(kategorijaId) {
-                var kategorije = this.get("model.kategorije");
-                var _kategorija = kategorije.find(function (x) {
-                    return x.get("id") == kategorijaId;
-                });
-
-                this.set('kategorija', _kategorija);
-            },
-            selectLokacija: function selectLokacija(lokacijaId) {
-                var lokacije = this.get("model.lokacije");
-                var _lokacija = lokacije.find(function (x) {
-                    return x.get("id") == lokacijaId;
-                });
-
-                this.set('lokacija', _lokacija);
-            },
-            register: function register() {
-                if (this.validacija()) {
-                    this.register();
-                }
-            },
-            selectTemplate: function selectTemplate(templateId) {
-                var templatei = this.get("model.templatei");
-                var template = templatei.find(function (x) {
-                    return x.get("id") == templateId;
-                });
-                var _polja = [];
-                if (template) {
-                    _polja = new Array(template.poljaTemplatea.length);
-
-                    for (var i = 0; i < template.poljaTemplatea.length; i++) {
-                        _polja[i] = { vrijednost: "" };
-                        _polja[i].staje = template.poljaTemplatea[i].nazivPolja;
-                    }
-                }
-                this.set("polja", _polja.slice());
-
-                this.set('template', template);
-            }
-        }
-    });
 });
 define('posao-fe/controllers/index', ['exports', 'posao-fe/models/oglas'], function (exports, _oglas) {
   'use strict';
@@ -1261,137 +1093,6 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 			}
 		}
 	});
-});
-define('posao-fe/controllers/viewad', ['exports'], function (exports) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = Ember.Controller.extend({
-        oglasiService: Ember.inject.service('oglasi-service'),
-        session: Ember.inject.service(),
-        noviDatumIsteka: null,
-        prijavaSuccess: false,
-        prijavaError: false,
-        reopenSuccess: false,
-        reopenError: false,
-        zatvaranjeSuccess: false,
-        zatvaranjeError: false,
-
-        prijava: function prijava(korisnik, oglas) {
-            var self = this;
-
-            return this.get('oglasiService').prijava(korisnik, oglas).then(function (x) {
-                self.set("prijavaSuccess", true);
-                self.set("prijavaError", false);
-
-                self.set("zatvaranjeSuccess", false);
-                self.set("zatvaranjeError", false);
-                self.set("reopenSuccess", false);
-                self.set("reopenError", false);
-
-                self.set("model.imaprijava", true);
-            }).catch(function (err) {
-                self.set("prijavaSuccess", false);
-                self.set("prijavaError", true);
-
-                self.set("zatvaranjeSuccess", false);
-                self.set("zatvaranjeError", false);
-                self.set("reopenSuccess", false);
-                self.set("reopenError", false);
-            });
-        },
-
-        delete: function _delete(oglasId) {
-            return this.get('oglasiService').delete(oglasId);
-        },
-
-        zatvori: function zatvori(oglasId) {
-            return this.get('oglasiService').zatvori(oglasId);
-        },
-
-        reopen: function reopen(oglasId, brojDana) {
-            var self = this;
-            if (isNaN(this.get("noviDatumIsteka")) || this.get("noviDatumIsteka") < 1 || !this.get("noviDatumIsteka").toString().match(/^\d+$/)) {
-                self.set("datumError", true);
-            } else {
-                this.get('oglasiService').reopen(oglasId, brojDana).then(function (x) {
-                    self.set("reopenSuccess", true);
-                    self.set("reopenError", false);
-                    self.set("datumError", false);
-                    self.set("model.oglas.zatvoren", 0);
-
-                    self.set("zatvaranjeSuccess", false);
-                    self.set("zatvaranjeError", false);
-                    self.set("prijavaSuccess", false);
-                    self.set("prijavaError", false);
-                }).catch(function (err) {
-                    self.set("reopenError", true);
-                    self.set("reopenSuccess", false);
-                    self.set("datumError", false);
-
-                    self.set("zatvaranjeSuccess", false);
-                    self.set("zatvaranjeError", false);
-                    self.set("prijavaSuccess", false);
-                    self.set("prijavaError", false);
-                });
-            }
-        },
-
-        actions: {
-            prijava: function prijava(oglasId) {
-                var korisnikId = this.get("session.data.authenticated.userid");
-                this.prijava(korisnikId, oglasId);
-            },
-
-            delete: function _delete() {
-                var self = this;
-
-                var oglasId = this.get("model.oglas.idOglasa");
-                var potvrda = confirm("Jeste li sigurni da želite izbrisati oglas?");
-                if (potvrda) {
-                    this.delete(oglasId).then(function (x) {
-                        alert("Uspješno izbrisan oglas");
-                        self.transitionToRoute('index');
-                    });
-                }
-            },
-
-            zatvori: function zatvori() {
-                var self = this;
-
-                var oglasId = this.get("model.oglas.idOglasa");
-
-                var potvrda = confirm("Jeste li sigurni da želite zatvoriti oglas?");
-
-                if (potvrda) {
-                    this.zatvori(oglasId).then(function (x) {
-                        self.set('model.oglas.zatvoren', 1);
-                        self.set("zatvaranjeSuccess", true);
-                        self.set("zatvaranjeError", false);
-                        self.set("reopenSuccess", false);
-                        self.set("reopenError", false);
-                        self.set("prijavaSuccess", false);
-                        self.set("prijavaError", false);
-                    }).catch(function (err) {
-                        self.set("zatvaranjeSuccess", false);
-                        self.set("zatvaranjeError", true);
-                        self.set("reopenSuccess", false);
-                        self.set("reopenError", false);
-                        self.set("prijavaSuccess", false);
-                        self.set("prijavaError", false);
-                    });
-                }
-            },
-
-            reopen: function reopen() {
-                var oglasId = this.get("model.oglas.idOglasa");
-                var noviDatum = this.get("noviDatumIsteka");
-                this.reopen(oglasId, noviDatum);
-            }
-        }
-    });
 });
 define('posao-fe/globals', ['exports'], function (exports) {
   'use strict';
@@ -2381,20 +2082,13 @@ define('posao-fe/routes/index', ['exports'], function (exports) {
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
 
-		beforeModel: function beforeModel(transition) {
-
-			// if(!this.get('session.isAuthenticated')) {
-			// 	return this.transitionTo("unauthorized");
-			// }
-		},
-
 		model: function model(params, transition) {
 			var self = this;
 			var username = this.get("session.data.authenticated.username");
-			var _profil = this.get('oglasiService').share(username);
+			var documents = this.get('oglasiService').share(username);
 
 			return Ember.RSVP.hash({
-				oglas: _profil
+				oglas: documents
 			});
 		}
 	});
@@ -2406,7 +2100,6 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 		value: true
 	});
 	exports.default = Ember.Route.extend({
-		korisnikService: Ember.inject.service('korisnik-service'),
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
 		serverError: false,
@@ -2535,39 +2228,6 @@ define('posao-fe/services/file-queue', ['exports', 'ember-file-upload/services/f
     }
   });
 });
-define('posao-fe/services/kategorija-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/kategorija'], function (exports, _baseService, _kategorija) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = _baseService.default.extend({
-
-        all: function all() {
-            var kategorije = [];
-            this.ajax({ url: 'kategorije/get/all', type: "GET" }).then(function (data) {
-                data.forEach(function (kategorija) {
-                    kategorije.addObject(_kategorija.default.create(kategorija));
-                });
-            });
-
-            return kategorije;
-        },
-
-        update: function update(kategorija, kategorijaId) {
-            return this.ajax({ url: 'kategorije/update?id=' + kategorijaId, type: "POST", data: JSON.stringify(kategorija) });
-        },
-
-        delete: function _delete(id) {
-            return this.ajax({ url: 'kategorije/remove?id=' + id, type: "DELETE" });
-        },
-
-        add: function add(kategorija) {
-            return this.ajax({ url: 'kategorije/add', type: "POST", data: JSON.stringify(kategorija) });
-        }
-
-    });
-});
 define('posao-fe/services/korisnik-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/korisnik', 'posao-fe/models/nezaposleni', 'posao-fe/models/poslodavac', 'posao-fe/models/izvjestaj'], function (exports, _baseService, _korisnik, _nezaposleni, _poslodavac, _izvjestaj) {
     'use strict';
 
@@ -2633,26 +2293,6 @@ define('posao-fe/services/korisnik-service', ['exports', 'posao-fe/services/base
 
     });
 });
-define('posao-fe/services/lokacija-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/lokacija'], function (exports, _baseService, _lokacija) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = _baseService.default.extend({
-
-        all: function all() {
-            var lokacije = [];
-            this.ajax({ url: 'lokacije/get/all', type: "GET" }).then(function (data) {
-                data.forEach(function (lokacija) {
-                    lokacije.addObject(_lokacija.default.create(lokacija));
-                });
-            });
-
-            return lokacije;
-        }
-    });
-});
 define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/oglas'], function (exports, _baseService, _oglas) {
     'use strict';
 
@@ -2662,6 +2302,7 @@ define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-s
     exports.default = _baseService.default.extend({
 
         //sve je uredu ovdje, ne diraj
+        //nije moguće preimenovati, ali sve se ovdje tiče contenta, kako nazivamo dokument u projektu
 
         all: function all(username) {
             var oglasi = [];
@@ -2692,47 +2333,6 @@ define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-s
         }
     });
 });
-define('posao-fe/services/poruke-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/poruka', 'posao-fe/globals'], function (exports, _baseService, _poruka, _globals) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = _baseService.default.extend({
-
-        all: function all(id) {
-            var poruke = [];
-            this.ajax({ url: 'poruke/get?recipient=' + id, type: "GET" }).then(function (data) {
-                data.forEach(function (poruka) {
-                    poruka.vrijeme = (0, _globals.default)(poruka.vrijeme);
-                    poruke.addObject(_poruka.default.create(poruka));
-                });
-            });
-
-            return poruke;
-        },
-
-        my: function my(id) {
-            var poruke = [];
-            this.ajax({ url: 'poruke/get/sender?sender=' + id, type: "GET" }).then(function (data) {
-                data.forEach(function (poruka) {
-                    poruka.vrijeme = (0, _globals.default)(poruka.vrijeme);
-                    poruke.addObject(_poruka.default.create(poruka));
-                });
-            });
-
-            return poruke;
-        },
-
-        send: function send(poruka) {
-            return this.ajax({ url: 'poruke/send', type: "POST", data: JSON.stringify(poruka) });
-        },
-
-        getUnread: function getUnread(id) {
-            return this.ajax({ url: 'poruke/unread?korisnik=' + id, type: "GET" });
-        }
-    });
-});
 define('posao-fe/services/session', ['exports', 'ember-simple-auth/services/session'], function (exports, _session) {
   'use strict';
 
@@ -2740,31 +2340,6 @@ define('posao-fe/services/session', ['exports', 'ember-simple-auth/services/sess
     value: true
   });
   exports.default = _session.default;
-});
-define('posao-fe/services/template-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/template'], function (exports, _baseService, _template) {
-    'use strict';
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = _baseService.default.extend({
-
-        add: function add(template) {
-            return this.ajax({ url: 'template/add', type: "POST", data: JSON.stringify(template) });
-        },
-
-        all: function all(template) {
-            var templatei = [];
-            this.ajax({ url: 'template/get/all', type: "GET" }).then(function (data) {
-                data.forEach(function (template) {
-                    templatei.addObject(_template.default.create(template));
-                });
-            });
-
-            return templatei;
-        }
-
-    });
 });
 define('posao-fe/session-stores/application', ['exports', 'ember-simple-auth/session-stores/adaptive'], function (exports, _adaptive) {
   'use strict';
@@ -2865,6 +2440,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+7f1bd6a6"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+5b2cf7de"});
 }
 //# sourceMappingURL=posao-fe.map

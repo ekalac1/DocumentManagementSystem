@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	korisnikService: Ember.inject.service('korisnik-service'),
 	oglasiService: Ember.inject.service('oglasi-service'),
 	session: Ember.inject.service('session'),
 	serverError: false,

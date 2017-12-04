@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
-  porukeService: Ember.inject.service('poruke-service'),
   oglasiService: Ember.inject.service('oglasi-service'),
   collapsedBool: false,
   credentialsError: false,
@@ -57,7 +56,7 @@ export default Ember.Controller.extend({
         this.set("collapsedStr", "collapse navbar-collapse");
       }
     },
-    
+
     logout(){
       this.get('session').invalidate();
     }
