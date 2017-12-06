@@ -8,6 +8,13 @@ export default Ember.Route.extend({
     }
   },
 
+  beforeModel: function() {
+
+		if(!this.get('session.isAuthenticated')) {
+			return this.transitionTo("unauthorized");
+		}
+	},
+
   model(params) {
      let _profil = this.get('oglasiService').getContent(params.id);
 

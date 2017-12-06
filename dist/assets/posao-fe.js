@@ -1284,24 +1284,6 @@ define('posao-fe/helpers/gte', ['exports', 'ember-truth-helpers/helpers/gte'], f
 
   exports.default = forExport;
 });
-define('posao-fe/helpers/if-equal', ['exports', 'myapp/helpers/if-condition'], function (exports, _ifCondition) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  exports.default = function () {
-    var options = arguments[arguments.length - 1];
-
-    // Find all unique values in the array; if one is left, they were all equal
-    options.conditional = function (results) {
-      return results.uniq().length === 1;
-    };
-
-    return _ifCondition.default.apply(this, arguments);
-  };
-});
 define('posao-fe/helpers/is-array', ['exports', 'ember-truth-helpers/helpers/is-array'], function (exports, _isArray) {
   'use strict';
 
@@ -1375,64 +1357,6 @@ define('posao-fe/helpers/lte', ['exports', 'ember-truth-helpers/helpers/lte'], f
 
   exports.default = forExport;
 });
-define("posao-fe/helpers/nezaposleni-helper", ["exports"], function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _slicedToArray = function () {
-    function sliceIterator(arr, i) {
-      var _arr = [];
-      var _n = true;
-      var _d = false;
-      var _e = undefined;
-
-      try {
-        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-          _arr.push(_s.value);
-
-          if (i && _arr.length === i) break;
-        }
-      } catch (err) {
-        _d = true;
-        _e = err;
-      } finally {
-        try {
-          if (!_n && _i["return"]) _i["return"]();
-        } finally {
-          if (_d) throw _e;
-        }
-      }
-
-      return _arr;
-    }
-
-    return function (arr, i) {
-      if (Array.isArray(arr)) {
-        return arr;
-      } else if (Symbol.iterator in Object(arr)) {
-        return sliceIterator(arr, i);
-      } else {
-        throw new TypeError("Invalid attempt to destructure non-iterable instance");
-      }
-    };
-  }();
-
-  exports.default = Ember.Helper.helper(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 1),
-        arg1 = _ref2[0];
-
-    if (arg1) {
-      if (arg1 === "Nezaposleni") {
-        return false;
-      }
-    }
-
-    return true;
-  });
-});
 define('posao-fe/helpers/not-eq', ['exports', 'ember-truth-helpers/helpers/not-equal'], function (exports, _notEqual) {
   'use strict';
 
@@ -1494,64 +1418,6 @@ define('posao-fe/helpers/pluralize', ['exports', 'ember-inflector/lib/helpers/pl
     value: true
   });
   exports.default = _pluralize.default;
-});
-define("posao-fe/helpers/poslodavac-helper", ["exports"], function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _slicedToArray = function () {
-    function sliceIterator(arr, i) {
-      var _arr = [];
-      var _n = true;
-      var _d = false;
-      var _e = undefined;
-
-      try {
-        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-          _arr.push(_s.value);
-
-          if (i && _arr.length === i) break;
-        }
-      } catch (err) {
-        _d = true;
-        _e = err;
-      } finally {
-        try {
-          if (!_n && _i["return"]) _i["return"]();
-        } finally {
-          if (_d) throw _e;
-        }
-      }
-
-      return _arr;
-    }
-
-    return function (arr, i) {
-      if (Array.isArray(arr)) {
-        return arr;
-      } else if (Symbol.iterator in Object(arr)) {
-        return sliceIterator(arr, i);
-      } else {
-        throw new TypeError("Invalid attempt to destructure non-iterable instance");
-      }
-    };
-  }();
-
-  exports.default = Ember.Helper.helper(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 1),
-        arg1 = _ref2[0];
-
-    if (arg1) {
-      if (arg1 === "Poslodavac") {
-        return false;
-      }
-    }
-
-    return true;
-  });
 });
 define('posao-fe/helpers/singularize', ['exports', 'ember-inflector/lib/helpers/singularize'], function (exports, _singularize) {
   'use strict';
@@ -1895,34 +1761,6 @@ define('posao-fe/models/base-model', ['exports'], function (exports) {
         deserialize: function deserialize() {}
     });
 });
-define('posao-fe/models/izvjestaj', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-
-	var _modelProperties = ['brojOglasa', 'brojPoslodavaca', 'brojNezaposlenih', 'brojPrijava'];
-
-	exports.default = _baseModel.default.extend({
-		modelProperties: _modelProperties
-	});
-});
-define('posao-fe/models/kategorija', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-
-	var _modelProperties = ['idkategorije', 'naziv'];
-
-	exports.default = _baseModel.default.extend({
-		modelProperties: _modelProperties
-	});
-});
 define('posao-fe/models/korisnik', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
 	'use strict';
 
@@ -1974,48 +1812,6 @@ define('posao-fe/models/oglas', ['exports', 'posao-fe/models/base-model'], funct
 
 
 	var _modelProperties = ['fileName', 'datatype', 'owner', "content", 'id'];
-
-	exports.default = _baseModel.default.extend({
-		modelProperties: _modelProperties
-	});
-});
-define('posao-fe/models/poruka', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-
-	var _modelProperties = ['tekst', 'posiljalac', 'primalac'];
-
-	exports.default = _baseModel.default.extend({
-		modelProperties: _modelProperties
-	});
-});
-define('posao-fe/models/poslodavac', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-
-	var _modelProperties = ['idKorisnika', 'ime', 'prezime', 'nazivFirme', 'telefon', 'sakriveniPodaci'];
-
-	exports.default = _baseModel.default.extend({
-		modelProperties: _modelProperties
-	});
-});
-define('posao-fe/models/template', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-
-	var _modelProperties = ['id', 'naziv', 'poljaTemplatea'];
 
 	exports.default = _baseModel.default.extend({
 		modelProperties: _modelProperties
@@ -2116,6 +1912,13 @@ define('posao-fe/routes/preview', ['exports'], function (exports) {
     queryParams: {
       id: {
         refreshModel: true
+      }
+    },
+
+    beforeModel: function beforeModel() {
+
+      if (!this.get('session.isAuthenticated')) {
+        return this.transitionTo("unauthorized");
       }
     },
 
@@ -2374,7 +2177,7 @@ define("posao-fe/templates/index", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "Spe5V37J", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"main-page\"],[13],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n    \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n      \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n        \"],[11,\"h1\",[]],[13],[0,\"Welcome \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n        \"],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"                \"],[11,\"p\",[]],[13],[0,\"Lista svih dokumenata koji su vam vidljivi\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"        \"],[11,\"p\",[]],[13],[0,\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum\"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"    \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n      \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n        \"],[11,\"tbody\",[]],[13],[0,\"\\n\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"          \"],[11,\"tr\",[]],[13],[0,\"\\n            \"],[11,\"td\",[]],[13],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[14],[0,\"\\n\"],[6,[\"link-to\"],[\"preview\",[33,[\"query-params\"],null,[[\"id\"],[[28,[\"oglas\",\"id\"]]]]]],null,{\"statements\":[[0,\"            \"],[11,\"td\",[]],[13],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"        \"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/index.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "IUBh+EfQ", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"main-page\"],[13],[0,\"\\n  \"],[11,\"div\",[]],[15,\"class\",\"img img-responsive pozadinaRegistracije cover-screen\"],[13],[14],[0,\"\\n\\n  \"],[11,\"div\",[]],[15,\"class\",\"container\"],[13],[0,\"\\n    \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n      \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n        \"],[11,\"h1\",[]],[13],[0,\"Welcome \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n        \"],[11,\"br\",[]],[13],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"                \"],[11,\"p\",[]],[13],[0,\"Lista svih dokumenata koji su vam vidljivi\"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"        \"],[11,\"p\",[]],[13],[0,\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum\"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"    \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n      \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n        \"],[11,\"tbody\",[]],[13],[0,\"\\n\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"          \"],[11,\"tr\",[]],[13],[0,\"\\n            \"],[11,\"td\",[]],[13],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n              \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[14],[0,\"\\n\"],[6,[\"link-to\"],[\"preview\",[33,[\"query-params\"],null,[[\"id\"],[[28,[\"oglas\",\"id\"]]]]]],null,{\"statements\":[[0,\"            \"],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"            \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"              \"],[11,\"div\",[]],[15,\"class\",\"form-group pomjereniTextBox\"],[13],[0,\"\\n            \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"tbl_txt\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[0,\"\\n            \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"        \"],[14],[0,\"\\n      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"  \"],[14],[0,\"\\n\"],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/index.hbs" } });
 });
 define("posao-fe/templates/main", ["exports"], function (exports) {
   "use strict";
@@ -2430,6 +2233,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+eb557756"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+a9f3ec21"});
 }
 //# sourceMappingURL=posao-fe.map
