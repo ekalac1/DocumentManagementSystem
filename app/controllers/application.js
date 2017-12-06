@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
       });
     },
 
-    login: function(doRedirect) {
+    login: function(credentials, doRedirect) {
       var self = this;
       credentials = this.getProperties('identification', 'password');
       this.authenticate(credentials).then(function(value) {

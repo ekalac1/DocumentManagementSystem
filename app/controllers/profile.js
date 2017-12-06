@@ -23,6 +23,9 @@ export default Ember.Controller.extend({
         }).catch(err => {
         });
       }
+    },
+    showDocument(documentId) {
+      var oglas = this.get("oglasiService").getContent(username, documentId, newName)
     }
   }
 });

@@ -12,6 +12,11 @@ p {
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+iframe {
+  width:  100vh;
+  height: 100vh;
+}
 .h-divider {
   border-color: #151515;
   margin-top: 0;

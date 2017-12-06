@@ -14,6 +14,7 @@ Router.map(function() {
 
   this.route('unauthorized');
   this.route("error", { path: "*path"});
+  this.route('preview');
 });
 
 export default Router;

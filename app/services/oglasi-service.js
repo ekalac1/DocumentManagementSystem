@@ -32,5 +32,8 @@ export default BaseService.extend({
     },
     rename: function(username, oglasId, documentName) {
       return this.ajax({url: `content/workspace?user=${username}&document=${oglasId}&name=${documentName}`, type: "POST"})
+    },
+    getContent: function(documentId) {
+      return this.ajax({url: `content/show?id=${documentId}`, type: "GET"})
     }
 });
