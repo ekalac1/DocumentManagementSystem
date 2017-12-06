@@ -22,7 +22,9 @@
             {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.wordprocessingml.document")}}<img class="img-responsive" src="../assets/images/doc.png" alt="txt">{{/if}}
             {{#if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}}<img class="img-responsive" src="../assets/images/xls.png" alt="txt">{{/if}}
           </td>
+          {{#link-to "preview" (query-params id=oglas.id)}}
           <td><p class = "tbl_txt">{{oglas.fileName}}</p></td>
+          {{/link-to}}
           <td><button type="button" class="btn btn-primary tbl_btn" {{action "toggleBody" oglas.id}}>Rename</button></td>
           {{#if isShowingBody}}
               {{input type="text" class="form-control" id="newName" placeholder="Novo ime" value=ime}}

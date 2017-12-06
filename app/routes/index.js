@@ -4,7 +4,7 @@ export default Ember.Route.extend({
 	oglasiService: Ember.inject.service('oglasi-service'),
 	session: Ember.inject.service('session'),
 
-	model: function(params, transition) {
+	model: function() {
 		let username = this.get("session.data.authenticated.username");
 		let documents = this.get('oglasiService').share(username);
 

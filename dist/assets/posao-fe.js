@@ -966,27 +966,16 @@ define('posao-fe/controllers/index', ['exports'], function (exports) {
   });
 });
 define('posao-fe/controllers/preview', ['exports'], function (exports) {
-  'use strict';
+     'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.default = Ember.Controller.extend({
-    oglasiService: Ember.inject.service('oglasi-service'),
-    queryParams: ['id'],
-    id: null,
-
-    filteredArticles: Ember.computed('id', function () {
-      var category = this.get('id');
-      var articles = this.get('model');
-
-      var _profil = this.get('oglasiService').getContent(this.get('id'));
-
-      return Ember.RSVP.hash({
-        oglas: _profil
-      });
-    })
-  });
+     Object.defineProperty(exports, "__esModule", {
+          value: true
+     });
+     exports.default = Ember.Controller.extend({
+          oglasiService: Ember.inject.service('oglasi-service'),
+          queryParams: ['id'],
+          id: null
+     });
 });
 define('posao-fe/controllers/profile', ['exports'], function (exports) {
   'use strict';
@@ -1002,17 +991,17 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
         var korisnikId = this.get("session.data.authenticated.username");
         this.get("oglasiService").delete(korisnikId, documentId).then(function (x) {
           window.location.reload(true);
-        }).catch(function (err) {});
+        });
       },
+
       toggleBody: function toggleBody(documentId) {
         this.toggleProperty('isShowingBody');
         var username = this.get("session.data.authenticated.username");
         var newName = this.get("ime");
-        console.log(newName);
         if (newName != null) {
           this.get("oglasiService").rename(username, documentId, newName).then(function (x) {
             window.location.reload(true);
-          }).catch(function (err) {});
+          });
         }
       },
       showDocument: function showDocument(documentId) {
@@ -2106,7 +2095,7 @@ define('posao-fe/routes/index', ['exports'], function (exports) {
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
 
-		model: function model(params, transition) {
+		model: function model() {
 			var username = this.get("session.data.authenticated.username");
 			var documents = this.get('oglasiService').share(username);
 
@@ -2131,17 +2120,6 @@ define('posao-fe/routes/preview', ['exports'], function (exports) {
     },
 
     model: function model(params) {
-      // This gets called upon entering 'articles' route
-      // for the first time, and we opt into refiring it upon
-      // query param changes by setting `refreshModel:true` above.
-
-      // params has format of { category: "someValueOrJustNull" },
-      // which we can forward to the server.
-      //  let category = params.get('id');
-      var showVisitModal = params.id;
-
-      console.log(showVisitModal);
-
       var _profil = this.get('oglasiService').getContent(params.id);
 
       return Ember.RSVP.hash({
@@ -2159,18 +2137,15 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 	exports.default = Ember.Route.extend({
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
-		serverError: false,
-		serverErrorText: "",
-		serverSuccess: false,
 
-		beforeModel: function beforeModel(transition) {
+		beforeModel: function beforeModel() {
 
 			if (!this.get('session.isAuthenticated')) {
 				return this.transitionTo("unauthorized");
 			}
 		},
 
-		model: function model(params, transition) {
+		model: function model() {
 			var username = this.get("session.data.authenticated.username");
 			var _profil = this.get('oglasiService').all(username);
 
@@ -2189,7 +2164,7 @@ define('posao-fe/routes/registracija', ['exports'], function (exports) {
 	exports.default = Ember.Route.extend({
 		session: Ember.inject.service('session'),
 
-		beforeModel: function beforeModel(transition) {
+		beforeModel: function beforeModel() {
 			if (this.get('session.isAuthenticated')) return this.transitionTo("unauthorized");
 		}
 
@@ -2423,7 +2398,7 @@ define("posao-fe/templates/profile", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "SayAEN8R", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"              \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"delete\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Delete\"],[14],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "CB8BAd+X", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[15,\"class\",\"table table-blue\"],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]},null],[0,\"\\n          \"],[14],[0,\"\\n\"],[6,[\"link-to\"],[\"preview\",[33,[\"query-params\"],null,[[\"id\"],[[28,[\"oglas\",\"id\"]]]]]],null,{\"statements\":[[0,\"          \"],[11,\"td\",[]],[13],[11,\"p\",[]],[15,\"class\",\"tbl_txt\"],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[14],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"              \"],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary tbl_btn\"],[5,[\"action\"],[[28,[null]],\"delete\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Delete\"],[14],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
 });
 define("posao-fe/templates/registracija", ["exports"], function (exports) {
   "use strict";
@@ -2455,6 +2430,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+d3147dfa"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+eb557756"});
 }
 //# sourceMappingURL=posao-fe.map

@@ -8,19 +8,16 @@ export default Ember.Controller.extend({
       let korisnikId = this.get("session.data.authenticated.username");
       this.get("oglasiService").delete(korisnikId, documentId).then(x => {
         window.location.reload(true);
-      }).catch(err => {
       });
     },
+
     toggleBody(documentId) {
       this.toggleProperty('isShowingBody');
       var username = this.get("session.data.authenticated.username");
       var newName= this.get("ime") ;
-      console.log(newName);
-      if (newName != null)
-      {
+      if (newName != null){
         this.get("oglasiService").rename(username, documentId, newName).then(x => {
          window.location.reload(true);
-        }).catch(err => {
         });
       }
     },
