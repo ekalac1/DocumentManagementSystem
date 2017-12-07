@@ -288,7 +288,7 @@ iframe {
   border-bottom-left-radius: 0;
 }
 .pozadinaRegistracije{
-  background-image: url('../assets/images/background.png');
+  background-image: url('../assets/images/1511.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
@@ -296,11 +296,34 @@ iframe {
   -o-background-size: cover;
   background-size: cover;
 }
-.tbl_txt{
-    margin-top: 5%;
+
+table{
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
 }
-.tbl_btn{
-    margin-top: 10%;
+
+td{
+  padding: 5px;
+  border-bottom: 2px solid white !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  margin:0 auto;
+}
+
+.imeInput {
+  border-bottom: 0px !important;
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+  padding-left: 5px;
+}
+
+.imeInputP {
+  border-bottom: 0px !important;
+  margin:0 auto;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding-left: 5px;
 }
 .pomjereniTextBox{
   display: inline-block;

@@ -34,6 +34,9 @@ export default Ember.Controller.extend({
         }).catch(err => {
         });
       }
+    },
+    insertNewline: function() {
+      Ember.$('#id_button').click();
     }
   }
 });

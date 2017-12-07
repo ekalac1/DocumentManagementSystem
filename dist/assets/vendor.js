@@ -70679,8 +70679,8 @@ createDeprecatedModule('resolver');
      The property name of the form element's `model` (by default the `model` of its parent `Components.Form`) that this
      form element should represent. The control element's value will automatically be bound to the model property's
      value.
-      Using this property enables form validation on this element.
-      @property property
+       Using this property enables form validation on this element.
+       @property property
      @type string
      @public
      */
@@ -73372,15 +73372,15 @@ createDeprecatedModule('resolver');
 
     /**
      If true a label will be shown inside the progress bar.
-      By default it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.
+       By default it will be the percentage corresponding to the `value` property, rounded to `roundDigits` digits.
      You can customize it by using the component with a block template, which the component yields the percentage
      value to:
-      ```hbs
+       ```hbs
      {{#bs-progress}}
        {{#bs-progress-bar value=progressValue as |percent|}}{{progressValue}} ({{percent}}%){{/bs-progress-bar}}
      {{/bs-progress}}
      ```
-      @property showLabel
+       @property showLabel
      @type boolean
      @default false
      @public
@@ -80059,7 +80059,7 @@ createDeprecatedModule('resolver');
   if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.String) {
     /**
       See {{#crossLink "Ember.String/pluralize"}}{{/crossLink}}
-       @method pluralize
+        @method pluralize
       @for String
     */
     String.prototype.pluralize = function () {
@@ -80068,7 +80068,7 @@ createDeprecatedModule('resolver');
 
     /**
       See {{#crossLink "Ember.String/singularize"}}{{/crossLink}}
-       @method singularize
+        @method singularize
       @for String
     */
     String.prototype.singularize = function () {
@@ -80280,9 +80280,9 @@ createDeprecatedModule('resolver');
   Inflector.prototype = {
     /**
       @public
-       As inflections can be costly, and commonly the same subset of words are repeatedly
+        As inflections can be costly, and commonly the same subset of words are repeatedly
       inflected an optional cache is provided.
-       @method enableCache
+        @method enableCache
     */
     enableCache: function enableCache() {
       this.purgeCache();
@@ -80300,7 +80300,7 @@ createDeprecatedModule('resolver');
 
     /**
       @public
-       @method purgedCache
+        @method purgedCache
     */
     purgeCache: function purgeCache() {
       this._cacheUsed = false;
@@ -80311,7 +80311,7 @@ createDeprecatedModule('resolver');
     /**
       @public
       disable caching
-       @method disableCache;
+        @method disableCache;
     */
     disableCache: function disableCache() {
       this._sCache = null;
@@ -80397,7 +80397,7 @@ createDeprecatedModule('resolver');
 
     /**
       @protected
-       @method inflect
+        @method inflect
       @param {String} word
       @param {Object} typeRules
       @param {Object} irregular
@@ -81954,7 +81954,7 @@ define("ember-resolver/features", [], function () {
         The container of the application being debugged.
         This property will be injected
         on creation.
-         @property container
+          @property container
         @default null
         */
 
@@ -81962,14 +81962,14 @@ define("ember-resolver/features", [], function () {
         The resolver instance of the application
         being debugged. This property will be injected
         on creation.
-         @property resolver
+          @property resolver
         @default null
         */
 
     /**
         Returns true if it is possible to catalog a list of available
         classes in the resolver for a given type.
-         @method canCatalogEntriesByType
+          @method canCatalogEntriesByType
         @param {string} type The type. e.g. "model", "controller", "route"
         @return {boolean} whether a list is available for this type.
         */
@@ -81983,7 +81983,7 @@ define("ember-resolver/features", [], function () {
 
     /**
         Returns the available classes a given type.
-         @method catalogEntriesByType
+          @method catalogEntriesByType
         @param {string} type The type. e.g. "model", "controller", "route"
         @return {Array} An array of classes.
         */
@@ -82270,10 +82270,10 @@ define("ember-resolver/features", [], function () {
 
 
     /**
-      A listing of functions to test for moduleName's based on the provided
+       A listing of functions to test for moduleName's based on the provided
      `parsedName`. This allows easy customization of additional module based
      lookup patterns.
-      @property moduleNameLookupPatterns
+       @property moduleNameLookupPatterns
      @returns {Ember.Array}
      */
     moduleNameLookupPatterns: Ember.computed(function () {
@@ -82538,14 +82538,14 @@ define("ember-resolver/features", [], function () {
 
     /**
       Restores the session from a set of session properties.
-       It will return a resolving promise if one of two conditions is met:
-       1) Both `data.token` and `data.expiresAt` are non-empty and `expiresAt`
+        It will return a resolving promise if one of two conditions is met:
+        1) Both `data.token` and `data.expiresAt` are non-empty and `expiresAt`
          is greater than the calculated `now`.
       2) If `data.token` is non-empty and the decoded token has a key for
          `tokenExpireName`.
-       If `refreshAccessTokens` is true, `scheduleAccessTokenRefresh` will
+        If `refreshAccessTokens` is true, `scheduleAccessTokenRefresh` will
       be called and an automatic token refresh will be initiated.
-       @method restore
+        @method restore
       @param {Object} data The data to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results
                                    in the session being authenticated
@@ -82596,12 +82596,12 @@ define("ember-resolver/features", [], function () {
 
     /**
       Authenticates the session with the specified `credentials`.
-       It will return a resolving promise if it successfully posts a request
+        It will return a resolving promise if it successfully posts a request
       to the `JWT.serverTokenEndpoint` with the valid credentials.
-       An automatic token refresh will be scheduled with the new expiration date
+        An automatic token refresh will be scheduled with the new expiration date
       from the returned refresh token. That expiration will be merged with the
       response and the promise resolved.
-       @method authenticate
+        @method authenticate
       @param {Object} credentials The credentials to authenticate the session with
       @param {Object} headers Additional headers to be sent to server
       @return {Ember.RSVP.Promise} A promise that resolves when an auth token is
@@ -82644,10 +82644,10 @@ define("ember-resolver/features", [], function () {
     /**
       Schedules a token refresh request to be sent to the backend after a calculated
       `wait` time has passed.
-       If both `token` and `expiresAt` are non-empty, and `expiresAt` minus the optional
+        If both `token` and `expiresAt` are non-empty, and `expiresAt` minus the optional
       refres leeway is greater than the calculated `now`, the token refresh will be scheduled
       through Ember.run.later.
-       @method scheduleAccessTokenRefresh
+        @method scheduleAccessTokenRefresh
       @private
     */
     scheduleAccessTokenRefresh: function scheduleAccessTokenRefresh(expiresAt, token) {
@@ -82666,12 +82666,12 @@ define("ember-resolver/features", [], function () {
 
     /**
       Makes a refresh token request to grab a new authenticated JWT token from the server.
-       It will return a resolving promise if a successful POST is made to the
+        It will return a resolving promise if a successful POST is made to the
       `JWT.serverTokenRefreshEndpoint`.
-       After the new token is obtained it will schedule the next automatic token refresh
+        After the new token is obtained it will schedule the next automatic token refresh
       based on the new `expiresAt` time.
-       The session will be updated via the trigger `sessionDataUpdated`.
-       @method refreshAccessToken
+        The session will be updated via the trigger `sessionDataUpdated`.
+        @method refreshAccessToken
       @private
     */
     refreshAccessToken: function refreshAccessToken(token, headers) {
@@ -82704,7 +82704,7 @@ define("ember-resolver/features", [], function () {
     /**
       Returns a nested object with the token property name.
       Example:  If `tokenPropertyName` is "data.user.token", `makeRefreshData` will return {data: {user: {token: "token goes here"}}}
-       @method makeRefreshData
+        @method makeRefreshData
       @return {object} An object with the nested property name.
     */
     makeRefreshData: function makeRefreshData(token) {
@@ -82725,7 +82725,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns the decoded token with accessible returned values.
-       @method getTokenData
+        @method getTokenData
       @return {object} An object with properties for the session.
     */
     getTokenData: function getTokenData(token) {
@@ -82741,7 +82741,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Accepts a `url` and `data` to be used in an ajax server request.
-       @method makeRequest
+        @method makeRequest
       @private
     */
     makeRequest: function makeRequest(url, data, headers) {
@@ -82794,7 +82794,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Handles authentication response from server, and returns session data
-       @method handleAuthResponse
+        @method handleAuthResponse
       @private
      */
     handleAuthResponse: function handleAuthResponse(response) {
@@ -82824,7 +82824,7 @@ define("ember-resolver/features", [], function () {
       Handles token refresh fail status. If the server response to a token refresh has a
       status of 401 or 403 then the token in the session will be invalidated and
       the sessionInvalidated provided by ember-simple-auth will be triggered.
-       @method handleTokenRefreshFail
+        @method handleTokenRefreshFail
     */
 
     handleTokenRefreshFail: function handleTokenRefreshFail(refreshStatus) {
@@ -82855,9 +82855,9 @@ define("ember-resolver/features", [], function () {
   exports['default'] = _emberSimpleAuthAuthenticatorsBase['default'].extend({
     /**
       The endpoint on the server the authenticator acquires the auth token from.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#serverTokenEndpoint`](#SimpleAuth-Configuration-Token-serverTokenEndpoint).
-       @property serverTokenEndpoint
+        @property serverTokenEndpoint
       @type String
       @default '/api/token-auth/'
     */
@@ -82866,9 +82866,9 @@ define("ember-resolver/features", [], function () {
     /**
       The attribute-name that is used for the identification field when sending the
       authentication data to the server.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#identificationField`](#SimpleAuth-Configuration-Token-identificationField).
-       @property identificationField
+        @property identificationField
       @type String
       @default 'username'
     */
@@ -82877,9 +82877,9 @@ define("ember-resolver/features", [], function () {
     /**
       The attribute-name that is used for the password field when sending the
       authentication data to the server.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#passwordfield`](#SimpleAuth-Configuration-Token-passwordfield).
-       @property passwordField
+        @property passwordField
       @type String
       @default 'password'
     */
@@ -82887,9 +82887,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the property in session that contains token used for authorization.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#tokenPropertyName`](#SimpleAuth-Configuration-Token-tokenPropertyName).
-       @property tokenPropertyName
+        @property tokenPropertyName
       @type String
       @default 'token'
     */
@@ -82897,9 +82897,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       The property that stores custom headers that will be sent on every request.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#headers`](#SimpleAuth-Configuration-Token-headers).
-       @property headers
+        @property headers
       @type Object
       @default {}
     */
@@ -82921,7 +82921,7 @@ define("ember-resolver/features", [], function () {
       Restores the session from a set of session properties; __will return a
       resolving promise when there's a non-empty `token` in the
       `properties`__ and a rejecting promise otherwise.
-       @method restore
+        @method restore
       @param {Object} properties The properties to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session being authenticated
     */
@@ -82947,7 +82947,7 @@ define("ember-resolver/features", [], function () {
       response. __If the credentials are valid and authentication succeeds, a
       promise that resolves with the server's response is returned__, otherwise a
       promise that rejects with the server error is returned.
-       @method authenticate
+        @method authenticate
       @param {Object} credentials The credentials to authenticate the session with
       @param {Object} headers Additional headers to pass with request
       @return {Ember.RSVP.Promise} A promise that resolves when an auth token is successfully acquired from the server and rejects otherwise
@@ -82972,7 +82972,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns an object used to be sent for authentication.
-       @method getAuthenticateData
+        @method getAuthenticateData
       @return {object} An object with properties for authentication.
     */
     getAuthenticateData: function getAuthenticateData(credentials) {
@@ -82986,7 +82986,7 @@ define("ember-resolver/features", [], function () {
     /**
       Returns an object with properties the `authenticate` promise will resolve,
       be saved in and accessible via the session.
-       @method getResponseData
+        @method getResponseData
       @return {object} An object with properties for the session.
     */
     getResponseData: function getResponseData(response) {
@@ -82995,7 +82995,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Does nothing
-       @method invalidate
+        @method invalidate
       @return {Ember.RSVP.Promise} A resolving promise
     */
     invalidate: function invalidate() {
@@ -83053,9 +83053,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       The prefix used in the value of the Authorization header.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#authorizationPrefix`](#SimpleAuth-Configuration-Token-authorizationPrefix).
-       @property authorizationPrefix
+        @property authorizationPrefix
       @type String
       @default 'Bearer '
     */
@@ -83063,9 +83063,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the property in session that contains token used for authorization.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#tokenPropertyName`](#SimpleAuth-Configuration-Token-tokenPropertyName).
-       @property tokenPropertyName
+        @property tokenPropertyName
       @type String
       @default 'token'
     */
@@ -83073,9 +83073,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the HTTP Header used to send token.
-       This value can be configured via
+        This value can be configured via
       [`SimpleAuth.Configuration.Token#authorizationHeaderName`](#SimpleAuth-Configuration-Token-authorizationHeaderName).
-       @property authorizationHeaderName
+        @property authorizationHeaderName
       @type String
       @default 'Authorization'
     */
@@ -83097,10 +83097,10 @@ define("ember-resolver/features", [], function () {
     /**
       Authorizes an XHR request by sending the `token`
       properties from the session in the `Authorization` header:
-       ```
+        ```
       Authorization: Bearer <token>
       ```
-       @method authorize
+        @method authorize
       @param {object} data
       @param {function} block
     */
@@ -83153,7 +83153,7 @@ define("ember-resolver/features", [], function () {
     /**
       The endpoint on the server the authenticator acquires the auth token
       and email from.
-       @property serverTokenEndpoint
+        @property serverTokenEndpoint
       @readOnly
       @static
       @type String
@@ -83172,7 +83172,7 @@ define("ember-resolver/features", [], function () {
     /**
       The attribute-name that is used for the identification field when sending
       the authentication data to the server.
-       @property identificationField
+        @property identificationField
       @readOnly
       @static
       @type String
@@ -83183,7 +83183,7 @@ define("ember-resolver/features", [], function () {
     /**
       The attribute-name that is used for the password field when sending
       the authentication data to the server.
-       @property passwordField
+        @property passwordField
       @readOnly
       @static
       @type String
@@ -83194,7 +83194,7 @@ define("ember-resolver/features", [], function () {
     /**
       The name of the property in session that contains token
       used for authorization.
-       @property tokenPropertyName
+        @property tokenPropertyName
       @readOnly
       @static
       @type String
@@ -83229,7 +83229,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The prefix used in the value of the Authorization header.
-       @property authorizationPrefix
+        @property authorizationPrefix
       @readOnly
       @static
       @type String
@@ -83239,7 +83239,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the HTTP Header used to send token.
-       @property authorizationHeaderName
+        @property authorizationHeaderName
       @readOnly
       @static
       @type String
@@ -83249,7 +83249,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Custom headers to be added on request.
-       @property headers
+        @property headers
       @readonly
       @static
       @type Object
@@ -83295,7 +83295,7 @@ define("ember-resolver/features", [], function () {
       handles that event, passes the updated data back to the authenticator's
       {{#crossLink "BaseAuthenticator/restore:method"}}{{/crossLink}}
       method and handles the result of that invocation accordingly.
-       @event sessionDataUpdated
+        @event sessionDataUpdated
       @param {Object} data The updated session data
       @public
     */
@@ -83306,7 +83306,7 @@ define("ember-resolver/features", [], function () {
       expires or an event is triggered from an external authentication provider
       that the authenticator uses. The session handles the event and will
       invalidate itself when it is triggered.
-       @event sessionDataInvalidated
+        @event sessionDataInvalidated
       @public
     */
 
@@ -83316,16 +83316,16 @@ define("ember-resolver/features", [], function () {
       from the session store__ or when properties in the store change due to
       external events (e.g. in another tab) and the new session data needs to be
       validated for whether it constitutes an authenticated session.
-       __This method returns a promise. A resolving promise results in the session
+        __This method returns a promise. A resolving promise results in the session
       becoming or remaining authenticated.__ Any data the promise resolves with
       will be saved in and accessible via the session service's
       `data.authenticated` property (see
       {{#crossLink "SessionService/data:property"}}{{/crossLink}}). A rejecting
       promise indicates that `data` does not constitute a valid session and will
       result in the session being invalidated or remaining unauthenticated.
-       The `BaseAuthenticator`'s implementation always returns a rejecting
+        The `BaseAuthenticator`'s implementation always returns a rejecting
       promise. __This method must be overridden in subclasses.__
-       @method restore
+        @method restore
       @param {Object} data The data to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming or remaining authenticated
       @public
@@ -83341,16 +83341,16 @@ define("ember-resolver/features", [], function () {
       implements (e.g. a set of credentials or a Facebook account id etc.). __The
       session will invoke this method in order to authenticate itself__ (see
       {{#crossLink "SessionService/authenticate:method"}}{{/crossLink}}).
-       __This method returns a promise. A resolving promise will result in the
+        __This method returns a promise. A resolving promise will result in the
       session becoming authenticated.__ Any data the promise resolves with will
       be saved in and accessible via the session service's `data.authenticated`
       property (see {{#crossLink "SessionService/data:property"}}{{/crossLink}}).
       A rejecting promise indicates that authentication failed and will result in
       the session remaining unauthenticated.
-       The `BaseAuthenticator`'s implementation always returns a rejecting promise
+        The `BaseAuthenticator`'s implementation always returns a rejecting promise
       and thus never authenticates the session. __This method must be overridden
       in subclasses__.
-       @method authenticate
+        @method authenticate
       @param {Any} [...args] The arguments that the authenticator requires to authenticate the session
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming authenticated
       @public
@@ -83365,14 +83365,14 @@ define("ember-resolver/features", [], function () {
       the session will invalidate itself and clear all authenticated session data,
       it might be necessary for some authenticators to perform additional tasks
       (e.g. invalidating an access token on the server side).
-       __This method returns a promise. A resolving promise will result in the
+        __This method returns a promise. A resolving promise will result in the
       session becoming unauthenticated.__ A rejecting promise will result in
       invalidation being intercepted and the session remaining authenticated.
-       The `BaseAuthenticator`'s implementation always returns a resolving promise
+        The `BaseAuthenticator`'s implementation always returns a resolving promise
       and thus never intercepts session invalidation. __This method doesn't have
       to be overridden in custom authenticators__ if no actions need to be
       performed on session invalidation.
-       @method invalidate
+        @method invalidate
       @param {Object} data The current authenticated session data
       @param {Array} ...args additional arguments as required by the authenticator
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session being invalidated
@@ -83416,7 +83416,7 @@ define("ember-resolver/features", [], function () {
   exports.default = _base.default.extend({
     /**
       The endpoint on the server that the authentication request is sent to.
-       @property serverTokenEndpoint
+        @property serverTokenEndpoint
       @type String
       @default '/users/sign_in'
       @public
@@ -83426,7 +83426,7 @@ define("ember-resolver/features", [], function () {
     /**
       The devise resource name. __This will be used in the request and also be
       expected in the server's response.__
-       @property resourceName
+        @property resourceName
       @type String
       @default 'user'
       @public
@@ -83436,7 +83436,7 @@ define("ember-resolver/features", [], function () {
     /**
       The token attribute name. __This will be used in the request and also be
       expected in the server's response.__
-       @property tokenAttributeName
+        @property tokenAttributeName
       @type String
       @default 'token'
       @public
@@ -83446,7 +83446,7 @@ define("ember-resolver/features", [], function () {
     /**
       The identification attribute name. __This will be used in the request and
       also be expected in the server's response.__
-       @property identificationAttributeName
+        @property identificationAttributeName
       @type String
       @default 'email'
       @public
@@ -83457,9 +83457,9 @@ define("ember-resolver/features", [], function () {
       When authentication fails, the rejection callback is provided with the whole
       Fetch API [Response](https://fetch.spec.whatwg.org/#response-class) object
       instead of its responseJSON or responseText.
-       This is useful for cases when the backend provides additional context not
+        This is useful for cases when the backend provides additional context not
       available in the response body.
-       @property rejectWithXhr
+        @property rejectWithXhr
       @type Boolean
       @default false
       @deprecated DeviseAuthenticator/rejectWithResponse:property
@@ -83474,9 +83474,9 @@ define("ember-resolver/features", [], function () {
       When authentication fails, the rejection callback is provided with the whole
       Fetch API [Response](https://fetch.spec.whatwg.org/#response-class) object
       instead of its responseJSON or responseText.
-       This is useful for cases when the backend provides additional context not
+        This is useful for cases when the backend provides additional context not
       available in the response body.
-       @property rejectWithResponse
+        @property rejectWithResponse
       @type Boolean
       @default false
       @public
@@ -83490,7 +83490,7 @@ define("ember-resolver/features", [], function () {
       and
       {{#crossLink "DeviseAuthenticator/identificationAttributeName:property"}}identification{{/crossLink}}
       values in `data`__ and a rejecting promise otherwise.
-       @method restore
+        @method restore
       @param {Object} data The data to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming or remaining authenticated
       @public
@@ -83512,7 +83512,7 @@ define("ember-resolver/features", [], function () {
       __If the credentials are valid and authentication succeeds, a promise that
       resolves with the server's response is returned__, otherwise a promise that
       rejects with the server error is returned.
-       @method authenticate
+        @method authenticate
       @param {String} identification The user's identification
       @param {String} password The user's password
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming authenticated
@@ -83562,7 +83562,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Does nothing
-       @method invalidate
+        @method invalidate
       @return {Ember.RSVP.Promise} A resolving promise
       @public
     */
@@ -83574,7 +83574,7 @@ define("ember-resolver/features", [], function () {
     /**
       Makes a request to the Devise server using
       [ember-fetch](https://github.com/stefanpenner/ember-fetch).
-       @method makeRequest
+        @method makeRequest
       @param {Object} data The request data
       @param {Object} options request options that are passed to `fetch`
       @return {Promise} The promise returned by `fetch`
@@ -83621,7 +83621,7 @@ define("ember-resolver/features", [], function () {
      Restores the session from a session data object; __will return a resolving
      promise when there is a non-empty `access_token` in the session data__ and
      a rejecting promise otherwise.
-      @method restore
+       @method restore
      @param {Object} data The data to restore the session from
      @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming or remaining authenticated
      @public
@@ -83642,11 +83642,11 @@ define("ember-resolver/features", [], function () {
     /**
      Authenticates the session using the specified location `hash`
      (see https://tools.ietf.org/html/rfc6749#section-4.2.2).
-      __If the access token is valid and thus authentication succeeds, a promise that
+       __If the access token is valid and thus authentication succeeds, a promise that
      resolves with the access token is returned__, otherwise a promise that rejects
      with the error code as returned by the server is returned
      (see https://tools.ietf.org/html/rfc6749#section-4.2.2.1).
-      @method authenticate
+       @method authenticate
      @param {Object} hash The location hash
      @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming authenticated
      @public
@@ -83668,7 +83668,7 @@ define("ember-resolver/features", [], function () {
 
     /**
      This method simply returns a resolving promise.
-      @method invalidate
+       @method invalidate
      @return {Ember.RSVP.Promise} A promise that when it resolves results in the session being invalidated
      @public
      */
@@ -83721,7 +83721,7 @@ define("ember-resolver/features", [], function () {
     /**
       Triggered when the authenticator refreshed the access token (see
       [RFC 6749, section 6](http://tools.ietf.org/html/rfc6749#section-6)).
-       @event sessionDataUpdated
+        @event sessionDataUpdated
       @param {Object} data The updated session data
       @public
     */
@@ -83731,7 +83731,7 @@ define("ember-resolver/features", [], function () {
       https://tools.ietf.org/html/rfc6749#appendix-A.1). __This should only be
       used for statistics or logging etc. as it cannot actually be trusted since
       it could have been manipulated on the client!__
-       @property clientId
+        @property clientId
       @type String
       @default null
       @public
@@ -83741,7 +83741,7 @@ define("ember-resolver/features", [], function () {
     /**
       The endpoint on the server that authentication and token refresh requests
       are sent to.
-       @property serverTokenEndpoint
+        @property serverTokenEndpoint
       @type String
       @default '/token'
       @public
@@ -83752,10 +83752,10 @@ define("ember-resolver/features", [], function () {
       The endpoint on the server that token revocation requests are sent to. Only
       set this if the server actually supports token revocation. If this is
       `null`, the authenticator will not revoke tokens on session invalidation.
-       __If token revocation is enabled but fails, session invalidation will be
+        __If token revocation is enabled but fails, session invalidation will be
       intercepted and the session will remain authenticated (see
       {{#crossLink "OAuth2PasswordGrantAuthenticator/invalidate:method"}}{{/crossLink}}).__
-       @property serverTokenRevocationEndpoint
+        @property serverTokenRevocationEndpoint
       @type String
       @default null
       @public
@@ -83765,7 +83765,7 @@ define("ember-resolver/features", [], function () {
     /**
       Sets whether the authenticator automatically refreshes access tokens if the
       server supports it.
-       @property refreshAccessTokens
+        @property refreshAccessTokens
       @type Boolean
       @default true
       @public
@@ -83777,10 +83777,10 @@ define("ember-resolver/features", [], function () {
       return a random number. This randomization is needed because in case of
       multiple tabs, we need to prevent the tabs from sending refresh token
       request at the same exact moment.
-       __When overriding this property, make sure to mark the overridden property
+        __When overriding this property, make sure to mark the overridden property
       as volatile so it will actually have a different value each time it is
       accessed.__
-       @property refreshAccessTokens
+        @property refreshAccessTokens
       @type Integer
       @default a random number between 5 and 10
       @public
@@ -83807,9 +83807,9 @@ define("ember-resolver/features", [], function () {
       When authentication fails, the rejection callback is provided with the whole
       Fetch API [Response](https://fetch.spec.whatwg.org/#response-class) object
       instead of its responseJSON or responseText.
-       This is useful for cases when the backend provides additional context not
+        This is useful for cases when the backend provides additional context not
       available in the response body.
-       @property rejectWithXhr
+        @property rejectWithXhr
       @type Boolean
       @default false
       @deprecated OAuth2PasswordGrantAuthenticator/rejectWithResponse:property
@@ -83824,9 +83824,9 @@ define("ember-resolver/features", [], function () {
       When authentication fails, the rejection callback is provided with the whole
       Fetch API [Response](https://fetch.spec.whatwg.org/#response-class) object
       instead of its responseJSON or responseText.
-       This is useful for cases when the backend provides additional context not
+        This is useful for cases when the backend provides additional context not
       available in the response body.
-       @property rejectWithResponse
+        @property rejectWithResponse
       @type Boolean
       @default false
       @public
@@ -83837,14 +83837,14 @@ define("ember-resolver/features", [], function () {
       Restores the session from a session data object; __will return a resolving
       promise when there is a non-empty `access_token` in the session data__ and
       a rejecting promise otherwise.
-       If the server issues
+        If the server issues
       [expiring access tokens](https://tools.ietf.org/html/rfc6749#section-5.1)
       and there is an expired access token in the session data along with a
       refresh token, the authenticator will try to refresh the access token and
       return a promise that resolves with the new access token if the refresh was
       successful. If there is no refresh token or the token refresh is not
       successful, a rejecting promise will be returned.
-       @method restore
+        @method restore
       @param {Object} data The data to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming or remaining authenticated
       @public
@@ -83879,15 +83879,15 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "OAuth2PasswordGrantAuthenticator/serverTokenEndpoint:property"}}{{/crossLink}}
       and receives the access token in response (see
       http://tools.ietf.org/html/rfc6749#section-4.3).
-       __If the credentials are valid (and the optionally requested scope is
+        __If the credentials are valid (and the optionally requested scope is
       granted) and thus authentication succeeds, a promise that resolves with the
       server's response is returned__, otherwise a promise that rejects with the
       error as returned by the server is returned.
-       __If the
+        __If the
       [server supports it](https://tools.ietf.org/html/rfc6749#section-5.1), this
       method also schedules refresh requests for the access token before it
       expires.__
-       @method authenticate
+        @method authenticate
       @param {String} identification The resource owner username
       @param {String} password The resource owner password
       @param {String|Array} scope The scope of the access request (see [RFC 6749, section 3.3](http://tools.ietf.org/html/rfc6749#section-3.3))
@@ -83935,9 +83935,9 @@ define("ember-resolver/features", [], function () {
       refresh token if present). If token revocation succeeds, this method
       returns a resolving promise, otherwise it will return a rejecting promise,
       thus intercepting session invalidation.
-       If token revocation is not enabled this method simply returns a resolving
+        If token revocation is not enabled this method simply returns a resolving
       promise.
-       @method invalidate
+        @method invalidate
       @param {Object} data The current authenticated session data
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session being invalidated
       @public
@@ -83975,7 +83975,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Makes a request to the OAuth 2.0 server.
-       @method makeRequest
+        @method makeRequest
       @param {String} url The request URL
       @param {Object} data The request data
       @param {Object} headers Additional headers to send in request
@@ -84098,18 +84098,18 @@ define("ember-resolver/features", [], function () {
 
     /**
       Restores the session by calling the torii provider's `fetch` method.
-       __Many torii providers do not implement the `fetch` method__. If the
+        __Many torii providers do not implement the `fetch` method__. If the
       provider in use does not implement the method simply add it as follows:
-       ```js
+        ```js
       // app/torii-providers/facebook.js
       import FacebookOauth2Provider from 'torii/providers/facebook-oauth2';
-       export default FacebookOauth2Provider.extend({
+        export default FacebookOauth2Provider.extend({
         fetch(data) {
           return data;
         }
       });
       ```
-       @method restore
+        @method restore
       @param {Object} data The data to restore the session from
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming or remaining authenticated
       @public
@@ -84144,7 +84144,7 @@ define("ember-resolver/features", [], function () {
       [project's README](https://github.com/Vestorly/torii#readme), specifically
       the
       [section on providers](https://github.com/Vestorly/torii#configuring-a-torii-provider).
-       @method authenticate
+        @method authenticate
       @param {String} provider The torii provider to authenticate the session with
       @param {Object} options The options to pass to the torii provider
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session becoming authenticated
@@ -84166,7 +84166,7 @@ define("ember-resolver/features", [], function () {
       Closes the torii provider. If the provider is successfully closed, this
       method returns a resolving promise, otherwise it will return a rejecting
       promise, thus intercepting session invalidation.
-       @method invalidate
+        @method invalidate
       @return {Ember.RSVP.Promise} A promise that when it resolves results in the session being invalidated
       @public
     */
@@ -84202,9 +84202,9 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "SessionService/data:property"}}{{/crossLink}}) and a block.
       Depending on the mechanism it implements, the authorizer transforms the
       session data into authorization data and invokes the block with that data.
-       `BaseAuthorizer`'s implementation does nothing. __This method must be
+        `BaseAuthorizer`'s implementation does nothing. __This method must be
       overridden in custom authorizers.__
-       @method authorize
+        @method authorize
       @param {Object} data The current authenticated session data
       @param {Function} block The callback to call with the authorization data
       @public
@@ -84222,7 +84222,7 @@ define("ember-resolver/features", [], function () {
   exports.default = _base.default.extend({
     /**
       The token attribute name.
-       @property tokenAttributeName
+        @property tokenAttributeName
       @type String
       @default 'token'
       @public
@@ -84231,7 +84231,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The identification attribute name.
-       @property identificationAttributeName
+        @property identificationAttributeName
       @type String
       @default 'email'
       @public
@@ -84244,7 +84244,7 @@ define("ember-resolver/features", [], function () {
       and identification (see
       {{#crossLink "DeviseAuthenticator/identificationAttributeName:property"}}{{/crossLink}})
       in the `Authorization` header.
-       @method authorize
+        @method authorize
       @param {Object} data The data that the session currently holds
       @param {Function} block(headerName,headerContent) The callback to call with the authorization data; will receive the header name and header content as arguments.
       @public
@@ -84275,10 +84275,10 @@ define("ember-resolver/features", [], function () {
     /**
       Includes the access token from the session data into the `Authorization`
       header as a Bearer token, e.g.:
-       ```
+        ```
       Authorization: Bearer 234rtgjneroigne4
       ```
-       @method authorize
+        @method authorize
       @param {Object} data The data that the session currently holds
       @param {Function} block(headerName,headerContent) The callback to call with the authorization data; will receive the header name and header content as arguments
       @public
@@ -84331,7 +84331,7 @@ define("ember-resolver/features", [], function () {
   exports.default = {
     /**
       The base URL of the application as configured in `config/environment.js`.
-       @property baseURL
+        @property baseURL
       @readOnly
       @static
       @type String
@@ -84345,7 +84345,7 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "AuthenticatedRouteMixin"}}{{/crossLink}} will transition to
       this route when a route that implements the mixin is accessed when the
       route is not authenticated.
-       @property authenticationRoute
+        @property authenticationRoute
       @deprecated AuthenticatedRouteMixin/authenticationRoute:property
       @readOnly
       @static
@@ -84357,7 +84357,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The route to transition to after successful authentication.
-       @property routeAfterAuthentication
+        @property routeAfterAuthentication
       @deprecated ApplicationRouteMixin/routeAfterAuthentication:property
       @readOnly
       @static
@@ -84371,7 +84371,7 @@ define("ember-resolver/features", [], function () {
       The route to transition to if a route that implements the
       {{#crossLink "UnauthenticatedRouteMixin"}}{{/crossLink}} is accessed when
       the session is authenticated.
-       @property routeIfAlreadyAuthenticated
+        @property routeIfAlreadyAuthenticated
       @deprecated UnauthenticatedRouteMixin/routeIfAlreadyAuthenticated:property
       @readOnly
       @static
@@ -84765,7 +84765,7 @@ define("ember-resolver/features", [], function () {
   exports.default = Mixin.create({
     /**
       The session service.
-       @property session
+        @property session
       @readOnly
       @type SessionService
       @public
@@ -84780,7 +84780,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The route to transition to after successful authentication.
-       @property routeAfterAuthentication
+        @property routeAfterAuthentication
       @type String
       @default 'index'
       @public
@@ -84819,7 +84819,8 @@ define("ember-resolver/features", [], function () {
       cookie will be checked for a url that represents an attemptedTransition
       that was aborted in Fastboot mode, otherwise this action transitions to the
       {{#crossLink "Configuration/routeAfterAuthentication:property"}}{{/crossLink}}.
-        @method sessionAuthenticated
+    
+      @method sessionAuthenticated
       @public
     */
     sessionAuthenticated: function sessionAuthenticated() {
@@ -84845,11 +84846,11 @@ define("ember-resolver/features", [], function () {
       event. __It reloads the Ember.js application__ by redirecting the browser
       to the application's root URL so that all in-memory data (such as Ember
       Data stores etc.) gets cleared.
-       If the Ember.js application will be used in an environment where the users
+        If the Ember.js application will be used in an environment where the users
       don't have direct access to any data stored on the client (e.g.
       [cordova](http://cordova.apache.org)) this action can be overridden to e.g.
       simply transition to the index route.
-       @method sessionInvalidated
+        @method sessionInvalidated
       @public
     */
     sessionInvalidated: function sessionInvalidated() {
@@ -84877,7 +84878,7 @@ define("ember-resolver/features", [], function () {
   exports.default = Mixin.create({
     /**
       The session service.
-       @property session
+        @property session
       @readOnly
       @type SessionService
       @public
@@ -84895,7 +84896,7 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "AuthenticatedRouteMixin"}}{{/crossLink}} will transition to
       this route when a route that implements the mixin is accessed when the
       route is not authenticated.
-       @property authenticationRoute
+        @property authenticationRoute
       @type String
       @default 'login'
       @public
@@ -84917,10 +84918,10 @@ define("ember-resolver/features", [], function () {
       If the transition is aborted in Fastboot mode, the transition's target
       URL will be saved in a `ember_simple_auth-redirectTarget` cookie for use by
       the browser after authentication is complete.
-       __If `beforeModel` is overridden in a route that uses this mixin, the route's
+        __If `beforeModel` is overridden in a route that uses this mixin, the route's
      implementation must call `this._super(...arguments)`__ so that the mixin's
      `beforeModel` method is actually executed.
-       @method beforeModel
+        @method beforeModel
       @param {Transition} transition The transition that lead to this route
       @public
     */
@@ -84950,7 +84951,7 @@ define("ember-resolver/features", [], function () {
       `authenticationRoute`. In case the application uses an authentication
       mechanism that does not use an authentication route, this method can be
       overridden.
-       @method triggerAuthentication
+        @method triggerAuthentication
       @protected
     */
     triggerAuthentication: function triggerAuthentication() {
@@ -84974,7 +84975,7 @@ define("ember-resolver/features", [], function () {
   exports.default = Mixin.create({
     /**
       The session service.
-       @property session
+        @property session
       @readOnly
       @type SessionService
       @public
@@ -84987,7 +84988,7 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "BaseAuthorizer/authorize:method"}}{{/crossLink}}) with header
       name and header content arguments. __This property must be overridden in
       adapters using this mixin.__
-       @property authorizer
+        @property authorizer
       @type String
       @default null
       @public
@@ -85002,12 +85003,12 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "SessionService/authorize:method"}}{{/crossLink}}). The
       specific header name and contents depend on the actual authorizer that is
       used.
-       Until [emberjs/rfcs#171](https://github.com/emberjs/rfcs/pull/171)
+        Until [emberjs/rfcs#171](https://github.com/emberjs/rfcs/pull/171)
       gets resolved and [ds-improved-ajax](https://github.com/emberjs/data/pull/3099)
       [feature flag](https://github.com/emberjs/data/blob/master/FEATURES.md#feature-flags)
       is enabled, this method will be called for **every** ember-data version.
       `headersForRequest` *should* replace it after the resolution of the RFC.
-       @method ajaxOptions
+        @method ajaxOptions
       @protected
     */
     ajaxOptions: function ajaxOptions() {
@@ -85035,12 +85036,12 @@ define("ember-resolver/features", [], function () {
     /**
       Adds request headers containing the authorization data as constructed
       by the {{#crossLink "DataAdapterMixin/authorizer:property"}}{{/crossLink}}.
-       Until [emberjs/rfcs#171](https://github.com/emberjs/rfcs/pull/171)
+        Until [emberjs/rfcs#171](https://github.com/emberjs/rfcs/pull/171)
       gets resolved and [ds-improved-ajax](https://github.com/emberjs/data/pull/3099)
       [feature flag](https://github.com/emberjs/data/blob/master/FEATURES.md#feature-flags)
       is enabled, this method will **not** be used.
       See `ajaxOptions` instead.
-       @method headersForRequest
+        @method headersForRequest
       @protected
      */
     headersForRequest: function headersForRequest() {
@@ -85060,7 +85061,7 @@ define("ember-resolver/features", [], function () {
       This method is called for every response that the adapter receives from the
       API. If the response has a 401 status code it invalidates the session (see
       {{#crossLink "SessionService/invalidate:method"}}{{/crossLink}}).
-       @method handleResponse
+        @method handleResponse
       @param {Number} status The response status as received from the API
       @param  {Object} headers HTTP headers as received from the API
       @param {Any} payload The response body as received from the API
@@ -85077,7 +85078,7 @@ define("ember-resolver/features", [], function () {
      The default implementation for handleResponse.
      If the response has a 401 status code it invalidates the session (see
       {{#crossLink "SessionService/invalidate:method"}}{{/crossLink}}).
-      Override this method if you want custom invalidation logic for incoming responses.
+       Override this method if you want custom invalidation logic for incoming responses.
      @method ensureResponseAuthorized
      @param {Number} status The response status as received from the API
      @param  {Object} headers HTTP headers as received from the API
@@ -85104,7 +85105,7 @@ define("ember-resolver/features", [], function () {
   exports.default = Mixin.create({
     /**
      The session service.
-      @property session
+       @property session
      @readOnly
      @type SessionService
      @public
@@ -85116,7 +85117,7 @@ define("ember-resolver/features", [], function () {
       must be a subclass of the
       {{#crossLink "OAuth2ImplicitGrantAuthenticator"}}{{/crossLink}}
       authenticator.
-       @property authenticator
+        @property authenticator
       @type String
       @default null
       @public
@@ -85126,7 +85127,7 @@ define("ember-resolver/features", [], function () {
     /**
       Any error that potentially occurs during authentication will be stored in
       this property.
-       @property error
+        @property error
       @type String
       @default null
       @public
@@ -85138,7 +85139,7 @@ define("ember-resolver/features", [], function () {
       server to the
       {{#crossLink "OAuth2ImplicitGrantAuthenticator"}}{{/crossLink}} and
       authenticates the session with the authenticator.
-       @method activate
+        @method activate
       @public
     */
     activate: function activate() {
@@ -85197,7 +85198,7 @@ define("ember-resolver/features", [], function () {
   exports.default = Mixin.create({
     /**
       The session service.
-       @property session
+        @property session
       @readOnly
       @type SessionService
       @public
@@ -85214,7 +85215,7 @@ define("ember-resolver/features", [], function () {
       The route to transition to if a route that implements the
       {{#crossLink "UnauthenticatedRouteMixin"}}{{/crossLink}} is accessed when
       the session is authenticated.
-       @property routeIfAlreadyAuthenticated
+        @property routeIfAlreadyAuthenticated
       @type String
       @default 'index'
       @public
@@ -85227,10 +85228,10 @@ define("ember-resolver/features", [], function () {
       Checks whether the session is authenticated and if it is aborts the current
       transition and instead transitions to the
       {{#crossLink "Configuration/routeIfAlreadyAuthenticated:property"}}{{/crossLink}}.
-       __If `beforeModel` is overridden in a route that uses this mixin, the route's
+        __If `beforeModel` is overridden in a route that uses this mixin, the route's
      implementation must call `this._super(...arguments)`__ so that the mixin's
      `beforeModel` method is actually executed.
-       @method beforeModel
+        @method beforeModel
       @param {Transition} transition The transition that lead to this route
       @public
     */
@@ -85272,10 +85273,10 @@ define("ember-resolver/features", [], function () {
       application and the session state gets synchronized across tabs or windows
       via the store (see
       {{#crossLink "BaseStore/sessionDataUpdated:event"}}{{/crossLink}}).
-       When using the {{#crossLink "ApplicationRouteMixin"}}{{/crossLink}} this
+        When using the {{#crossLink "ApplicationRouteMixin"}}{{/crossLink}} this
       event will automatically get handled (see
       {{#crossLink "ApplicationRouteMixin/sessionAuthenticated:method"}}{{/crossLink}}).
-       @event authenticationSucceeded
+        @event authenticationSucceeded
       @public
     */
 
@@ -85287,16 +85288,16 @@ define("ember-resolver/features", [], function () {
       application and the session state gets synchronized across tabs or windows
       via the store (see
       {{#crossLink "BaseStore/sessionDataUpdated:event"}}{{/crossLink}}).
-       When using the {{#crossLink "ApplicationRouteMixin"}}{{/crossLink}} this
+        When using the {{#crossLink "ApplicationRouteMixin"}}{{/crossLink}} this
       event will automatically get handled (see
       {{#crossLink "ApplicationRouteMixin/sessionInvalidated:method"}}{{/crossLink}}).
-       @event invalidationSucceeded
+        @event invalidationSucceeded
       @public
     */
 
     /**
       Returns whether the session is currently authenticated.
-       @property isAuthenticated
+        @property isAuthenticated
       @type Boolean
       @readOnly
       @default false
@@ -85312,7 +85313,7 @@ define("ember-resolver/features", [], function () {
       that will be cleared when the session is invalidated. This data cannot be
       written. All other session data is writable and will not be cleared when
       the session is invalidated.
-       @property data
+        @property data
       @type Object
       @readOnly
       @default { authenticated: {} }
@@ -85322,7 +85323,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The session store.
-       @property store
+        @property store
       @type BaseStore
       @readOnly
       @default null
@@ -85337,7 +85338,7 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "ApplicationRouteMixin"}}{{/crossLink}} will retry it when the
       session becomes authenticated (see
       {{#crossLink "ApplicationRouteMixin/sessionAuthenticated:method"}}{{/crossLink}}).
-       @property attemptedTransition
+        @property attemptedTransition
       @type Transition
       @default null
       @public
@@ -85384,16 +85385,16 @@ define("ember-resolver/features", [], function () {
       accessible via the
       {{#crossLink "SessionService/data:property"}}session data's{{/crossLink}}
       `authenticated` property.
-       __This method returns a promise. A resolving promise indicates that the
+        __This method returns a promise. A resolving promise indicates that the
       session was successfully authenticated__ while a rejecting promise
       indicates that authentication failed and the session remains
       unauthenticated. The promise does not resolve with a value; instead, the
       data returned from the authenticator is available via the
       {{#crossLink "SessionService/data:property"}}{{/crossLink}} property.
-       When authentication succeeds this will trigger the
+        When authentication succeeds this will trigger the
       {{#crossLink "SessionService/authenticationSucceeded:event"}}{{/crossLink}}
       event.
-       @method authenticate
+        @method authenticate
       @param {String} authenticator The authenticator to use to authenticate the session
       @param {Any} [...args] The arguments to pass to the authenticator; depending on the type of authenticator these might be a set of credentials, a Facebook OAuth Token, etc.
       @return {Ember.RSVP.Promise} A promise that resolves when the session was authenticated successfully and rejects otherwise
@@ -85413,15 +85414,15 @@ define("ember-resolver/features", [], function () {
       invokes the authenticator's
       {{#crossLink "BaseAuthenticator/invalidate:method"}}{{/crossLink}} method
       and handles the returned promise accordingly.
-       This method returns a promise. A resolving promise indicates that the
+        This method returns a promise. A resolving promise indicates that the
       session was successfully invalidated while a rejecting promise indicates
       that invalidation failed and the session remains authenticated. Once the
       session is successfully invalidated it clears all of its authenticated data
       (see {{#crossLink "SessionService/data:property"}}{{/crossLink}}).
-       When invalidation succeeds this will trigger the
+        When invalidation succeeds this will trigger the
       {{#crossLink "SessionService/invalidationSucceeded:event"}}{{/crossLink}}
       event.
-       @method invalidate
+        @method invalidate
       @param {Array} ...args arguments that will be passed to the authenticator
       @return {Ember.RSVP.Promise} A promise that resolves when the session was invalidated successfully and rejects otherwise
       @public
@@ -85438,12 +85439,12 @@ define("ember-resolver/features", [], function () {
       {{#crossLink "BaseAuthorizer/authorize:method"}}{{/crossLink}}) if the
       session is authenticated. If the session is not currently authenticated
       this method does nothing.
-       ```js
+        ```js
       this.get('session').authorize('authorizer:oauth2-bearer', (headerName, headerValue) => {
         xhr.setRequestHeader(headerName, headerValue);
       });
       ```
-       @method authorize
+        @method authorize
       @param {String} authorizer The authorizer to authorize the block with
       @param {Function} block The block of code to call with the authorization data generated by the authorizer
       @public
@@ -85509,7 +85510,7 @@ define("ember-resolver/features", [], function () {
     /**
       The `localStorage` key the store persists data in if `localStorage` is
       available.
-       @property localStorageKey
+        @property localStorageKey
       @type String
       @default 'ember_simple_auth-session'
       @public
@@ -85521,7 +85522,7 @@ define("ember-resolver/features", [], function () {
       "example.com", ".example.com" (which includes all subdomains) or
       "subdomain.example.com". If not explicitly set, the cookie domain defaults
       to the domain the session was authenticated on.
-       @property cookieDomain
+        @property cookieDomain
       @type String
       @default null
       @public
@@ -85531,7 +85532,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the cookie to use if `localStorage` is not available.
-       @property cookieName
+        @property cookieName
       @type String
       @default ember_simple_auth-session
       @public
@@ -85541,7 +85542,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The path to use for the cookie, e.g., "/", "/something".
-       @property cookiePath
+        @property cookiePath
       @type String
       @default '/'
       @public
@@ -85553,7 +85554,7 @@ define("ember-resolver/features", [], function () {
       The expiration time for the cookie in seconds if `localStorage` is not
       available. A value of `null` will make the cookie a session cookie that
       expires and gets deleted when the browser is closed.
-       @property cookieExpirationTime
+        @property cookieExpirationTime
       @default null
       @type Integer
       @public
@@ -85612,7 +85613,7 @@ define("ember-resolver/features", [], function () {
     /**
       Persists the `data` in the `localStorage` if it is available or in a cookie
       if it is not.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -85627,7 +85628,7 @@ define("ember-resolver/features", [], function () {
     /**
       Returns all data currently stored in the `localStorage` if that is
       available - or if it is not, in the cookie - as a plain object.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -85640,7 +85641,7 @@ define("ember-resolver/features", [], function () {
       Clears the store by deleting the
       {{#crossLink "LocalStorageStore/key:property"}}{{/crossLink}} from
       `localStorage` if that is available or by deleting the cookie if it is not.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -85665,16 +85666,16 @@ define("ember-resolver/features", [], function () {
       handles that event, passes the updated data to its authenticator's
       {{#crossLink "BaseAuthenticator/restore:method"}}{{/crossLink}} method and
       handles the result of that invocation accordingly.
-       @event sessionDataUpdated
+        @event sessionDataUpdated
       @param {Object} data The updated session data
       @public
     */
 
     /**
       Persists the `data`. This replaces all currently stored data.
-       `BaseStores`'s implementation always returns a rejecting promise. __This
+        `BaseStores`'s implementation always returns a rejecting promise. __This
       method must be overridden in subclasses__.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -85686,9 +85687,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns all data currently stored as a plain object.
-       `BaseStores`'s implementation always returns a rejecting promise. __This
+        `BaseStores`'s implementation always returns a rejecting promise. __This
       method must be overridden in subclasses__.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -85699,9 +85700,9 @@ define("ember-resolver/features", [], function () {
 
     /**
       Clears the store.
-       `BaseStores`'s implementation always returns a rejecting promise. __This
+        `BaseStores`'s implementation always returns a rejecting promise. __This
       method must be overridden in subclasses__.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -85796,7 +85797,7 @@ define("ember-resolver/features", [], function () {
       (which includes all subdomains) or "subdomain.example.com". If not
       explicitly set, the cookie domain defaults to the domain the session was
       authenticated on.
-       @property cookieDomain
+        @property cookieDomain
       @type String
       @default null
       @public
@@ -85806,7 +85807,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The name of the cookie.
-       @property cookieName
+        @property cookieName
       @type String
       @default ember_simple_auth-session
       @public
@@ -85818,7 +85819,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The path to use for the cookie, e.g., "/", "/something".
-       @property cookiePath
+        @property cookiePath
       @type String
       @default '/'
       @public
@@ -85830,10 +85831,10 @@ define("ember-resolver/features", [], function () {
       The expiration time for the cookie in seconds. A value of `null` will make
       the cookie a session cookie that expires and gets deleted when the browser
       is closed.
-       The recommended minimum value is 90 seconds. If your value is less than
+        The recommended minimum value is 90 seconds. If your value is less than
       that, the cookie may expire before its expiration time is extended
       (expiration time is extended every 60 seconds).
-       @property cookieExpirationTime
+        @property cookieExpirationTime
       @default null
       @type Integer
       @public
@@ -85894,7 +85895,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Persists the `data` in the cookie.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -85910,7 +85911,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns all data currently stored in the cookie as a plain object.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -85926,7 +85927,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Clears the store by deleting the cookie.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -86031,7 +86032,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Persists `data`. This replaces all currently stored data.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -86045,7 +86046,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns all data currently stored as a plain object.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -86058,7 +86059,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Clears the store.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -86089,7 +86090,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The `localStorage` key the store persists data in.
-       @property key
+        @property key
       @type String
       @default 'ember_simple_auth-session'
       @public
@@ -86112,7 +86113,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Persists the `data` in the `localStorage`.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -86128,7 +86129,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns all data currently stored in the `localStorage` as a plain object.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -86143,7 +86144,7 @@ define("ember-resolver/features", [], function () {
       Clears the store by deleting the
       {{#crossLink "LocalStorageStore/key:property"}}{{/crossLink}} from
       `localStorage`.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -86186,7 +86187,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       The `sessionStorage` key the store persists data in.
-       @property key
+        @property key
       @type String
       @default 'ember_simple_auth-session'
       @public
@@ -86209,7 +86210,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Persists the `data` in the `sessionStorage`.
-       @method persist
+        @method persist
       @param {Object} data The data to persist
       @return {Ember.RSVP.Promise} A promise that resolves when the data has successfully been persisted and rejects otherwise.
       @public
@@ -86225,7 +86226,7 @@ define("ember-resolver/features", [], function () {
 
     /**
       Returns all data currently stored in the `sessionStorage` as a plain object.
-       @method restore
+        @method restore
       @return {Ember.RSVP.Promise} A promise that resolves with the data currently persisted in the store when the data has been restored successfully and rejects otherwise.
       @public
     */
@@ -86240,7 +86241,7 @@ define("ember-resolver/features", [], function () {
       Clears the store by deleting the
       {{#crossLink "sessionStorageStore/key:property"}}{{/crossLink}} from
       `sessionStorage`.
-       @method clear
+        @method clear
       @return {Ember.RSVP.Promise} A promise that resolves when the store has been cleared successfully and rejects otherwise.
       @public
     */
@@ -87247,7 +87248,7 @@ var MapWithDefault = Ember.MapWithDefault;
 var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Register with target handler
-     @method registerHandlers
+      @method registerHandlers
     @param {Object} target
     @param {Function} becameInvalid
     @param {Function} becameValid
@@ -87266,7 +87267,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Register with target handler
-     @method _registerHandlers
+      @method _registerHandlers
     @private
   */
   _registerHandlers: function _registerHandlers(target, becameInvalid, becameValid) {
@@ -87290,7 +87291,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Returns errors for a given attribute
-     ```javascript
+      ```javascript
     let user = store.createRecord('user', {
       username: 'tomster',
       email: 'invalidEmail'
@@ -87300,7 +87301,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
       // [{attribute: "email", message: "Doesn't look like a valid email."}]
     });
     ```
-     @method errorsFor
+      @method errorsFor
     @param {String} attribute
     @return {Array}
   */
@@ -87312,14 +87313,14 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     An array containing all of the error messages for this
     record. This is useful for displaying all errors to the user.
-     ```handlebars
+      ```handlebars
     {{#each model.errors.messages as |message|}}
       <div class="error">
         {{message}}
       </div>
     {{/each}}
     ```
-     @property messages
+      @property messages
     @type {Array}
   */
   messages: Ember.computed.mapBy('content', 'message'),
@@ -87348,7 +87349,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Total number of errors.
-     @property length
+      @property length
     @type {Number}
     @readOnly
   */
@@ -87363,13 +87364,13 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Adds error messages to a given attribute and sends
     `becameInvalid` event to the record.
-     Example:
-     ```javascript
+      Example:
+      ```javascript
     if (!user.get('username') {
       user.get('errors').add('username', 'This field is required');
     }
     ```
-     @method add
+      @method add
     @param {String} attribute
     @param {(Array|String)} messages
     @deprecated
@@ -87392,7 +87393,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Adds error messages to a given attribute without sending event.
-     @method _add
+      @method _add
     @private
   */
   _add: function _add(attribute, messages) {
@@ -87433,18 +87434,18 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Removes all error messages from the given attribute and sends
     `becameValid` event to the record if there no more errors left.
-     Example:
-     ```app/models/user.js
+      Example:
+      ```app/models/user.js
     import DS from 'ember-data';
-     export default DS.Model.extend({
+      export default DS.Model.extend({
       email: DS.attr('string'),
       twoFactorAuth: DS.attr('boolean'),
       phone: DS.attr('string')
     });
     ```
-     ```app/routes/user/edit.js
+      ```app/routes/user/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         save: function(user) {
            if (!user.get('twoFactorAuth')) {
@@ -87455,7 +87456,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
       }
     });
     ```
-     @method remove
+      @method remove
     @param {String} attribute
     @deprecated
   */
@@ -87479,7 +87480,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Removes all error messages from the given attribute without sending event.
-     @method _remove
+      @method _remove
     @private
   */
   _remove: function _remove(attribute) {
@@ -87498,10 +87499,10 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Removes all error messages and sends `becameValid` event
     to the record.
-     Example:
-     ```app/routes/user/edit.js
+      Example:
+      ```app/routes/user/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         retrySave: function(user) {
            user.get('errors').clear();
@@ -87510,7 +87511,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
       }
     });
     ```
-     @method clear
+      @method clear
     @deprecated
   */
   clear: function clear() {
@@ -87531,7 +87532,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Removes all error messages.
     to the record.
-     @method _clear
+      @method _clear
     @private
   */
   _clear: function _clear() {
@@ -87557,9 +87558,9 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Checks if there is error messages for the given attribute.
-     ```app/routes/user/edit.js
+      ```app/routes/user/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         save: function(user) {
            if (user.get('errors').has('email')) {
@@ -87570,7 +87571,7 @@ var Errors = Ember.ArrayProxy.extend(Ember.Evented, {
       }
     });
     ```
-     @method has
+      @method has
     @param {String} attribute
     @return {Boolean} true if there some errors on given attribute
   */
@@ -88504,7 +88505,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
     the server or the `created` state if the record is created on the
     client. A record can also enter the empty state if the adapter is
     unable to locate the record.
-     @property isEmpty
+      @property isEmpty
     @type {Boolean}
     @readOnly
   */
@@ -88514,7 +88515,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
     record enters this state when the store asks the adapter for its
     data. It remains in this state until the adapter provides the
     requested data.
-     @property isLoading
+      @property isLoading
     @type {Boolean}
     @readOnly
   */
@@ -88524,15 +88525,15 @@ var Model = Ember.Object.extend(Ember.Evented, {
     record enters this state when its data is populated. Most of a
     record's lifecycle is spent inside substates of the `loaded`
     state.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('isLoaded'); // true
-     store.findRecord('model', 1).then(function(model) {
+      store.findRecord('model', 1).then(function(model) {
       model.get('isLoaded'); // true
     });
     ```
-     @property isLoaded
+      @property isLoaded
     @type {Boolean}
     @readOnly
   */
@@ -88542,17 +88543,17 @@ var Model = Ember.Object.extend(Ember.Evented, {
     record has local changes that have not yet been saved by the
     adapter. This includes records that have been created (but not yet
     saved) or deleted.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('hasDirtyAttributes'); // true
-     store.findRecord('model', 1).then(function(model) {
+      store.findRecord('model', 1).then(function(model) {
       model.get('hasDirtyAttributes'); // false
       model.set('foo', 'some value');
       model.get('hasDirtyAttributes'); // true
     });
     ```
-     @since 1.13.0
+      @since 1.13.0
     @property hasDirtyAttributes
     @type {Boolean}
     @readOnly
@@ -88565,8 +88566,8 @@ var Model = Ember.Object.extend(Ember.Evented, {
     record enters the saving state when `save` is called, but the
     adapter has not yet acknowledged that the changes have been
     persisted to the backend.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('isSaving'); // false
     let promise = record.save();
@@ -88575,7 +88576,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       record.get('isSaving'); // false
     });
     ```
-     @property isSaving
+      @property isSaving
     @type {Boolean}
     @readOnly
   */
@@ -88587,27 +88588,27 @@ var Model = Ember.Object.extend(Ember.Evented, {
     was not yet persisted. When `isSaving` is true, the change is
     in-flight. When both `hasDirtyAttributes` and `isSaving` are false, the
     change has persisted.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('isDeleted');    // false
     record.deleteRecord();
-     // Locally deleted
+      // Locally deleted
     record.get('isDeleted');           // true
     record.get('hasDirtyAttributes');  // true
     record.get('isSaving');            // false
-     // Persisting the deletion
+      // Persisting the deletion
     let promise = record.save();
     record.get('isDeleted');    // true
     record.get('isSaving');     // true
-     // Deletion Persisted
+      // Deletion Persisted
     promise.then(function() {
       record.get('isDeleted');          // true
       record.get('isSaving');           // false
       record.get('hasDirtyAttributes'); // false
     });
     ```
-     @property isDeleted
+      @property isDeleted
     @type {Boolean}
     @readOnly
   */
@@ -88617,24 +88618,24 @@ var Model = Ember.Object.extend(Ember.Evented, {
     record will be in the `new` state when it has been created on the
     client and the adapter has not yet report that it was successfully
     saved.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('isNew'); // true
-     record.save().then(function(model) {
+      record.save().then(function(model) {
       model.get('isNew'); // false
     });
     ```
-     @property isNew
+      @property isNew
     @type {Boolean}
     @readOnly
   */
   isNew: retrieveFromCurrentState,
   /**
     If this property is `true` the record is in the `valid` state.
-     A record will be in the `valid` state when the adapter did not report any
+      A record will be in the `valid` state when the adapter did not report any
     server-side validation failures.
-     @property isValid
+      @property isValid
     @type {Boolean}
     @readOnly
   */
@@ -88643,15 +88644,15 @@ var Model = Ember.Object.extend(Ember.Evented, {
     If the record is in the dirty state this property will report what
     kind of change has caused it to move into the dirty
     state. Possible values are:
-     - `created` The record has been created by the client and not yet saved to the adapter.
+      - `created` The record has been created by the client and not yet saved to the adapter.
     - `updated` The record has been updated by the client and not yet saved to the adapter.
     - `deleted` The record has been deleted by the client and not yet saved to the adapter.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let record = store.createRecord('model');
     record.get('dirtyType'); // 'created'
     ```
-     @property dirtyType
+      @property dirtyType
     @type {String}
     @readOnly
   */
@@ -88661,15 +88662,15 @@ var Model = Ember.Object.extend(Ember.Evented, {
     If `true` the adapter reported that it was unable to save local
     changes to the backend for any reason other than a server-side
     validation error.
-     Example
-     ```javascript
+      Example
+      ```javascript
     record.get('isError'); // false
     record.set('foo', 'valid value');
     record.save().then(null, function() {
       record.get('isError'); // true
     });
     ```
-     @property isError
+      @property isError
     @type {Boolean}
     @readOnly
   */
@@ -88677,13 +88678,13 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     If `true` the store is attempting to reload the record from the adapter.
-     Example
-     ```javascript
+      Example
+      ```javascript
     record.get('isReloading'); // false
     record.reload();
     record.get('isReloading'); // true
     ```
-     @property isReloading
+      @property isReloading
     @type {Boolean}
     @readOnly
   */
@@ -88695,14 +88696,14 @@ var Model = Ember.Object.extend(Ember.Evented, {
     strings before being used internally. Note when declaring the
     attributes for a model it is an error to declare an id
     attribute.
-     ```javascript
+      ```javascript
     let record = store.createRecord('model');
     record.get('id'); // null
-     store.findRecord('model', 1).then(function(model) {
+      store.findRecord('model', 1).then(function(model) {
       model.get('id'); // '1'
     });
     ```
-     @property id
+      @property id
     @type {String}
   */
   id: null,
@@ -88719,9 +88720,9 @@ var Model = Ember.Object.extend(Ember.Evented, {
     any errors returned by the adapter. When present the errors hash
     contains keys corresponding to the invalid property names
     and values which are arrays of Javascript objects with two keys:
-     - `message` A string containing the error message from the backend
+      - `message` A string containing the error message from the backend
     - `attribute` The name of the property associated with this error message
-     ```javascript
+      ```javascript
     record.get('errors.length'); // 0
     record.set('foo', 'invalid value');
     record.save().catch(function() {
@@ -88729,9 +88730,9 @@ var Model = Ember.Object.extend(Ember.Evented, {
       // [{message: 'foo should be a number.', attribute: 'foo'}]
     });
     ```
-     The `errors` property us useful for displaying error messages to
+      The `errors` property us useful for displaying error messages to
     the user.
-     ```handlebars
+      ```handlebars
     <label>Username: {{input value=username}} </label>
     {{#each model.errors.username as |error|}}
       <div class="error">
@@ -88745,16 +88746,17 @@ var Model = Ember.Object.extend(Ember.Evented, {
       </div>
     {{/each}}
     ```
-      You can also access the special `messages` property on the error
+  
+    You can also access the special `messages` property on the error
     object to get an array of all the error strings.
-     ```handlebars
+      ```handlebars
     {{#each model.errors.messages as |message|}}
       <div class="error">
         {{message}}
       </div>
     {{/each}}
     ```
-     @property errors
+      @property errors
     @type {DS.Errors}
   */
   errors: computed(function () {
@@ -88771,7 +88773,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     This property holds the `DS.AdapterError` object with which
     last adapter operation was rejected.
-     @property adapterError
+      @property adapterError
     @type {DS.AdapterError}
   */
   adapterError: null,
@@ -88779,11 +88781,11 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Create a JSON representation of the record, using the serialization
     strategy of the store's adapter.
-    `serialize` takes an optional hash as a parameter, currently
+     `serialize` takes an optional hash as a parameter, currently
     supported options are:
-    - `includeId`: `true` if the record's ID should be included in the
+     - `includeId`: `true` if the record's ID should be included in the
       JSON representation.
-     @method serialize
+      @method serialize
     @param {Object} options
     @return {Object} an object whose values are primitive JSON values only
   */
@@ -88795,11 +88797,11 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Use [DS.JSONSerializer](DS.JSONSerializer.html) to
     get the JSON representation of a record.
-     `toJSON` takes an optional hash as a parameter, currently
+      `toJSON` takes an optional hash as a parameter, currently
     supported options are:
-     - `includeId`: `true` if the record's ID should be included in the
+      - `includeId`: `true` if the record's ID should be included in the
       JSON representation.
-     @method toJSON
+      @method toJSON
     @param {Object} options
     @return {Object} A JSON representation of the object.
   */
@@ -88815,49 +88817,49 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Fired when the record is ready to be interacted with,
     that is either loaded from the server or created locally.
-     @event ready
+      @event ready
   */
   ready: null,
 
   /**
     Fired when the record is loaded from the server.
-     @event didLoad
+      @event didLoad
   */
   didLoad: null,
 
   /**
     Fired when the record is updated.
-     @event didUpdate
+      @event didUpdate
   */
   didUpdate: null,
 
   /**
     Fired when a new record is commited to the server.
-     @event didCreate
+      @event didCreate
   */
   didCreate: null,
 
   /**
     Fired when the record is deleted.
-     @event didDelete
+      @event didDelete
   */
   didDelete: null,
 
   /**
     Fired when the record becomes invalid.
-     @event becameInvalid
+      @event becameInvalid
   */
   becameInvalid: null,
 
   /**
     Fired when the record enters the error state.
-     @event becameError
+      @event becameError
   */
   becameError: null,
 
   /**
     Fired when the record is rolled back.
-     @event rolledBack
+      @event rolledBack
   */
   rolledBack: null,
 
@@ -88888,10 +88890,10 @@ var Model = Ember.Object.extend(Ember.Evented, {
     `save` afterwards if you want to persist it. You might use this
     method if you want to allow the user to still `rollbackAttributes()`
     after a delete was made.
-     Example
-     ```app/routes/model/delete.js
+      Example
+      ```app/routes/model/delete.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         softDelete: function() {
           this.controller.get('model').deleteRecord();
@@ -88905,7 +88907,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     ```
-     @method deleteRecord
+      @method deleteRecord
   */
   deleteRecord: function deleteRecord() {
     this._internalModel.deleteRecord();
@@ -88914,10 +88916,10 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     Same as `deleteRecord`, but saves the record immediately.
-     Example
-     ```app/routes/model/delete.js
+      Example
+      ```app/routes/model/delete.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         delete: function() {
           let controller = this.controller;
@@ -88928,14 +88930,14 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     ```
-     If you pass an object on the `adapterOptions` property of the options
+      If you pass an object on the `adapterOptions` property of the options
     argument it will be passed to your adapter via the snapshot
-     ```js
+      ```js
     record.destroyRecord({ adapterOptions: { subscribe: false } });
     ```
-     ```app/adapters/post.js
+      ```app/adapters/post.js
     import MyCustomAdapter from './custom-adapter';
-     export default MyCustomAdapter.extend({
+      export default MyCustomAdapter.extend({
       deleteRecord: function(store, type, snapshot) {
         if (snapshot.adapterOptions.subscribe) {
           // ...
@@ -88944,7 +88946,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     ```
-     @method destroyRecord
+      @method destroyRecord
     @param {Object} options
     @return {Promise} a promise that will be resolved when the adapter returns
     successfully or rejected if the adapter returns with an error.
@@ -88957,7 +88959,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     Unloads the record from the store. This will cause the record to be destroyed and freed up for garbage collection.
-     @method unloadRecord
+      @method unloadRecord
   */
   unloadRecord: function unloadRecord() {
     if (this.isDestroyed) {
@@ -88985,33 +88987,33 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Returns an object, whose keys are changed properties, and value is
     an [oldProp, newProp] array.
-     The array represents the diff of the canonical state with the local state
+      The array represents the diff of the canonical state with the local state
     of the model. Note: if the model is created locally, the canonical state is
     empty since the adapter hasn't acknowledged the attributes yet:
-     Example
-     ```app/models/mascot.js
+      Example
+      ```app/models/mascot.js
     import DS from 'ember-data';
-     export default DS.Model.extend({
+      export default DS.Model.extend({
       name: DS.attr('string'),
       isAdmin: DS.attr('boolean', {
         defaultValue: false
       })
     });
     ```
-     ```javascript
+      ```javascript
     let mascot = store.createRecord('mascot');
-     mascot.changedAttributes(); // {}
-     mascot.set('name', 'Tomster');
-    mascot.changedAttributes(); // { name: [undefined, 'Tomster'] }
-     mascot.set('isAdmin', true);
-    mascot.changedAttributes(); // { isAdmin: [undefined, true], name: [undefined, 'Tomster'] }
-     mascot.save().then(function() {
       mascot.changedAttributes(); // {}
-       mascot.set('isAdmin', false);
+      mascot.set('name', 'Tomster');
+    mascot.changedAttributes(); // { name: [undefined, 'Tomster'] }
+      mascot.set('isAdmin', true);
+    mascot.changedAttributes(); // { isAdmin: [undefined, true], name: [undefined, 'Tomster'] }
+      mascot.save().then(function() {
+      mascot.changedAttributes(); // {}
+        mascot.set('isAdmin', false);
       mascot.changedAttributes(); // { isAdmin: [true, false] }
     });
     ```
-     @method changedAttributes
+      @method changedAttributes
     @return {Object} an object, whose keys are changed properties,
       and value is an [oldProp, newProp] array.
   */
@@ -89028,7 +89030,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
   adapterWillCommit: function() {
     this.send('willCommit');
   },
-   /**
+    /**
     @method adapterDidDirty
     @private
   adapterDidDirty: function() {
@@ -89040,15 +89042,15 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     If the model `hasDirtyAttributes` this function will discard any unsaved
     changes. If the model `isNew` it will be removed from the store.
-     Example
-     ```javascript
+      Example
+      ```javascript
     record.get('name'); // 'Untitled Document'
     record.set('name', 'Doc 1');
     record.get('name'); // 'Doc 1'
     record.rollbackAttributes();
     record.get('name'); // 'Untitled Document'
     ```
-     @since 1.13.0
+      @since 1.13.0
     @method rollbackAttributes
   */
   rollbackAttributes: function rollbackAttributes() {
@@ -89071,8 +89073,8 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Save the record and persist any changes to the record to an
     external source via the adapter.
-     Example
-     ```javascript
+      Example
+      ```javascript
     record.set('name', 'Tomster');
     record.save().then(function() {
       // Success callback
@@ -89080,14 +89082,14 @@ var Model = Ember.Object.extend(Ember.Evented, {
       // Error callback
     });
     ```
-    If you pass an object using the `adapterOptions` property of the options
+     If you pass an object using the `adapterOptions` property of the options
    argument it will be passed to your adapter via the snapshot.
-     ```js
+      ```js
     record.save({ adapterOptions: { subscribe: false } });
     ```
-     ```app/adapters/post.js
+      ```app/adapters/post.js
     import MyCustomAdapter from './custom-adapter';
-     export default MyCustomAdapter.extend({
+      export default MyCustomAdapter.extend({
       updateRecord: function(store, type, snapshot) {
         if (snapshot.adapterOptions.subscribe) {
           // ...
@@ -89096,7 +89098,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     ```
-     @method save
+      @method save
     @param {Object} options
     @return {Promise} a promise that will be resolved when the adapter returns
     successfully or rejected if the adapter returns with an error.
@@ -89114,11 +89116,11 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     Reload the record from the adapter.
-     This will only work if the record has already finished loading.
-     Example
-     ```app/routes/model/view.js
+      This will only work if the record has already finished loading.
+      Example
+      ```app/routes/model/view.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       actions: {
         reload: function() {
           this.controller.get('model').reload().then(function(model) {
@@ -89128,7 +89130,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     ```
-     @method reload
+      @method reload
     @return {Promise} a promise that will be resolved with the record when the
     adapter returns successfully or rejected if the adapter returns
     with an error.
@@ -89147,7 +89149,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
     Override the default event firing from Ember.Evented to
     also call methods with the given name.
-     @method trigger
+      @method trigger
     @private
     @param {String} name
   */
@@ -89173,13 +89175,13 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     Get the reference for the specified belongsTo relationship.
-     Example
-     ```app/models/blog.js
+      Example
+      ```app/models/blog.js
     export default DS.Model.extend({
       user: DS.belongsTo({ async: true })
     });
     ```
-     ```javascript
+      ```javascript
     let blog = store.push({
       data: {
         type: 'blog',
@@ -89192,21 +89194,21 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     let userRef = blog.belongsTo('user');
-     // check if the user relationship is loaded
+      // check if the user relationship is loaded
     let isLoaded = userRef.value() !== null;
-     // get the record of the reference (null if not yet available)
+      // get the record of the reference (null if not yet available)
     let user = userRef.value();
-     // get the identifier of the reference
+      // get the identifier of the reference
     if (userRef.remoteType() === "id") {
       let id = userRef.id();
     } else if (userRef.remoteType() === "link") {
       let link = userRef.link();
     }
-     // load user (via store.findRecord or store.findBelongsTo)
+      // load user (via store.findRecord or store.findBelongsTo)
     userRef.load().then(...)
-     // or trigger a reload
+      // or trigger a reload
     userRef.reload().then(...)
-     // provide data for reference
+      // provide data for reference
     userRef.push({
       type: 'user',
       id: 1,
@@ -89217,7 +89219,7 @@ var Model = Ember.Object.extend(Ember.Evented, {
       userRef.value() === user;
     });
     ```
-     @method belongsTo
+      @method belongsTo
     @param {String} name of the relationship
     @since 2.5.0
     @return {BelongsToReference} reference for this relationship
@@ -89229,13 +89231,13 @@ var Model = Ember.Object.extend(Ember.Evented, {
 
   /**
     Get the reference for the specified hasMany relationship.
-     Example
-     ```javascript
+      Example
+      ```javascript
     // models/blog.js
     export default DS.Model.extend({
       comments: DS.hasMany({ async: true })
     });
-     let blog = store.push({
+      let blog = store.push({
       data: {
         type: 'blog',
         id: 1,
@@ -89250,26 +89252,26 @@ var Model = Ember.Object.extend(Ember.Evented, {
       }
     });
     let commentsRef = blog.hasMany('comments');
-     // check if the comments are loaded already
+      // check if the comments are loaded already
     let isLoaded = commentsRef.value() !== null;
-     // get the records of the reference (null if not yet available)
+      // get the records of the reference (null if not yet available)
     let comments = commentsRef.value();
-     // get the identifier of the reference
+      // get the identifier of the reference
     if (commentsRef.remoteType() === "ids") {
       let ids = commentsRef.ids();
     } else if (commentsRef.remoteType() === "link") {
       let link = commentsRef.link();
     }
-     // load comments (via store.findMany or store.findHasMany)
+      // load comments (via store.findMany or store.findHasMany)
     commentsRef.load().then(...)
-     // or trigger a reload
+      // or trigger a reload
     commentsRef.reload().then(...)
-     // provide data for reference
+      // provide data for reference
     commentsRef.push([{ type: 'comment', id: 1 }, { type: 'comment', id: 2 }]).then(function(comments) {
       commentsRef.value() === comments;
     });
     ```
-     @method hasMany
+      @method hasMany
     @param {String} name of the relationship
     @since 2.5.0
     @return {HasManyReference} reference for this relationship
@@ -89286,13 +89288,13 @@ var Model = Ember.Object.extend(Ember.Evented, {
   /**
    Provides info about the model for debugging purposes
    by grouping the properties into more semantic groups.
-    Meant to be used by debugging tools such as the Chrome Ember Extension.
-    - Groups all attributes in "Attributes" group.
+     Meant to be used by debugging tools such as the Chrome Ember Extension.
+     - Groups all attributes in "Attributes" group.
    - Groups all belongsTo relationships in "Belongs To" group.
    - Groups all hasMany relationships in "Has Many" group.
    - Groups all flags in "Flags" group.
    - Flags relationship CPs as expensive properties.
-    @method _debugInfo
+     @method _debugInfo
    @for DS.Model
    @private
    */
@@ -89349,38 +89351,39 @@ var Model = Ember.Object.extend(Ember.Evented, {
    Given a callback, iterates over each of the relationships in the model,
    invoking the callback with the name of each relationship and its relationship
    descriptor.
-     The callback method you provide should have the following signature (all
+  
+   The callback method you provide should have the following signature (all
    parameters are optional):
-    ```javascript
+     ```javascript
    function(name, descriptor);
    ```
-    - `name` the name of the current property in the iteration
+     - `name` the name of the current property in the iteration
    - `descriptor` the meta object that describes this relationship
-    The relationship descriptor argument is an object with the following properties.
-    - **key** <span class="type">String</span> the name of this relationship on the Model
+     The relationship descriptor argument is an object with the following properties.
+     - **key** <span class="type">String</span> the name of this relationship on the Model
    - **kind** <span class="type">String</span> "hasMany" or "belongsTo"
    - **options** <span class="type">Object</span> the original options hash passed when the relationship was declared
    - **parentType** <span class="type">DS.Model</span> the type of the Model that owns this relationship
    - **type** <span class="type">String</span> the type name of the related Model
-    Note that in addition to a callback, you can also pass an optional target
+     Note that in addition to a callback, you can also pass an optional target
    object that will be set as `this` on the context.
-    Example
-    ```app/serializers/application.js
+     Example
+     ```app/serializers/application.js
    import DS from 'ember-data';
-    export default DS.JSONSerializer.extend({
+     export default DS.JSONSerializer.extend({
     serialize: function(record, options) {
       let json = {};
-       record.eachRelationship(function(name, descriptor) {
+        record.eachRelationship(function(name, descriptor) {
         if (descriptor.kind === 'hasMany') {
           let serializedHasManyName = name.toUpperCase() + '_IDS';
           json[serializedHasManyName] = record.get(name).mapBy('id');
         }
       });
-       return json;
+        return json;
     }
   });
    ```
-    @method eachRelationship
+     @method eachRelationship
    @param {Function} callback the callback to invoke
    @param {any} binding the value to which the callback's `this` should be bound
    */
@@ -89438,22 +89441,22 @@ Model.reopenClass({
     of `createRecord()`. The store is still able to create instances
     by calling the `_create()` method. To create an instance of a
     `DS.Model` use [store.createRecord](DS.Store.html#method_createRecord).
-     @method create
+      @method create
     @private
     @static
   */
   /**
    Represents the model's class name as a string. This can be used to look up the model's class name through
    `DS.Store`'s modelFor method.
-    `modelName` is generated for you by Ember Data. It will be a lowercased, dasherized string.
+     `modelName` is generated for you by Ember Data. It will be a lowercased, dasherized string.
    For example:
-    ```javascript
+     ```javascript
    store.modelFor('post').modelName; // 'post'
    store.modelFor('blog-post').modelName; // 'blog-post'
    ```
-    The most common place you'll want to access `modelName` is in your serializer's `payloadKeyFromModelName` method. For example, to change payload
+     The most common place you'll want to access `modelName` is in your serializer's `payloadKeyFromModelName` method. For example, to change payload
    keys to underscore (instead of dasherized), you might use the following code:
-    ```javascript
+     ```javascript
    export default const PostSerializer = DS.RESTSerializer.extend({
      payloadKeyFromModelName: function(modelName) {
        return Ember.String.underscore(modelName);
@@ -89470,12 +89473,12 @@ Model.reopenClass({
   /*
    These class methods below provide relationship
    introspection abilities about relationships.
-    A note about the computed properties contained here:
-    **These properties are effectively sealed once called for the first time.**
+     A note about the computed properties contained here:
+     **These properties are effectively sealed once called for the first time.**
    To avoid repeatedly doing expensive iteration over a model's fields, these
    values are computed once and then cached for the remainder of the runtime of
    your application.
-    If your application needs to modify a class after its initial definition
+     If your application needs to modify a class after its initial definition
    (for example, using `reopen()` to add additional attributes), make sure you
    do it before using your model with the store, which uses these properties
    extensively.
@@ -89483,15 +89486,15 @@ Model.reopenClass({
 
   /**
    For a given relationship name, returns the model type of the relationship.
-    For example, if you define a model like this:
-    ```app/models/post.js
+     For example, if you define a model like this:
+     ```app/models/post.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       comments: DS.hasMany('comment')
     });
    ```
-    Calling `store.modelFor('post').typeForRelationship('comments', store)` will return `Comment`.
-    @method typeForRelationship
+     Calling `store.modelFor('post').typeForRelationship('comments', store)` will return `Comment`.
+     @method typeForRelationship
    @static
    @param {String} name the name of the relationship
    @param {store} store an instance of DS.Store
@@ -89509,24 +89512,24 @@ Model.reopenClass({
 
   /**
    Find the relationship which is the inverse of the one asked for.
-    For example, if you define models like this:
-    ```app/models/post.js
+     For example, if you define models like this:
+     ```app/models/post.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       comments: DS.hasMany('message')
     });
    ```
-    ```app/models/message.js
+     ```app/models/message.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       owner: DS.belongsTo('post')
     });
    ```
-    ``` js
+     ``` js
    store.modelFor('post').inverseFor('comments', store) // { type: App.Message, name: 'owner', kind: 'belongsTo' }
    store.modelFor('message').inverseFor('owner', store) // { type: App.Post, name: 'comments', kind: 'hasMany' }
    ```
-    @method inverseFor
+     @method inverseFor
    @static
    @param {String} name the name of the relationship
    @param {DS.Store} store
@@ -89630,30 +89633,30 @@ Model.reopenClass({
    relationship. The value of each entry is an array containing a descriptor
    for each relationship with that type, describing the name of the relationship
    as well as the type.
-    For example, given the following model definition:
-    ```app/models/blog.js
+     For example, given the following model definition:
+     ```app/models/blog.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       users: DS.hasMany('user'),
       owner: DS.belongsTo('user'),
       posts: DS.hasMany('post')
     });
    ```
-    This computed property would return a map describing these
+     This computed property would return a map describing these
    relationships, like this:
-    ```javascript
+     ```javascript
    import Ember from 'ember';
    import Blog from 'app/models/blog';
    import User from 'app/models/user';
    import Post from 'app/models/post';
-    let relationships = Ember.get(Blog, 'relationships');
+     let relationships = Ember.get(Blog, 'relationships');
    relationships.get(User);
    //=> [ { name: 'users', kind: 'hasMany' },
    //     { name: 'owner', kind: 'belongsTo' } ]
    relationships.get(Post);
    //=> [ { name: 'posts', kind: 'hasMany' } ]
    ```
-    @property relationships
+     @property relationships
    @static
    @type Ember.Map
    @readOnly
@@ -89665,25 +89668,25 @@ Model.reopenClass({
    A hash containing lists of the model's relationships, grouped
    by the relationship kind. For example, given a model with this
    definition:
-    ```app/models/blog.js
+     ```app/models/blog.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       users: DS.hasMany('user'),
       owner: DS.belongsTo('user'),
-       posts: DS.hasMany('post')
+        posts: DS.hasMany('post')
     });
    ```
-    This property would contain the following:
-    ```javascript
+     This property would contain the following:
+     ```javascript
    import Ember from 'ember';
    import Blog from 'app/models/blog';
-    let relationshipNames = Ember.get(Blog, 'relationshipNames');
+     let relationshipNames = Ember.get(Blog, 'relationshipNames');
    relationshipNames.hasMany;
    //=> ['users', 'posts']
    relationshipNames.belongsTo;
    //=> ['owner']
    ```
-    @property relationshipNames
+     @property relationshipNames
    @static
    @type Object
    @readOnly
@@ -89707,23 +89710,23 @@ Model.reopenClass({
    An array of types directly related to a model. Each type will be
    included once, regardless of the number of relationships it has with
    the model.
-    For example, given a model with this definition:
-    ```app/models/blog.js
+     For example, given a model with this definition:
+     ```app/models/blog.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       users: DS.hasMany('user'),
       owner: DS.belongsTo('user'),
-       posts: DS.hasMany('post')
+        posts: DS.hasMany('post')
     });
    ```
-    This property would contain the following:
-    ```javascript
+     This property would contain the following:
+     ```javascript
    import Ember from 'ember';
    import Blog from 'app/models/blog';
-    let relatedTypes = Ember.get(Blog, 'relatedTypes');
+     let relatedTypes = Ember.get(Blog, 'relatedTypes');
    //=> [ User, Post ]
    ```
-    @property relatedTypes
+     @property relatedTypes
    @static
    @type Ember.Array
    @readOnly
@@ -89733,27 +89736,27 @@ Model.reopenClass({
   /**
    A map whose keys are the relationships of a model and whose values are
    relationship descriptors.
-    For example, given a model with this
+     For example, given a model with this
    definition:
-    ```app/models/blog.js
+     ```app/models/blog.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       users: DS.hasMany('user'),
       owner: DS.belongsTo('user'),
-       posts: DS.hasMany('post')
+        posts: DS.hasMany('post')
     });
    ```
-    This property would contain the following:
-    ```javascript
+     This property would contain the following:
+     ```javascript
    import Ember from 'ember';
    import Blog from 'app/models/blog';
-    let relationshipsByName = Ember.get(Blog, 'relationshipsByName');
+     let relationshipsByName = Ember.get(Blog, 'relationshipsByName');
    relationshipsByName.get('users');
    //=> { key: 'users', kind: 'hasMany', type: 'user', options: Object, isRelationship: true }
    relationshipsByName.get('owner');
    //=> { key: 'owner', kind: 'belongsTo', type: 'user', options: Object, isRelationship: true }
    ```
-    @property relationshipsByName
+     @property relationshipsByName
    @static
    @type Ember.Map
    @readOnly
@@ -89764,30 +89767,30 @@ Model.reopenClass({
    A map whose keys are the fields of the model and whose values are strings
    describing the kind of the field. A model's fields are the union of all of its
    attributes and relationships.
-    For example:
-    ```app/models/blog.js
+     For example:
+     ```app/models/blog.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       users: DS.hasMany('user'),
       owner: DS.belongsTo('user'),
-       posts: DS.hasMany('post'),
-       title: DS.attr('string')
+        posts: DS.hasMany('post'),
+        title: DS.attr('string')
     });
    ```
-    ```js
+     ```js
    import Ember from 'ember';
    import Blog from 'app/models/blog';
-    let fields = Ember.get(Blog, 'fields');
+     let fields = Ember.get(Blog, 'fields');
    fields.forEach(function(kind, field) {
       console.log(field, kind);
     });
-    // prints:
+     // prints:
    // users, hasMany
    // owner, belongsTo
    // posts, hasMany
    // title, attribute
    ```
-    @property fields
+     @property fields
    @static
    @type Ember.Map
    @readOnly
@@ -89810,7 +89813,7 @@ Model.reopenClass({
    Given a callback, iterates over each of the relationships in the model,
    invoking the callback with the name of each relationship and its relationship
    descriptor.
-    @method eachRelationship
+     @method eachRelationship
    @static
    @param {Function} callback the callback to invoke
    @param {any} binding the value to which the callback's `this` should be bound
@@ -89827,7 +89830,7 @@ Model.reopenClass({
    invoking the callback with the related type's class. Each type will be
    returned just once, regardless of how many different relationships it has
    with a model.
-    @method eachRelatedType
+     @method eachRelatedType
    @static
    @param {Function} callback the callback to invoke
    @param {any} binding the value to which the callback's `this` should be bound
@@ -89866,28 +89869,28 @@ Model.reopenClass({
    A map whose keys are the attributes of the model (properties
    described by DS.attr) and whose values are the meta object for the
    property.
-    Example
-    ```app/models/person.js
+     Example
+     ```app/models/person.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       firstName: DS.attr('string'),
       lastName: DS.attr('string'),
       birthday: DS.attr('date')
     });
    ```
-    ```javascript
+     ```javascript
    import Ember from 'ember';
    import Person from 'app/models/person';
-    let attributes = Ember.get(Person, 'attributes')
-    attributes.forEach(function(meta, name) {
+     let attributes = Ember.get(Person, 'attributes')
+     attributes.forEach(function(meta, name) {
       console.log(name, meta);
     });
-    // prints:
+     // prints:
    // firstName {type: "string", isAttribute: true, options: Object, parentType: function, name: "firstName"}
    // lastName {type: "string", isAttribute: true, options: Object, parentType: function, name: "lastName"}
    // birthday {type: "date", isAttribute: true, options: Object, parentType: function, name: "birthday"}
    ```
-    @property attributes
+     @property attributes
    @static
    @type {Ember.Map}
    @readOnly
@@ -89915,27 +89918,27 @@ Model.reopenClass({
    described by DS.attr) and whose values are type of transformation
    applied to each attribute. This map does not include any
    attributes that do not have an transformation type.
-    Example
-    ```app/models/person.js
+     Example
+     ```app/models/person.js
    import DS from 'ember-data';
-    export default DS.Model.extend({
+     export default DS.Model.extend({
       firstName: DS.attr(),
       lastName: DS.attr('string'),
       birthday: DS.attr('date')
     });
    ```
-    ```javascript
+     ```javascript
    import Ember from 'ember';
    import Person from 'app/models/person';
-    let transformedAttributes = Ember.get(Person, 'transformedAttributes')
-    transformedAttributes.forEach(function(field, type) {
+     let transformedAttributes = Ember.get(Person, 'transformedAttributes')
+     transformedAttributes.forEach(function(field, type) {
       console.log(field, type);
     });
-    // prints:
+     // prints:
    // lastName string
    // birthday date
    ```
-    @property transformedAttributes
+     @property transformedAttributes
    @static
    @type {Ember.Map}
    @readOnly
@@ -89955,32 +89958,32 @@ Model.reopenClass({
   /**
    Iterates through the attributes of the model, calling the passed function on each
    attribute.
-    The callback method you provide should have the following signature (all
+     The callback method you provide should have the following signature (all
    parameters are optional):
-    ```javascript
+     ```javascript
    function(name, meta);
    ```
-    - `name` the name of the current property in the iteration
+     - `name` the name of the current property in the iteration
    - `meta` the meta object for the attribute property in the iteration
-    Note that in addition to a callback, you can also pass an optional target
+     Note that in addition to a callback, you can also pass an optional target
    object that will be set as `this` on the context.
-    Example
-    ```javascript
+     Example
+     ```javascript
    import DS from 'ember-data';
-    let Person = DS.Model.extend({
+     let Person = DS.Model.extend({
       firstName: DS.attr('string'),
       lastName: DS.attr('string'),
       birthday: DS.attr('date')
     });
-    Person.eachAttribute(function(name, meta) {
+     Person.eachAttribute(function(name, meta) {
       console.log(name, meta);
     });
-    // prints:
+     // prints:
    // firstName {type: "string", isAttribute: true, options: Object, parentType: function, name: "firstName"}
    // lastName {type: "string", isAttribute: true, options: Object, parentType: function, name: "lastName"}
    // birthday {type: "date", isAttribute: true, options: Object, parentType: function, name: "birthday"}
    ```
-    @method eachAttribute
+     @method eachAttribute
    @param {Function} callback The callback to execute
    @param {Object} [binding] the value to which the callback's `this` should be bound
    @static
@@ -89996,32 +89999,32 @@ Model.reopenClass({
    Iterates through the transformedAttributes of the model, calling
    the passed function on each attribute. Note the callback will not be
    called for any attributes that do not have an transformation type.
-    The callback method you provide should have the following signature (all
+     The callback method you provide should have the following signature (all
    parameters are optional):
-    ```javascript
+     ```javascript
    function(name, type);
    ```
-    - `name` the name of the current property in the iteration
+     - `name` the name of the current property in the iteration
    - `type` a string containing the name of the type of transformed
    applied to the attribute
-    Note that in addition to a callback, you can also pass an optional target
+     Note that in addition to a callback, you can also pass an optional target
    object that will be set as `this` on the context.
-    Example
-    ```javascript
+     Example
+     ```javascript
    import DS from 'ember-data';
-    let Person = DS.Model.extend({
+     let Person = DS.Model.extend({
       firstName: DS.attr(),
       lastName: DS.attr('string'),
       birthday: DS.attr('date')
     });
-    Person.eachTransformedAttribute(function(name, type) {
+     Person.eachTransformedAttribute(function(name, type) {
       console.log(name, type);
     });
-    // prints:
+     // prints:
    // lastName string
    // birthday date
    ```
-    @method eachTransformedAttribute
+     @method eachTransformedAttribute
    @param {Function} callback The callback to execute
    @param {Object} [binding] the value to which the callback's `this` should be bound
    @static
@@ -90055,15 +90058,15 @@ if (isEnabled('ds-rollback-attribute')) {
   Model.reopen({
     /**
       Discards any unsaved changes to the given attribute. This feature is not enabled by default. You must enable `ds-rollback-attribute` and be running a canary build.
-       Example
-       ```javascript
+        Example
+        ```javascript
       record.get('name'); // 'Untitled Document'
       record.set('name', 'Doc 1');
       record.get('name'); // 'Doc 1'
       record.rollbackAttribute('name');
       record.get('name'); // 'Untitled Document'
       ```
-       @method rollbackAttribute
+        @method rollbackAttribute
     */
     rollbackAttribute: function rollbackAttribute(attributeName) {
       if (attributeName in this._internalModel._attributes) {
@@ -90087,20 +90090,20 @@ if (isEnabled('ds-rollback-attribute')) {
     /**
      This Ember.js hook allows an object to be notified when a property
      is defined.
-      In this case, we use it to be notified when an Ember Data user defines a
+       In this case, we use it to be notified when an Ember Data user defines a
      belongs-to relationship. In that case, we need to set up observers for
      each one, allowing us to track relationship changes and automatically
      reflect changes in the inverse has-many array.
-      This hook passes the class being set up, as well as the key and value
+       This hook passes the class being set up, as well as the key and value
      being defined. So, for example, when the user does this:
-      ```javascript
+       ```javascript
      DS.Model.extend({
       parent: DS.belongsTo('user')
     });
      ```
-      This hook would be called with "parent" as the key and the computed
+       This hook would be called with "parent" as the key and the computed
      property returned by `DS.belongsTo` as the value.
-      @method didDefineProperty
+       @method didDefineProperty
      @param {Object} proto
      @param {String} key
      @param {Ember.ComputedProperty} value
@@ -90861,7 +90864,7 @@ var Relationship = function () {
     Call this method once a record deletion has been persisted
     to purge it from BOTH current and canonical state of all
     relationships.
-     @method removeCompletelyFromInverse
+      @method removeCompletelyFromInverse
     @private
    */
 
@@ -90894,7 +90897,7 @@ var Relationship = function () {
 
   /*
     Removes the given internalModel from BOTH canonical AND current state.
-     This method is useful when either a deletion or a rollback on a new record
+      This method is useful when either a deletion or a rollback on a new record
     needs to entirely purge itself from an inverse relationship.
    */
 
@@ -90974,7 +90977,7 @@ var Relationship = function () {
    difference between unknown (`undefined`) or empty (`null`). The reason for
    this is that we wouldn't want to serialize unknown relationships as `null`
    as that might overwrite remote state.
-    All relationships for a newly created (`store.createRecord()`) are
+     All relationships for a newly created (`store.createRecord()`) are
    considered known (`hasData === true`).
    */
 
@@ -90986,10 +90989,10 @@ var Relationship = function () {
   /*
    `hasLoaded` is a flag to indicate if we have gotten data from the adapter or
    not when the relationship has a link.
-    This is used to be able to tell when to fetch the link and when to return
+     This is used to be able to tell when to fetch the link and when to return
    the local data in scenarios where the local state is considered known
    (`hasData === true`).
-    Updating the link will automatically set `hasLoaded` to `false`.
+     Updating the link will automatically set `hasLoaded` to `false`.
    */
 
 
@@ -91001,7 +91004,7 @@ var Relationship = function () {
    `push` for a relationship allows the store to push a JSON API Relationship
    Object onto the relationship. The relationship will then extract and set the
    meta, data and links of that relationship.
-    `push` use `updateMeta`, `updateData` and `updateLink` to update the state
+     `push` use `updateMeta`, `updateData` and `updateLink` to update the state
    of the relationship.
    */
 
@@ -91031,10 +91034,10 @@ var Relationship = function () {
     /*
      Data being pushed into the relationship might contain only data or links,
      or a combination of both.
-      If we got data we want to set both hasData and hasLoaded to true since
+       If we got data we want to set both hasData and hasLoaded to true since
      this would indicate that we should prefer the local state instead of
      trying to fetch the link or call findRecord().
-      If we have no data but a link is present we want to set hasLoaded to false
+       If we have no data but a link is present we want to set hasLoaded to false
      without modifying the hasData flag. This will ensure we fetch the updated
      link next time the relationship is accessed.
      */
@@ -91198,7 +91201,7 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
 
     /**
     The loading state of this array
-     @property {Boolean} isLoaded
+      @property {Boolean} isLoaded
     */
     this.isLoaded = false;
     this.length = 0;
@@ -91206,17 +91209,17 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
     /**
     Used for async `hasMany` arrays
     to keep track of when they will resolve.
-     @property {Ember.RSVP.Promise} promise
+      @property {Ember.RSVP.Promise} promise
     @private
     */
     this.promise = null;
 
     /**
     Metadata associated with the request for async hasMany relationships.
-     Example
-     Given that the server returns the following JSON payload when fetching a
+      Example
+      Given that the server returns the following JSON payload when fetching a
     hasMany relationship:
-     ```js
+      ```js
     {
       "comments": [{
         "id": 1,
@@ -91224,35 +91227,35 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
       }, {
     // ...
       }],
-       "meta": {
+        "meta": {
         "page": 1,
         "total": 5
       }
     }
     ```
-     You can then access the metadata via the `meta` property:
-     ```js
+      You can then access the metadata via the `meta` property:
+      ```js
     post.get('comments').then(function(comments) {
       var meta = comments.get('meta');
-     // meta.page => 1
+      // meta.page => 1
     // meta.total => 5
     });
     ```
-     @property {Object} meta
+      @property {Object} meta
     @public
     */
     this.meta = this.meta || null;
 
     /**
     `true` if the relationship is polymorphic, `false` otherwise.
-     @property {Boolean} isPolymorphic
+      @property {Boolean} isPolymorphic
     @private
     */
     this.isPolymorphic = this.isPolymorphic || false;
 
     /**
     The relationship which manages this array.
-     @property {ManyRelationship} relationship
+      @property {ManyRelationship} relationship
     @private
     */
     this.relationship = this.relationship || null;
@@ -91351,10 +91354,10 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
     holds a relationship that was originally fetched using a links url
     Ember Data will revisit the original links url to repopulate the
     relationship.
-     If the manyArray holds the result of a `store.query()` reload will
+      If the manyArray holds the result of a `store.query()` reload will
     re-run the original query.
-     Example
-     ```javascript
+      Example
+      ```javascript
     var user = store.peekRecord('user', 1)
     user.login().then(function() {
       user.get('permissions').then(function(permissions) {
@@ -91362,7 +91365,7 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
       });
     });
     ```
-     @method reload
+      @method reload
     @public
   */
   reload: function reload() {
@@ -91372,8 +91375,8 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
 
   /**
     Saves all of the records in the `ManyArray`.
-     Example
-     ```javascript
+      Example
+      ```javascript
     store.findRecord('inbox', 1).then(function(inbox) {
       inbox.get('messages').then(function(messages) {
         messages.forEach(function(message) {
@@ -91383,7 +91386,7 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
       });
     });
     ```
-     @method save
+      @method save
     @return {DS.PromiseArray} promise
   */
   save: function save() {
@@ -91399,7 +91402,7 @@ var ManyArray = Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
 
   /**
     Create a child record within the owner
-     @method createRecord
+      @method createRecord
     @private
     @param {Object} hash
     @return {DS.Model} record
@@ -92109,11 +92112,11 @@ var Snapshot = function () {
     /**
      The underlying record for this snapshot. Can be used to access methods and
      properties defined on the record.
-      Example
-      ```javascript
+       Example
+       ```javascript
      let json = snapshot.record.toJSON();
      ```
-      @property record
+       @property record
      @type {DS.Model}
      */
     this.record = record;
@@ -92123,12 +92126,12 @@ var Snapshot = function () {
 
     /**
      The id of the snapshot's underlying record
-      Example
-      ```javascript
+       Example
+       ```javascript
      // store.push('post', { id: 1, author: 'Tomster', title: 'Ember.js rocks' });
      postSnapshot.id; // => '1'
      ```
-      @property id
+       @property id
      @type {String}
      */
     this.id = internalModel.id;
@@ -92143,7 +92146,7 @@ var Snapshot = function () {
 
     /**
      The name of the type of the underlying record for this snapshot, as a string.
-      @property modelName
+       @property modelName
      @type {String}
      */
     this.modelName = internalModel.modelName;
@@ -92153,21 +92156,21 @@ var Snapshot = function () {
 
   /**
    The type of the underlying record for this snapshot, as a DS.Model.
-    @property type
+     @property type
    @type {DS.Model}
    */
 
 
   /**
    Returns the value of an attribute.
-    Example
-    ```javascript
+     Example
+     ```javascript
    // store.push('post', { id: 1, author: 'Tomster', title: 'Ember.js rocks' });
    postSnapshot.attr('author'); // => 'Tomster'
    postSnapshot.attr('title'); // => 'Ember.js rocks'
    ```
-    Note: Values are loaded eagerly and cached when the snapshot is created.
-    @method attr
+     Note: Values are loaded eagerly and cached when the snapshot is created.
+     @method attr
    @param {String} keyName
    @return {Object} The attribute value or undefined
    */
@@ -92180,12 +92183,12 @@ var Snapshot = function () {
 
   /**
    Returns all attributes and their corresponding values.
-    Example
-    ```javascript
+     Example
+     ```javascript
    // store.push('post', { id: 1, author: 'Tomster', title: 'Ember.js rocks' });
    postSnapshot.attributes(); // => { author: 'Tomster', title: 'Ember.js rocks' }
    ```
-    @method attributes
+     @method attributes
    @return {Object} All attributes of the current snapshot
    */
 
@@ -92196,13 +92199,13 @@ var Snapshot = function () {
 
   /**
    Returns all changed attributes and their old and new values.
-    Example
-    ```javascript
+     Example
+     ```javascript
    // store.push('post', { id: 1, author: 'Tomster', title: 'Ember.js rocks' });
    postModel.set('title', 'Ember.js rocks!');
    postSnapshot.changedAttributes(); // => { title: ['Ember.js rocks', 'Ember.js rocks!'] }
    ```
-    @method changedAttributes
+     @method changedAttributes
    @return {Object} All changed attributes of the current snapshot
    */
 
@@ -92221,25 +92224,25 @@ var Snapshot = function () {
 
   /**
    Returns the current value of a belongsTo relationship.
-    `belongsTo` takes an optional hash of options as a second parameter,
+     `belongsTo` takes an optional hash of options as a second parameter,
    currently supported options are:
-    - `id`: set to `true` if you only want the ID of the related record to be
+     - `id`: set to `true` if you only want the ID of the related record to be
    returned.
-    Example
-    ```javascript
+     Example
+     ```javascript
    // store.push('post', { id: 1, title: 'Hello World' });
    // store.createRecord('comment', { body: 'Lorem ipsum', post: post });
    commentSnapshot.belongsTo('post'); // => DS.Snapshot
    commentSnapshot.belongsTo('post', { id: true }); // => '1'
-    // store.push('comment', { id: 1, body: 'Lorem ipsum' });
+     // store.push('comment', { id: 1, body: 'Lorem ipsum' });
    commentSnapshot.belongsTo('post'); // => undefined
    ```
-    Calling `belongsTo` will return a new Snapshot as long as there's any known
+     Calling `belongsTo` will return a new Snapshot as long as there's any known
    data for the relationship available, such as an ID. If the relationship is
    known but unset, `belongsTo` will return `null`. If the contents of the
    relationship is unknown `belongsTo` will return `undefined`.
-    Note: Relationships are loaded lazily and cached upon first access.
-    @method belongsTo
+     Note: Relationships are loaded lazily and cached upon first access.
+     @method belongsTo
    @param {String} keyName
    @param {Object} [options]
    @return {(DS.Snapshot|String|null|undefined)} A snapshot or ID of a known
@@ -92294,20 +92297,20 @@ var Snapshot = function () {
 
   /**
    Returns the current value of a hasMany relationship.
-    `hasMany` takes an optional hash of options as a second parameter,
+     `hasMany` takes an optional hash of options as a second parameter,
    currently supported options are:
-    - `ids`: set to `true` if you only want the IDs of the related records to be
+     - `ids`: set to `true` if you only want the IDs of the related records to be
    returned.
-    Example
-    ```javascript
+     Example
+     ```javascript
    // store.push('post', { id: 1, title: 'Hello World', comments: [2, 3] });
    postSnapshot.hasMany('comments'); // => [DS.Snapshot, DS.Snapshot]
    postSnapshot.hasMany('comments', { ids: true }); // => ['2', '3']
-    // store.push('post', { id: 1, title: 'Hello World' });
+     // store.push('post', { id: 1, title: 'Hello World' });
    postSnapshot.hasMany('comments'); // => undefined
    ```
-    Note: Relationships are loaded lazily and cached upon first access.
-    @method hasMany
+     Note: Relationships are loaded lazily and cached upon first access.
+     @method hasMany
    @param {String} keyName
    @param {Object} [options]
    @return {(Array|undefined)} An array of snapshots or IDs of a known
@@ -92364,13 +92367,13 @@ var Snapshot = function () {
   /**
     Iterates through all the attributes of the model, calling the passed
     function on each attribute.
-     Example
-     ```javascript
+      Example
+      ```javascript
     snapshot.eachAttribute(function(name, meta) {
       // ...
     });
     ```
-     @method eachAttribute
+      @method eachAttribute
     @param {Function} callback the callback to execute
     @param {Object} [binding] the value to which the callback's `this` should be bound
   */
@@ -92383,13 +92386,13 @@ var Snapshot = function () {
   /**
     Iterates through all the relationships of the model, calling the passed
     function on each relationship.
-     Example
-     ```javascript
+      Example
+      ```javascript
     snapshot.eachRelationship(function(name, relationship) {
       // ...
     });
     ```
-     @method eachRelationship
+      @method eachRelationship
     @param {Function} callback the callback to execute
     @param {Object} [binding] the value to which the callback's `this` should be bound
   */
@@ -92401,21 +92404,21 @@ var Snapshot = function () {
 
   /**
     Serializes the snapshot using the serializer for the model.
-     Example
-     ```app/adapters/application.js
+      Example
+      ```app/adapters/application.js
     import DS from 'ember-data';
-     export default DS.Adapter.extend({
+      export default DS.Adapter.extend({
       createRecord(store, type, snapshot) {
         var data = snapshot.serialize({ includeId: true });
         var url = `/${type.modelName}`;
-         return fetch(url, {
+          return fetch(url, {
           method: 'POST',
           body: data,
         }).then((response) => response.json())
       }
     });
     ```
-     @method serialize
+      @method serialize
     @param {Object} options
     @return {Object} an object whose values are primitive JSON values only
    */
@@ -92499,9 +92502,9 @@ Reference.prototype = {
    @namespace DS
 */
 var RecordReference = function RecordReference(store, internalModel) {
-  this._super$constructor(store, internalModel);
-  this.type = internalModel.modelName;
-  this._id = internalModel.id;
+   this._super$constructor(store, internalModel);
+   this.type = internalModel.modelName;
+   this._id = internalModel.id;
 };
 
 RecordReference.prototype = Object.create(Reference.prototype);
@@ -92526,7 +92529,7 @@ RecordReference.prototype._super$constructor = Reference;
    @return {String} The id of the record.
 */
 RecordReference.prototype.id = function () {
-  return this._id;
+   return this._id;
 };
 
 /**
@@ -92546,7 +92549,7 @@ RecordReference.prototype.id = function () {
    @return {String} 'identity'
 */
 RecordReference.prototype.remoteType = function () {
-  return 'identity';
+   return 'identity';
 };
 
 /**
@@ -92580,11 +92583,11 @@ RecordReference.prototype.remoteType = function () {
   @return Promise<record> a promise for the value (record or relationship)
 */
 RecordReference.prototype.push = function (objectOrPromise) {
-  var _this = this;
+   var _this = this;
 
-  return Ember.RSVP.resolve(objectOrPromise).then(function (data) {
-    return _this.store.push(data);
-  });
+   return Ember.RSVP.resolve(objectOrPromise).then(function (data) {
+      return _this.store.push(data);
+   });
 };
 
 /**
@@ -92604,9 +92607,9 @@ RecordReference.prototype.push = function (objectOrPromise) {
    @return {DS.Model} the record for this RecordReference
 */
 RecordReference.prototype.value = function () {
-  if (this.internalModel.hasRecord) {
-    return this.internalModel.getRecord();
-  }
+   if (this.internalModel.hasRecord) {
+      return this.internalModel.getRecord();
+   }
 };
 
 /**
@@ -92626,7 +92629,7 @@ RecordReference.prototype.value = function () {
    @return {Promise<record>} the record for this RecordReference
 */
 RecordReference.prototype.load = function () {
-  return this.store.findRecord(this.type, this._id);
+   return this.store.findRecord(this.type, this._id);
 };
 
 /**
@@ -92646,12 +92649,12 @@ RecordReference.prototype.load = function () {
    @return {Promise<record>} the record for this RecordReference
 */
 RecordReference.prototype.reload = function () {
-  var record = this.value();
-  if (record) {
-    return record.reload();
-  }
+   var record = this.value();
+   if (record) {
+      return record.reload();
+   }
 
-  return this.load();
+   return this.load();
 };
 
 /**
@@ -93778,7 +93781,7 @@ var InternalModel = function () {
   /**
     Computes the set of internal models reachable from `this` across exactly one
     relationship.
-     @return {Array} An array containing the internal models that `this` belongs
+      @return {Array} An array containing the internal models that `this` belongs
     to or has many.
   */
 
@@ -93793,10 +93796,10 @@ var InternalModel = function () {
 
   /**
     Computes the set of internal models reachable from this internal model.
-     Reachability is determined over the relationship graph (ie a graph where
+      Reachability is determined over the relationship graph (ie a graph where
     nodes are internal models and edges are belongs to or has many
     relationships).
-     @return {Array} An array including `this` and all internal models reachable
+      @return {Array} An array including `this` and all internal models reachable
     from `this`.
   */
 
@@ -93828,10 +93831,10 @@ var InternalModel = function () {
     Unload the record for this internal model. This will cause the record to be
     destroyed and freed up for garbage collection. It will also do a check
     for cleaning up internal models.
-     This check is performed by first computing the set of related internal
+      This check is performed by first computing the set of related internal
     models. If all records in this set are unloaded, then the entire set is
     destroyed. Otherwise, nothing in the set is destroyed.
-     This means that this internal model will be freed up for garbage collection
+      This means that this internal model will be freed up for garbage collection
     once all models that refer to it via some relationship are also unloaded.
   */
 
@@ -94017,9 +94020,9 @@ var InternalModel = function () {
   /*
     Checks if the attributes which are considered as changed are still
     different to the state which is acknowledged by the server.
-     This method is needed when data for the internal model is pushed and the
+      This method is needed when data for the internal model is pushed and the
     pushed data might acknowledge dirty attributes as confirmed.
-     @method updateChangedAttributes
+      @method updateChangedAttributes
     @private
    */
 
@@ -94044,7 +94047,7 @@ var InternalModel = function () {
   /*
     Returns an object, whose keys are changed properties, and value is an
     [oldProp, newProp] array.
-     @method changedAttributes
+      @method changedAttributes
     @private
   */
 
@@ -94261,10 +94264,10 @@ var InternalModel = function () {
   /*
    This method should only be called by records in the `isNew()` state OR once the record
    has been deleted and that deletion has been persisted.
-    It will remove this record from any associated relationships.
-    If `isNew` is true (default false), it will also completely reset all
+     It will remove this record from any associated relationships.
+     If `isNew` is true (default false), it will also completely reset all
     relationships to an empty state as well.
-     @method removeFromInverseRelationships
+      @method removeFromInverseRelationships
     @param {Boolean} isNew whether to unload from the `isNew` perspective
     @private
    */
@@ -94323,9 +94326,9 @@ var InternalModel = function () {
     the store of their existence. The most common use case is for supporting client side
     nested URLs, such as `/posts/1/comments/2` so the user can do
     `store.findRecord('comment', 2, { preload: { post: 1 } })` without having to fetch the post.
-     Preloaded data can be attributes and relationships passed in either as IDs or as actual
+      Preloaded data can be attributes and relationships passed in either as IDs or as actual
     models.
-     @method preloadData
+      @method preloadData
     @private
     @param {Object} preload
   */
@@ -94391,7 +94394,7 @@ var InternalModel = function () {
 
   /*
     Used to notify the store to update FilteredRecordArray membership.
-     @method updateRecordArrays
+      @method updateRecordArrays
     @private
   */
 
@@ -94437,7 +94440,7 @@ var InternalModel = function () {
     If the adapter did not return a hash in response to a commit,
     merge the changed attributes and relationships into the existing
     saved data.
-     @method adapterDidCommit
+      @method adapterDidCommit
   */
 
 
@@ -94535,34 +94538,35 @@ var InternalModel = function () {
 
   /*
     Ember Data has 3 buckets for storing the value of an attribute on an internalModel.
-     `_data` holds all of the attributes that have been acknowledged by
+      `_data` holds all of the attributes that have been acknowledged by
     a backend via the adapter. When rollbackAttributes is called on a model all
     attributes will revert to the record's state in `_data`.
-     `_attributes` holds any change the user has made to an attribute
+      `_attributes` holds any change the user has made to an attribute
     that has not been acknowledged by the adapter. Any values in
     `_attributes` are have priority over values in `_data`.
-     `_inFlightAttributes`. When a record is being synced with the
+      `_inFlightAttributes`. When a record is being synced with the
     backend the values in `_attributes` are copied to
     `_inFlightAttributes`. This way if the backend acknowledges the
     save but does not return the new state Ember Data can copy the
     values from `_inFlightAttributes` to `_data`. Without having to
     worry about changes made to `_attributes` while the save was
     happenign.
-      Changed keys builds a list of all of the values that may have been
+  
+    Changed keys builds a list of all of the values that may have been
     changed by the backend after a successful save.
-     It does this by iterating over each key, value pair in the payload
+      It does this by iterating over each key, value pair in the payload
     returned from the server after a save. If the `key` is found in
     `_attributes` then the user has a local changed to the attribute
     that has not been synced with the server and the key is not
     included in the list of changed keys.
   
-    If the value, for a key differs from the value in what Ember Data
+      If the value, for a key differs from the value in what Ember Data
     believes to be the truth about the backend state (A merger of the
     `_data` and `_inFlightAttributes` objects where
     `_inFlightAttributes` has priority) then that means the backend
     has updated the value and the key is added to the list of changed
     keys.
-     @method _changedKeys
+      @method _changedKeys
     @private
   */
 
@@ -94727,21 +94731,21 @@ var InternalModel = function () {
      implicit relationships are relationship which have not been declared but the inverse side exists on
      another record somewhere
      For example if there was
-      ```app/models/comment.js
+       ```app/models/comment.js
      import DS from 'ember-data';
-      export default DS.Model.extend({
+       export default DS.Model.extend({
      name: DS.attr()
      })
      ```
-      but there is also
-      ```app/models/post.js
+       but there is also
+       ```app/models/post.js
      import DS from 'ember-data';
-      export default DS.Model.extend({
+       export default DS.Model.extend({
      name: DS.attr(),
      comments: DS.hasMany('comment')
      })
      ```
-      would have a implicit post relationship in order to be do things like remove ourselves from the post
+       would have a implicit post relationship in order to be do things like remove ourselves from the post
      when we are deleted
     */
 
@@ -94772,7 +94776,7 @@ if (isEnabled('ds-rollback-attribute')) {
   /*
      Returns the latest truth for an attribute - the canonical value, or the
      in-flight value.
-      @method lastAcknowledgedValue
+       @method lastAcknowledgedValue
      @private
   */
   InternalModel.prototype.lastAcknowledgedValue = function lastAcknowledgedValue(key) {
@@ -94866,7 +94870,7 @@ var InternalModelMap = function () {
 
   /**
    Destroy all models in the internalModelTest and wipe metadata.
-    @method clear
+     @method clear
    */
   InternalModelMap.prototype.clear = function clear() {
     var models = this._models;
@@ -94903,7 +94907,7 @@ var InternalModelMap = function () {
 
     /**
      deprecated (and unsupported) way of accessing modelClass
-      @deprecated
+       @deprecated
      */
 
   }, {
@@ -94937,7 +94941,7 @@ var IdentityMap = function () {
    Retrieves the `InternalModelMap` for a given modelName,
    creating one if one did not already exist. This is
    similar to `getWithDefault` or `get` on a `MapWithDefault`
-    @method retrieve
+     @method retrieve
    @param modelName a previously normalized modelName
    @returns {InternalModelMap} the InternalModelMap for the given modelName
    */
@@ -94956,7 +94960,7 @@ var IdentityMap = function () {
   /**
    Clears the contents of all known `RecordMaps`, but does
    not remove the InternalModelMap instances.
-    @method clear
+     @method clear
    */
 
 
@@ -95158,9 +95162,9 @@ var RelationshipPayloads = function () {
 
   /**
     Get the payload for the relationship of an individual record.
-     This might return the raw payload as pushed into the store, or one computed
+      This might return the raw payload as pushed into the store, or one computed
     from the payload of the inverse relationship.
-     @method
+      @method
   */
 
 
@@ -95178,8 +95182,8 @@ var RelationshipPayloads = function () {
 
   /**
     Push a relationship payload for an individual record.
-     This will make the payload available later for both this relationship and its inverse.
-     @method
+      This will make the payload available later for both this relationship and its inverse.
+      @method
   */
 
 
@@ -95189,8 +95193,8 @@ var RelationshipPayloads = function () {
 
   /**
     Unload the relationship payload for an individual record.
-     This does not unload the inverse relationship payload.
-     @method
+      This does not unload the inverse relationship payload.
+      @method
   */
 
 
@@ -95209,7 +95213,7 @@ var RelationshipPayloads = function () {
   /**
     @return {boolean} true iff `modelName` and `relationshipName` refer to the
     left hand side of this relationship, as opposed to the right hand side.
-     @method
+      @method
   */
 
 
@@ -95220,7 +95224,7 @@ var RelationshipPayloads = function () {
   /**
     @return {boolean} true iff `modelName` and `relationshipName` refer to the
     right hand side of this relationship, as opposed to the left hand side.
-     @method
+      @method
   */
 
 
@@ -95318,10 +95322,10 @@ var RelationshipPayloads = function () {
 
   /**
     Populate the inverse relationship for `relationshipData`.
-     If `relationshipData` is an array (eg because the relationship is hasMany)
+      If `relationshipData` is an array (eg because the relationship is hasMany)
     this means populate each inverse, otherwise populate only the single
     inverse.
-     @private
+      @private
     @method
   */
 
@@ -95348,9 +95352,9 @@ var RelationshipPayloads = function () {
     Actually add `inversePayload` to `inverseIdToPayloads`.  This is part of
     `_populateInverse` after we've normalized the case of `relationshipData`
     being either an array or a pojo.
-     We still have to handle the case that the *inverse* relationship payload may
+      We still have to handle the case that the *inverse* relationship payload may
     be an array or pojo.
-     @private
+      @private
     @method
   */
 
@@ -95391,7 +95395,7 @@ var RelationshipPayloads = function () {
     this relationship payload has just been updated (eg because the same
     relationship had multiple payloads pushed before the relationship was
     initialized).
-     @method
+      @method
   */
   RelationshipPayloads.prototype._removeInverse = function _removeInverse(id, previousPayload, inverseIdToPayloads) {
     var data = previousPayload && previousPayload.data;
@@ -95419,7 +95423,7 @@ var RelationshipPayloads = function () {
     Remove `id` from its inverse record with id `inverseId`.  If the inverse
     relationship is a belongsTo, this means just setting it to null, if the
     inverse relationship is a hasMany, then remove that id from its array of ids.
-     @method
+      @method
   */
 
 
@@ -95526,10 +95530,10 @@ var RelationshipPayloadsManager = function () {
 
   /**
     Find the payload for the given relationship of the given model.
-     Returns the payload for the given relationship, whether raw or computed from
+      Returns the payload for the given relationship, whether raw or computed from
     the payload of the inverse relationship.
-     @example
-       relationshipPayloadsManager.get('hobby', 2, 'user') === {
+      @example
+        relationshipPayloadsManager.get('hobby', 2, 'user') === {
         {
           data: {
             id: 1,
@@ -95537,7 +95541,7 @@ var RelationshipPayloadsManager = function () {
           }
         }
       }
-     @method
+      @method
   */
 
 
@@ -95550,8 +95554,8 @@ var RelationshipPayloadsManager = function () {
 
   /**
     Push a model's relationships payload into this cache.
-     @example
-       let userPayload = {
+      @example
+        let userPayload = {
         data: {
           id: 1,
           type: 'user',
@@ -95566,7 +95570,7 @@ var RelationshipPayloadsManager = function () {
         },
       };
       relationshipPayloadsManager.push('user', 1, userPayload.data.relationships);
-     @method
+      @method
   */
 
 
@@ -95589,7 +95593,7 @@ var RelationshipPayloadsManager = function () {
 
   /**
     Unload a model's relationships payload.
-     @method
+      @method
   */
 
 
@@ -95609,19 +95613,20 @@ var RelationshipPayloadsManager = function () {
   /**
     Find the RelationshipPayloads object for the given relationship.  The same
     RelationshipPayloads object is returned for either side of a relationship.
-     @example
-       const User = DS.Model.extend({
+      @example
+        const User = DS.Model.extend({
         hobbies: DS.hasMany('hobby')
       });
-       const Hobby = DS.Model.extend({
+        const Hobby = DS.Model.extend({
         user: DS.belongsTo('user')
       });
-       relationshipPayloads.get('user', 'hobbies') === relationshipPayloads.get('hobby', 'user');
-     The signature has a somewhat large arity to avoid extra work, such as
+        relationshipPayloads.get('user', 'hobbies') === relationshipPayloads.get('hobby', 'user');
+      The signature has a somewhat large arity to avoid extra work, such as
       a)  string maipulation & allocation with `modelName` and
          `relationshipName`
       b)  repeatedly getting `relationshipsByName` via `Ember.get`
-      @private
+  
+    @private
     @method
   */
 
@@ -95641,7 +95646,7 @@ var RelationshipPayloadsManager = function () {
 
   /**
     Create the `RelationshipsPayload` for the relationship `modelName`, `relationshipName`, and its inverse.
-     @private
+      @private
     @method
   */
 
@@ -95926,16 +95931,16 @@ var SnapshotRecordArray = function () {
 
     /**
       Number of records in the array
-       Example
-       ```app/adapters/post.js
+        Example
+        ```app/adapters/post.js
       import DS from 'ember-data'
-       export default DS.JSONAPIAdapter.extend({
+        export default DS.JSONAPIAdapter.extend({
         shouldReloadAll(store, snapshotRecordArray) {
           return !snapshotRecordArray.length;
         },
       });
       ```
-       @property length
+        @property length
       @type {Number}
     */
     this.length = recordArray.get('length');
@@ -95944,10 +95949,10 @@ var SnapshotRecordArray = function () {
 
     /**
       Meta objects for the record array.
-       Example
-       ```app/adapters/post.js
+        Example
+        ```app/adapters/post.js
       import DS from 'ember-data'
-       export default DS.JSONAPIAdapter.extend({
+        export default DS.JSONAPIAdapter.extend({
         shouldReloadAll(store, snapshotRecordArray) {
           var lastRequestTime = snapshotRecordArray.meta.lastRequestTime;
           var twentyMinutes = 20 * 60 * 1000;
@@ -95955,17 +95960,17 @@ var SnapshotRecordArray = function () {
         },
       });
       ```
-       @property meta
+        @property meta
       @type {Object}
     */
     this.meta = meta;
 
     /**
       A hash of adapter options passed into the store method for this request.
-       Example
-       ```app/adapters/post.js
+        Example
+        ```app/adapters/post.js
       import MyCustomAdapter from './custom-adapter';
-       export default MyCustomAdapter.extend({
+        export default MyCustomAdapter.extend({
         findAll(store, type, sinceToken, snapshotRecordArray) {
           if (snapshotRecordArray.adapterOptions.subscribe) {
             // ...
@@ -95974,23 +95979,23 @@ var SnapshotRecordArray = function () {
         }
       });
       ```
-       @property adapterOptions
+        @property adapterOptions
       @type {Object}
     */
     this.adapterOptions = options.adapterOptions;
 
     /**
       The relationships to include for this request.
-       Example
-       ```app/adapters/application.js
+        Example
+        ```app/adapters/application.js
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         findAll(store, type, snapshotRecordArray) {
           var url = `/${type.modelName}?include=${encodeURIComponent(snapshotRecordArray.include)}`;
-           return fetch(url).then((response) => response.json())
+            return fetch(url).then((response) => response.json())
         }
       });
-       @property include
+        @property include
       @type {String|Array}
     */
     this.include = options.include;
@@ -96005,13 +96010,13 @@ var SnapshotRecordArray = function () {
 
   /**
     Get snapshots of the underlying record array
-     Example
-     ```app/adapters/post.js
+      Example
+      ```app/adapters/post.js
     import DS from 'ember-data'
-     export default DS.JSONAPIAdapter.extend({
+      export default DS.JSONAPIAdapter.extend({
       shouldReloadAll(store, snapshotArray) {
         var snapshots = snapshotArray.snapshots();
-         return snapshots.any(function(ticketSnapshot) {
+          return snapshots.any(function(ticketSnapshot) {
           var timeDiff = moment().diff(ticketSnapshot.attr('lastAccessedAt'), 'minutes');
           if (timeDiff > 20) {
             return true;
@@ -96022,7 +96027,7 @@ var SnapshotRecordArray = function () {
       }
     });
     ```
-     @method snapshots
+      @method snapshots
     @return {Array} Array of snapshots
   */
   SnapshotRecordArray.prototype.snapshots = function snapshots() {
@@ -96072,7 +96077,7 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
       record is requested from the record array, the record
       for the client id at the same index is materialized, if
       necessary, by the store.
-       @property content
+        @property content
       @private
       @type Ember.Array
       */
@@ -96080,12 +96085,12 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
     /**
     The flag to signal a `RecordArray` is finished loading data.
-     Example
-     ```javascript
+      Example
+      ```javascript
     var people = store.peekAll('person');
     people.get('isLoaded'); // true
     ```
-     @property isLoaded
+      @property isLoaded
     @type Boolean
     */
     this.isLoaded = this.isLoaded || false;
@@ -96119,7 +96124,7 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
    The modelClass represented by this record array.
-    @property type
+     @property type
    @type DS.Model
    */
   type: computed$2('modelName', function () {
@@ -96131,7 +96136,7 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Retrieves an object from the content by index.
-     @method objectAtContent
+      @method objectAtContent
     @private
     @param {Number} index
     @return {DS.Model} record
@@ -96145,16 +96150,16 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
   /**
     Used to get the latest version of all of the records in this array
     from the adapter.
-     Example
-     ```javascript
+      Example
+      ```javascript
     var people = store.peekAll('person');
     people.get('isUpdating'); // false
-     people.update().then(function() {
+      people.update().then(function() {
       people.get('isUpdating'); // false
     });
-     people.get('isUpdating'); // true
+      people.get('isUpdating'); // true
     ```
-     @method update
+      @method update
   */
   update: function update() {
     var _this = this;
@@ -96190,7 +96195,7 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Adds an internal model to the `RecordArray` without duplicates
-     @method _pushInternalModels
+      @method _pushInternalModels
     @private
     @param {InternalModel} internalModel
   */
@@ -96204,7 +96209,7 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Removes an internalModel to the `RecordArray`.
-     @method removeInternalModel
+      @method removeInternalModel
     @private
     @param {InternalModel} internalModel
   */
@@ -96215,15 +96220,15 @@ var RecordArray = Ember.ArrayProxy.extend(Ember.Evented, {
 
   /**
     Saves all of the records in the `RecordArray`.
-     Example
-     ```javascript
+      Example
+      ```javascript
     var messages = store.peekAll('message');
     messages.forEach(function(message) {
       message.set('hasBeenSeen', true);
     });
     messages.save();
     ```
-     @method save
+      @method save
     @return {DS.PromiseArray} promise
   */
   save: function save() {
@@ -96321,21 +96326,21 @@ var FilteredRecordArray = RecordArray.extend({
   /**
     The filterFunction is a function used to test records from the store to
     determine if they should be part of the record array.
-     Example
-     ```javascript
+      Example
+      ```javascript
     var allPeople = store.peekAll('person');
     allPeople.mapBy('name'); // ["Tom Dale", "Yehuda Katz", "Trek Glowacki"]
-     var people = store.filter('person', function(person) {
+      var people = store.filter('person', function(person) {
       if (person.get('name').match(/Katz$/)) { return true; }
     });
     people.mapBy('name'); // ["Yehuda Katz"]
-     var notKatzFilter = function(person) {
+      var notKatzFilter = function(person) {
       return !person.get('name').match(/Katz$/);
     };
     people.set('filterFunction', notKatzFilter);
     people.mapBy('name'); // ["Tom Dale", "Trek Glowacki"]
     ```
-     @method filterFunction
+      @method filterFunction
     @param {DS.Model} record
     @return {Boolean} `true` if the record should be in the array
   */
@@ -96567,7 +96572,7 @@ var RecordArrayManager = function () {
 
   /**
     Update an individual filter.
-     @private
+      @private
     @method updateFilterRecordArray
     @param {DS.FilteredRecordArray} array
     @param {String} modelName
@@ -96642,9 +96647,9 @@ var RecordArrayManager = function () {
   /**
     This method is invoked if the `filterFunction` property is
     changed on a `DS.FilteredRecordArray`.
-     It essentially re-runs the filter from scratch. This same
+      It essentially re-runs the filter from scratch. This same
     method is invoked when the filter is created in th first place.
-     @method updateFilter
+      @method updateFilter
     @param {Array} array
     @param {String} modelName
     @param {Function} filter
@@ -96670,7 +96675,7 @@ var RecordArrayManager = function () {
   /**
     Get the `DS.RecordArray` for a modelName, which contains all loaded records of
     given modelName.
-     @method liveRecordArrayFor
+      @method liveRecordArrayFor
     @param {String} modelName
     @return {DS.RecordArray}
   */
@@ -96710,7 +96715,7 @@ var RecordArrayManager = function () {
   /**
     Get the `DS.RecordArray` for a modelName, which contains all loaded records of
     given modelName.
-     @method filteredRecordArraysFor
+      @method filteredRecordArraysFor
     @param {String} modelName
     @return {DS.RecordArray}
   */
@@ -96724,7 +96729,7 @@ var RecordArrayManager = function () {
   };
   /**
     Create a `DS.RecordArray` for a modelName.
-     @method createRecordArray
+      @method createRecordArray
     @param {String} modelName
     @param {Array} _content (optional|private)
     @return {DS.RecordArray}
@@ -96752,7 +96757,7 @@ var RecordArrayManager = function () {
 
   /**
     Create a `DS.FilteredRecordArray` for a modelName and register it for updates.
-     @method createFilteredRecordArray
+      @method createFilteredRecordArray
     @param {String} modelName
     @param {Function} filter
     @param {Object} query (optional
@@ -96779,7 +96784,7 @@ var RecordArrayManager = function () {
 
   /**
     Create a `DS.AdapterPopulatedRecordArray` for a modelName with given query.
-     @method createAdapterPopulatedRecordArray
+      @method createAdapterPopulatedRecordArray
     @param {String} modelName
     @param {Object} query
     @return {DS.AdapterPopulatedRecordArray}
@@ -96825,7 +96830,7 @@ var RecordArrayManager = function () {
     a filter function. This will cause the array to update
     automatically when records of that modelName change attribute
     values or states.
-     @method registerFilteredRecordArray
+      @method registerFilteredRecordArray
     @param {DS.RecordArray} array
     @param {String} modelName
     @param {Function} filter
@@ -96843,7 +96848,7 @@ var RecordArrayManager = function () {
   /**
     Unregister a RecordArray.
     So manager will not update this array.
-     @method unregisterRecordArray
+      @method unregisterRecordArray
     @param {DS.RecordArray} array
   */
 
@@ -97227,7 +97232,7 @@ Store = Service.extend({
     /*
       Ember Data uses several specialized micro-queues for organizing
       and coalescing similar async work.
-       These queues are currently controlled by a flush scheduled into
+        These queues are currently controlled by a flush scheduled into
       ember-data's custom backburner instance.
      */
     // used for coalescing record save requests
@@ -97254,14 +97259,14 @@ Store = Service.extend({
     The default adapter to use to communicate to a backend server or
     other persistence layer. This will be overridden by an application
     adapter if present.
-     If you want to specify `app/adapters/custom.js` as a string, do:
-     ```js
+      If you want to specify `app/adapters/custom.js` as a string, do:
+      ```js
     import DS from 'ember-data';
-     export default DS.Store.extend({
+      export default DS.Store.extend({
       adapter: 'custom',
     });
     ```
-     @property adapter
+      @property adapter
     @default '-json-api'
     @type {String}
   */
@@ -97270,10 +97275,10 @@ Store = Service.extend({
   /**
     Returns a JSON representation of the record using a custom
     type-specific serializer, if one exists.
-     The available options are:
-     * `includeId`: `true` if the record's ID should be included in
+      The available options are:
+      * `includeId`: `true` if the record's ID should be included in
       the JSON representation
-     @method serialize
+      @method serialize
     @private
     @deprecated
     @param {DS.Model} record the record to serialize
@@ -97294,12 +97299,12 @@ Store = Service.extend({
   /**
     This property returns the adapter, after resolving a possible
     string key.
-     If the supplied `adapter` was a class, or a String property
+      If the supplied `adapter` was a class, or a String property
     path resolved to a class, this property will instantiate the
     class.
-     This property is cacheable, so the same instance of a specified
+      This property is cacheable, so the same instance of a specified
     adapter class should be used for the lifetime of the store.
-     @property defaultAdapter
+      @property defaultAdapter
     @private
     @return DS.Adapter
   */
@@ -97319,21 +97324,21 @@ Store = Service.extend({
   /**
     Create a new record in the current store. The properties passed
     to this method are set on the newly created record.
-     To create a new instance of a `Post`:
-     ```js
+      To create a new instance of a `Post`:
+      ```js
     store.createRecord('post', {
       title: 'Rails is omakase'
     });
     ```
-     To create a new instance of a `Post` that has a relationship with a `User` record:
-     ```js
+      To create a new instance of a `Post` that has a relationship with a `User` record:
+      ```js
     let user = this.store.peekRecord('user', 1);
     store.createRecord('post', {
       title: 'Rails is omakase',
       user: user
     });
     ```
-     @method createRecord
+      @method createRecord
     @param {String} modelName
     @param {Object} inputProperties a hash of properties to set on the
       newly created record.
@@ -97376,7 +97381,7 @@ Store = Service.extend({
   /**
     If possible, this method asks the adapter to generate an ID for
     a newly created record.
-     @method _generateId
+      @method _generateId
     @private
     @param {String} modelName
     @param {Object} properties from the new record
@@ -97399,14 +97404,14 @@ Store = Service.extend({
 
   /**
     For symmetry, a record can be deleted via the store.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let post = store.createRecord('post', {
       title: 'Rails is omakase'
     });
-     store.deleteRecord(post);
+      store.deleteRecord(post);
     ```
-     @method deleteRecord
+      @method deleteRecord
     @param {DS.Model} record
   */
   deleteRecord: function deleteRecord(record) {
@@ -97417,13 +97422,13 @@ Store = Service.extend({
   /**
     For symmetry, a record can be unloaded via the store.
     This will cause the record to be destroyed and freed up for garbage collection.
-     Example
-     ```javascript
+      Example
+      ```javascript
     store.findRecord('post', 1).then(function(post) {
       store.unloadRecord(post);
     });
     ```
-     @method unloadRecord
+      @method unloadRecord
     @param {DS.Model} record
   */
   unloadRecord: function unloadRecord(record) {
@@ -97463,45 +97468,45 @@ Store = Service.extend({
 
   /**
     This method returns a record for a given type and id combination.
-     The `findRecord` method will always resolve its promise with the same
+      The `findRecord` method will always resolve its promise with the same
     object for a given type and `id`.
-     The `findRecord` method will always return a **promise** that will be
+      The `findRecord` method will always return a **promise** that will be
     resolved with the record.
-     Example
-     ```app/routes/post.js
+      Example
+      ```app/routes/post.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
         return this.store.findRecord('post', params.post_id);
       }
     });
     ```
-     If the record is not yet available, the store will ask the adapter's `find`
+      If the record is not yet available, the store will ask the adapter's `find`
     method to find the necessary data. If the record is already present in the
     store, it depends on the reload behavior _when_ the returned promise
     resolves.
-     ### Preloading
-     You can optionally `preload` specific attributes and relationships that you know of
+      ### Preloading
+      You can optionally `preload` specific attributes and relationships that you know of
     by passing them via the passed `options`.
-     For example, if your Ember route looks like `/posts/1/comments/2` and your API route
+      For example, if your Ember route looks like `/posts/1/comments/2` and your API route
     for the comment also looks like `/posts/1/comments/2` if you want to fetch the comment
     without fetching the post you can pass in the post to the `findRecord` call:
-     ```javascript
+      ```javascript
     store.findRecord('comment', 2, { preload: { post: 1 } });
     ```
-     If you have access to the post model you can also pass the model itself:
-     ```javascript
+      If you have access to the post model you can also pass the model itself:
+      ```javascript
     store.findRecord('post', 1).then(function (myPostModel) {
       store.findRecord('comment', 2, { post: myPostModel });
     });
     ```
-     ### Reloading
-     The reload behavior is configured either via the passed `options` hash or
+      ### Reloading
+      The reload behavior is configured either via the passed `options` hash or
     the result of the adapter's `shouldReloadRecord`.
-     If `{ reload: true }` is passed or `adapter.shouldReloadRecord` evaluates
+      If `{ reload: true }` is passed or `adapter.shouldReloadRecord` evaluates
     to `true`, then the returned promise resolves once the adapter returns
     data, regardless if the requested record is already in the store:
-     ```js
+      ```js
     store.push({
       data: {
         id: 1,
@@ -97509,7 +97514,7 @@ Store = Service.extend({
         revision: 1
       }
     });
-     // adapter#findRecord resolves with
+      // adapter#findRecord resolves with
     // [
     //   {
     //     id: 1,
@@ -97521,35 +97526,35 @@ Store = Service.extend({
       post.get('revision'); // 2
     });
     ```
-     If no reload is indicated via the abovementioned ways, then the promise
+      If no reload is indicated via the abovementioned ways, then the promise
     immediately resolves with the cached version in the store.
-     ### Background Reloading
-     Optionally, if `adapter.shouldBackgroundReloadRecord` evaluates to `true`,
+      ### Background Reloading
+      Optionally, if `adapter.shouldBackgroundReloadRecord` evaluates to `true`,
     then a background reload is started, which updates the records' data, once
     it is available:
-     ```js
+      ```js
     // app/adapters/post.js
     import ApplicationAdapter from "./application";
-     export default ApplicationAdapter.extend({
+      export default ApplicationAdapter.extend({
       shouldReloadRecord(store, snapshot) {
         return false;
       },
-       shouldBackgroundReloadRecord(store, snapshot) {
+        shouldBackgroundReloadRecord(store, snapshot) {
         return true;
       }
     });
-     // ...
-     store.push({
+      // ...
+      store.push({
       data: {
         id: 1,
         type: 'post',
         revision: 1
       }
     });
-     let blogPost = store.findRecord('post', 1).then(function(post) {
+      let blogPost = store.findRecord('post', 1).then(function(post) {
       post.get('revision'); // 1
     });
-     // later, once adapter#findRecord resolved with
+      // later, once adapter#findRecord resolved with
     // [
     //   {
     //     id: 1,
@@ -97557,24 +97562,24 @@ Store = Service.extend({
     //     revision: 2
     //   }
     // ]
-     blogPost.get('revision'); // 2
+      blogPost.get('revision'); // 2
     ```
-     If you would like to force or prevent background reloading, you can set a
+      If you would like to force or prevent background reloading, you can set a
     boolean value for `backgroundReload` in the options object for
     `findRecord`.
-     ```app/routes/post/edit.js
+      ```app/routes/post/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
         return this.store.findRecord('post', params.post_id, { backgroundReload: false });
       }
     });
     ```
-    If you pass an object on the `adapterOptions` property of the options
+     If you pass an object on the `adapterOptions` property of the options
    argument it will be passed to you adapter via the snapshot
-     ```app/routes/post/edit.js
+      ```app/routes/post/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
         return this.store.findRecord('post', params.post_id, {
           adapterOptions: { subscribe: false }
@@ -97582,9 +97587,9 @@ Store = Service.extend({
       }
     });
     ```
-     ```app/adapters/post.js
+      ```app/adapters/post.js
     import MyCustomAdapter from './custom-adapter';
-     export default MyCustomAdapter.extend({
+      export default MyCustomAdapter.extend({
       findRecord(store, type, id, snapshot) {
         if (snapshot.adapterOptions.subscribe) {
           // ...
@@ -97593,41 +97598,41 @@ Store = Service.extend({
       }
     });
     ```
-     See [peekRecord](#method_peekRecord) to get the cached version of a record.
-     ### Retrieving Related Model Records
-     If you use an adapter such as Ember's default
+      See [peekRecord](#method_peekRecord) to get the cached version of a record.
+      ### Retrieving Related Model Records
+      If you use an adapter such as Ember's default
     [`JSONAPIAdapter`](https://emberjs.com/api/data/classes/DS.JSONAPIAdapter.html)
     that supports the [JSON API specification](http://jsonapi.org/) and if your server
     endpoint supports the use of an
     ['include' query parameter](http://jsonapi.org/format/#fetching-includes),
     you can use `findRecord()` to automatically retrieve additional records related to
     the one you request by supplying an `include` parameter in the `options` object.
-     For example, given a `post` model that has a `hasMany` relationship with a `comment`
+      For example, given a `post` model that has a `hasMany` relationship with a `comment`
     model, when we retrieve a specific post we can have the server also return that post's
     comments in the same request:
-     ```app/routes/post.js
+      ```app/routes/post.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
        return this.store.findRecord('post', params.post_id, { include: 'comments' });
       }
     });
-     ```
+      ```
     In this case, the post's comments would then be available in your template as
     `model.comments`.
-     Multiple relationships can be requested using an `include` parameter consisting of a
+      Multiple relationships can be requested using an `include` parameter consisting of a
     comma-separated list (without white-space) while nested relationships can be specified
     using a dot-separated sequence of relationship names. So to request both the post's
     comments and the authors of those comments the request would look like this:
-     ```app/routes/post.js
+      ```app/routes/post.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
        return this.store.findRecord('post', params.post_id, { include: 'comments,comments.author' });
       }
     });
-     ```
-     @since 1.13.0
+      ```
+      @since 1.13.0
     @method findRecord
     @param {String} modelName
     @param {(String|Integer)} id
@@ -97707,7 +97712,7 @@ Store = Service.extend({
   /**
     This method makes a series of requests to the adapter's `find` method
     and returns a promise that resolves once they are all loaded.
-     @private
+      @private
     @method findByIds
     @param {String} modelName
     @param {Array} ids
@@ -97734,7 +97739,7 @@ Store = Service.extend({
     This method is called by `findRecord` if it discovers that a particular
     type/id pair hasn't been loaded yet to kick off a request to the
     adapter.
-     @method _fetchRecord
+      @method _fetchRecord
     @private
     @param {InternalModel} internalModel model
     @return {Promise} promise
@@ -97916,27 +97921,27 @@ Store = Service.extend({
 
   /**
     Get the reference for the specified record.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let userRef = store.getReference('user', 1);
-     // check if the user is loaded
+      // check if the user is loaded
     let isLoaded = userRef.value() !== null;
-     // get the record of the reference (null if not yet available)
+      // get the record of the reference (null if not yet available)
     let user = userRef.value();
-     // get the identifier of the reference
+      // get the identifier of the reference
     if (userRef.remoteType() === 'id') {
     let id = userRef.id();
     }
-     // load user (via store.find)
+      // load user (via store.find)
     userRef.load().then(...)
-     // or trigger a reload
+      // or trigger a reload
     userRef.reload().then(...)
-     // provide data for reference
+      // provide data for reference
     userRef.push({ id: 1, username: '@user' }).then(function(user) {
       userRef.value() === user;
     });
     ```
-     @method getReference
+      @method getReference
     @param {String} modelName
     @param {String|Integer} id
     @since 2.5.0
@@ -97951,16 +97956,16 @@ Store = Service.extend({
 
   /**
     Get a record by a given type and ID without triggering a fetch.
-     This method will synchronously return the record if it is available in the store,
+      This method will synchronously return the record if it is available in the store,
     otherwise it will return `null`. A record is available if it has been fetched earlier, or
     pushed manually into the store.
-     See [findRecord](#method_findRecord) if you would like to request this record from the backend.
-     _Note: This is a synchronous method and does not return a promise._
-     ```js
+      See [findRecord](#method_findRecord) if you would like to request this record from the backend.
+      _Note: This is a synchronous method and does not return a promise._
+      ```js
     let post = store.peekRecord('post', 1);
-     post.get('id'); // 1
+      post.get('id'); // 1
     ```
-     @since 1.13.0
+      @since 1.13.0
     @method peekRecord
     @param {String} modelName
     @param {String|Integer} id
@@ -97982,10 +97987,10 @@ Store = Service.extend({
 
   /**
     This method is called by the record's `reload` method.
-     This method calls the adapter's `find` method, which returns a promise. When
+      This method calls the adapter's `find` method, which returns a promise. When
     **that** promise resolves, `reloadRecord` will resolve the promise returned
     by the record's `reload`.
-     @method reloadRecord
+      @method reloadRecord
     @private
     @param {DS.Model} internalModel
     @return {Promise} promise
@@ -98009,14 +98014,14 @@ Store = Service.extend({
    This method returns true if a record for a given modelName and id is already
    loaded in the store. Use this function to know beforehand if a findRecord()
    will result in a request or that it will be a cache hit.
-    Example
-    ```javascript
+     Example
+     ```javascript
    store.hasRecordForId('post', 1); // false
    store.findRecord('post', 1).then(function() {
      store.hasRecordForId('post', 1); // true
    });
    ```
-     @method hasRecordForId
+      @method hasRecordForId
     @param {String} modelName
     @param {(String|Integer)} id
     @return {Boolean}
@@ -98038,7 +98043,7 @@ Store = Service.extend({
   /**
     Returns id record for a given type and ID. If one isn't already loaded,
     it builds a new record and leaves it in the `empty` state.
-     @method recordForId
+      @method recordForId
     @private
     @param {String} modelName
     @param {(String|Integer)} id
@@ -98096,11 +98101,11 @@ Store = Service.extend({
     If a relationship was originally populated by the adapter as a link
     (as opposed to a list of IDs), this method is called when the
     relationship is fetched.
-     The link (which is usually a URL) is passed through unchanged, so the
+      The link (which is usually a URL) is passed through unchanged, so the
     adapter can make whatever request it wants.
-     The usual use-case is for the server to register a URL as a link, and
+      The usual use-case is for the server to register a URL as a link, and
     then use that URL in the future to make a request for the relationship.
-     @method findHasMany
+      @method findHasMany
     @private
     @param {InternalModel} internalModel
     @param {any} link
@@ -98140,36 +98145,36 @@ Store = Service.extend({
   /**
     This method delegates a query to the adapter. This is the one place where
     adapter-level semantics are exposed to the application.
-     Each time this method is called a new request is made through the adapter.
-     Exposing queries this way seems preferable to creating an abstract query
+      Each time this method is called a new request is made through the adapter.
+      Exposing queries this way seems preferable to creating an abstract query
     language for all server-side queries, and then require all adapters to
     implement them.
-     ---
-     If you do something like this:
-     ```javascript
+      ---
+      If you do something like this:
+      ```javascript
     store.query('person', { page: 1 });
     ```
-     The call made to the server, using a Rails backend, will look something like this:
-     ```
+      The call made to the server, using a Rails backend, will look something like this:
+      ```
     Started GET "/api/v1/person?page=1"
     Processing by Api::V1::PersonsController#index as HTML
     Parameters: { "page"=>"1" }
     ```
-     ---
-     If you do something like this:
-     ```javascript
+      ---
+      If you do something like this:
+      ```javascript
     store.query('person', { ids: [1, 2, 3] });
     ```
-     The call to the server, using a Rails backend, will look something like this:
-     ```
+      The call to the server, using a Rails backend, will look something like this:
+      ```
     Started GET "/api/v1/person?ids%5B%5D=1&ids%5B%5D=2&ids%5B%5D=3"
     Processing by Api::V1::PersonsController#index as HTML
     Parameters: { "ids" => ["1", "2", "3"] }
     ```
-     This method returns a promise, which is resolved with an
+      This method returns a promise, which is resolved with an
     [`AdapterPopulatedRecordArray`](https://emberjs.com/api/data/classes/DS.AdapterPopulatedRecordArray.html)
     once the server returns.
-     @since 1.13.0
+      @since 1.13.0
     @method query
     @param {String} modelName
     @param {any} query an opaque query to be used by the adapter
@@ -98204,12 +98209,12 @@ Store = Service.extend({
     This method makes a request for one record, where the `id` is not known
     beforehand (if the `id` is known, use [`findRecord`](#method_findRecord)
     instead).
-     This method can be used when it is certain that the server will return a
+      This method can be used when it is certain that the server will return a
     single object for the primary data.
-     Each time this method is called a new request is made through the adapter.
-     Let's assume our API provides an endpoint for the currently logged in user
+      Each time this method is called a new request is made through the adapter.
+      Let's assume our API provides an endpoint for the currently logged in user
     via:
-     ```
+      ```
     // GET /api/current_user
     {
       user: {
@@ -98218,28 +98223,28 @@ Store = Service.extend({
       }
     }
     ```
-     Since the specific `id` of the `user` is not known beforehand, we can use
+      Since the specific `id` of the `user` is not known beforehand, we can use
     `queryRecord` to get the user:
-     ```javascript
+      ```javascript
     store.queryRecord('user', {}).then(function(user) {
       let username = user.get('username');
       console.log(`Currently logged in as ${username}`);
     });
     ```
-     The request is made through the adapters' `queryRecord`:
-     ```app/adapters/user.js
+      The request is made through the adapters' `queryRecord`:
+      ```app/adapters/user.js
     import DS from 'ember-data';
-     export default DS.Adapter.extend({
+      export default DS.Adapter.extend({
       queryRecord(modelName, query) {
         return Ember.$.getJSON('/api/current_user');
       }
     });
     ```
-     Note: the primary use case for `store.queryRecord` is when a single record
+      Note: the primary use case for `store.queryRecord` is when a single record
     is queried and the `id` is not known beforehand. In all other cases
     `store.query` and using the first item of the array is likely the preferred
     way:
-     ```
+      ```
     // GET /users?username=unique
     {
       data: [{
@@ -98251,28 +98256,28 @@ Store = Service.extend({
       }]
     }
     ```
-     ```javascript
+      ```javascript
     store.query('user', { username: 'unique' }).then(function(users) {
       return users.get('firstObject');
     }).then(function(user) {
       let id = user.get('id');
     });
     ```
-     This method returns a promise, which resolves with the found record.
-     If the adapter returns no data for the primary data of the payload, then
+      This method returns a promise, which resolves with the found record.
+      If the adapter returns no data for the primary data of the payload, then
     `queryRecord` resolves with `null`:
-     ```
+      ```
     // GET /users?username=unique
     {
       data: null
     }
     ```
-     ```javascript
+      ```javascript
     store.queryRecord('user', { username: 'unique' }).then(function(user) {
       console.log(user); // null
     });
     ```
-     @since 1.13.0
+      @since 1.13.0
     @method queryRecord
     @param {String} modelName
     @param {any} query an opaque query to be used by the adapter
@@ -98309,29 +98314,29 @@ Store = Service.extend({
     given type, and returns a promise which will resolve with all records of
     this type present in the store, even if the adapter only returns a subset
     of them.
-     ```app/routes/authors.js
+      ```app/routes/authors.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
         return this.store.findAll('author');
       }
     });
     ```
-     _When_ the returned promise resolves depends on the reload behavior,
+      _When_ the returned promise resolves depends on the reload behavior,
     configured via the passed `options` hash and the result of the adapter's
     `shouldReloadAll` method.
-     ### Reloading
-     If `{ reload: true }` is passed or `adapter.shouldReloadAll` evaluates to
+      ### Reloading
+      If `{ reload: true }` is passed or `adapter.shouldReloadAll` evaluates to
     `true`, then the returned promise resolves once the adapter returns data,
     regardless if there are already records in the store:
-     ```js
+      ```js
     store.push({
       data: {
         id: 'first',
         type: 'author'
       }
     });
-     // adapter#findAll resolves with
+      // adapter#findAll resolves with
     // [
     //   {
     //     id: 'second',
@@ -98342,60 +98347,60 @@ Store = Service.extend({
       authors.getEach('id'); // ['first', 'second']
     });
     ```
-     If no reload is indicated via the abovementioned ways, then the promise
+      If no reload is indicated via the abovementioned ways, then the promise
     immediately resolves with all the records currently loaded in the store.
-     ### Background Reloading
-     Optionally, if `adapter.shouldBackgroundReloadAll` evaluates to `true`,
+      ### Background Reloading
+      Optionally, if `adapter.shouldBackgroundReloadAll` evaluates to `true`,
     then a background reload is started. Once this resolves, the array with
     which the promise resolves, is updated automatically so it contains all the
     records in the store:
-     ```js
+      ```js
     // app/adapters/application.js
     export default DS.Adapter.extend({
       shouldReloadAll(store, snapshotsArray) {
         return false;
       },
-       shouldBackgroundReloadAll(store, snapshotsArray) {
+        shouldBackgroundReloadAll(store, snapshotsArray) {
         return true;
       }
     });
-     // ...
-     store.push({
+      // ...
+      store.push({
       data: {
         id: 'first',
         type: 'author'
       }
     });
-     let allAuthors;
+      let allAuthors;
     store.findAll('author').then(function(authors) {
       authors.getEach('id'); // ['first']
-       allAuthors = authors;
+        allAuthors = authors;
     });
-     // later, once adapter#findAll resolved with
+      // later, once adapter#findAll resolved with
     // [
     //   {
     //     id: 'second',
     //     type: 'author'
     //   }
     // ]
-     allAuthors.getEach('id'); // ['first', 'second']
+      allAuthors.getEach('id'); // ['first', 'second']
     ```
-     If you would like to force or prevent background reloading, you can set a
+      If you would like to force or prevent background reloading, you can set a
     boolean value for `backgroundReload` in the options object for
     `findAll`.
-     ```app/routes/post/edit.js
+      ```app/routes/post/edit.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model() {
         return this.store.findAll('post', { backgroundReload: false });
       }
     });
     ```
-     If you pass an object on the `adapterOptions` property of the options
+      If you pass an object on the `adapterOptions` property of the options
     argument it will be passed to you adapter via the `snapshotRecordArray`
-     ```app/routes/posts.js
+      ```app/routes/posts.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model(params) {
         return this.store.findAll('post', {
           adapterOptions: { subscribe: false }
@@ -98403,9 +98408,9 @@ Store = Service.extend({
       }
     });
     ```
-     ```app/adapters/post.js
+      ```app/adapters/post.js
     import MyCustomAdapter from './custom-adapter';
-     export default MyCustomAdapter.extend({
+      export default MyCustomAdapter.extend({
       findAll(store, type, sinceToken, snapshotRecordArray) {
         if (snapshotRecordArray.adapterOptions.subscribe) {
           // ...
@@ -98414,41 +98419,41 @@ Store = Service.extend({
       }
     });
     ```
-     See [peekAll](#method_peekAll) to get an array of current records in the
+      See [peekAll](#method_peekAll) to get an array of current records in the
     store, without waiting until a reload is finished.
-     ### Retrieving Related Model Records
-     If you use an adapter such as Ember's default
+      ### Retrieving Related Model Records
+      If you use an adapter such as Ember's default
     [`JSONAPIAdapter`](https://emberjs.com/api/data/classes/DS.JSONAPIAdapter.html)
     that supports the [JSON API specification](http://jsonapi.org/) and if your server
     endpoint supports the use of an
     ['include' query parameter](http://jsonapi.org/format/#fetching-includes),
     you can use `findAll()` to automatically retrieve additional records related to
     those requested by supplying an `include` parameter in the `options` object.
-     For example, given a `post` model that has a `hasMany` relationship with a `comment`
+      For example, given a `post` model that has a `hasMany` relationship with a `comment`
     model, when we retrieve all of the post records we can have the server also return
     all of the posts' comments in the same request:
-     ```app/routes/posts.js
+      ```app/routes/posts.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model() {
        return this.store.findAll('post', { include: 'comments' });
       }
     });
-     ```
+      ```
     Multiple relationships can be requested using an `include` parameter consisting of a
     comma-separated list (without white-space) while nested relationships can be specified
     using a dot-separated sequence of relationship names. So to request both the posts'
     comments and the authors of those comments the request would look like this:
-     ```app/routes/posts.js
+      ```app/routes/posts.js
     import Ember from 'ember';
-     export default Ember.Route.extend({
+      export default Ember.Route.extend({
       model() {
        return this.store.findAll('post', { include: 'comments,comments.author' });
       }
     });
-     ```
-     See [query](#method_query) to only get a subset of records from the server.
-     @since 1.13.0
+      ```
+      See [query](#method_query) to only get a subset of records from the server.
+      @since 1.13.0
     @method findAll
     @param {String} modelName
     @param {Object} options
@@ -98525,18 +98530,18 @@ Store = Service.extend({
   /**
     This method returns a filtered array that contains all of the
     known records for a given type in the store.
-     Note that because it's just a filter, the result will contain any
+      Note that because it's just a filter, the result will contain any
     locally created records of the type, however, it will not make a
     request to the backend to retrieve additional records. If you
     would like to request all the records from the backend please use
     [store.findAll](#method_findAll).
-     Also note that multiple calls to `peekAll` for a given type will always
+      Also note that multiple calls to `peekAll` for a given type will always
     return the same `RecordArray`.
-     Example
-     ```javascript
+      Example
+      ```javascript
     let localPosts = store.peekAll('post');
     ```
-     @since 1.13.0
+      @since 1.13.0
     @method peekAll
     @param {String} modelName
     @return {DS.RecordArray}
@@ -98553,12 +98558,12 @@ Store = Service.extend({
   /**
    This method unloads all records in the store.
    It schedules unloading to happen during the next run loop.
-    Optionally you can pass a type which unload all records for a given type.
-    ```javascript
+     Optionally you can pass a type which unload all records for a given type.
+     ```javascript
    store.unloadAll();
    store.unloadAll('post');
    ```
-    @method unloadAll
+     @method unloadAll
    @param {String} modelName
   */
   unloadAll: function unloadAll(modelName) {
@@ -98578,29 +98583,29 @@ Store = Service.extend({
     Takes a type and filter function, and returns a live RecordArray that
     remains up to date as new records are loaded into the store or created
     locally.
-     The filter function takes a materialized record, and returns true
+      The filter function takes a materialized record, and returns true
     if the record should be included in the filter and false if it should
     not.
-     Example
-     ```javascript
+      Example
+      ```javascript
     store.filter('post', function(post) {
       return post.get('unread');
     });
     ```
-     The filter function is called once on all records for the type when
+      The filter function is called once on all records for the type when
     it is created, and then once on each newly loaded or created record.
-     If any of a record's properties change, or if it changes state, the
+      If any of a record's properties change, or if it changes state, the
     filter function will be invoked again to determine whether it should
     still be in the array.
-     Optionally you can pass a query, which is the equivalent of calling
+      Optionally you can pass a query, which is the equivalent of calling
     [query](#method_query) with that same query, to fetch additional records
     from the server. The results returned by the server could then appear
     in the filter if they match the filter function.
-     The query itself is not used to filter records, it's only sent to your
+      The query itself is not used to filter records, it's only sent to your
     server for you to be able to do server-side filtering. The filter
     function will be applied on the returned results regardless.
-     Example
-     ```javascript
+      Example
+      ```javascript
     store.filter('post', { unread: true }, function(post) {
       return post.get('unread');
     }).then(function(unreadPosts) {
@@ -98610,7 +98615,7 @@ Store = Service.extend({
       unreadPosts.get('length'); // 4
     });
     ```
-     @method filter
+      @method filter
     @private
     @param {String} modelName
     @param {Object} query optional query
@@ -98658,7 +98663,7 @@ Store = Service.extend({
   /**
     This method has been deprecated and is an alias for store.hasRecordForId, which should
     be used instead.
-     @deprecated
+      @deprecated
     @method recordIsLoaded
     @param {String} modelName
     @param {string} id
@@ -98681,8 +98686,8 @@ Store = Service.extend({
   /**
     This method is called by `record.save`, and gets passed a
     resolver for the promise that `record.save` returns.
-     It schedules saving to happen at the end of the run loop.
-     @method scheduleSave
+      It schedules saving to happen at the end of the run loop.
+      @method scheduleSave
     @private
     @param {InternalModel} internalModel
     @param {Resolver} resolver
@@ -98703,7 +98708,7 @@ Store = Service.extend({
   /**
     This method is called at the end of the run loop, and
     flushes any records passed into `scheduleSave`
-     @method flushPendingSave
+      @method flushPendingSave
     @private
   */
   flushPendingSave: function flushPendingSave() {
@@ -98738,9 +98743,9 @@ Store = Service.extend({
     This method is called once the promise returned by an
     adapter's `createRecord`, `updateRecord` or `deleteRecord`
     is resolved.
-     If the data provides a server-generated ID, it will
+      If the data provides a server-generated ID, it will
     update the record and the store's indexes.
-     @method didSaveRecord
+      @method didSaveRecord
     @private
     @param {InternalModel} internalModel the in-flight internal model
     @param {Object} data optional data (see above)
@@ -98768,7 +98773,7 @@ Store = Service.extend({
     This method is called once the promise returned by an
     adapter's `createRecord`, `updateRecord` or `deleteRecord`
     is rejected with a `DS.InvalidError`.
-     @method recordWasInvalid
+      @method recordWasInvalid
     @private
     @param {InternalModel} internalModel
     @param {Object} errors
@@ -98782,7 +98787,7 @@ Store = Service.extend({
     This method is called once the promise returned by an
     adapter's `createRecord`, `updateRecord` or `deleteRecord`
     is rejected (with anything other than a `DS.InvalidError`).
-     @method recordWasError
+      @method recordWasError
     @private
     @param {InternalModel} internalModel
     @param {Error} error
@@ -98796,7 +98801,7 @@ Store = Service.extend({
     When an adapter's `createRecord`, `updateRecord` or `deleteRecord`
     resolves with data, this method extracts the ID from the supplied
     data.
-     @method updateId
+      @method updateId
     @private
     @param {InternalModel} internalModel
     @param {Object} data
@@ -98835,7 +98840,7 @@ Store = Service.extend({
 
   /**
     Returns a map of IDs to client IDs for a given modelName.
-     @method _internalModelsFor
+      @method _internalModelsFor
     @private
     @param {String} modelName
     @return {Object} recordMap
@@ -98851,7 +98856,7 @@ Store = Service.extend({
 
   /**
     This internal method is used by `push`.
-     @method _load
+      @method _load
     @private
     @param {Object} data
   */
@@ -98886,7 +98891,7 @@ Store = Service.extend({
     relationship metadata. Thus, we look up the mixin and create a mock
     DS.Model, so we can access the relationship CPs of the mixin (`comments`)
     in this case
-     @private
+      @private
   */
   _modelForMixin: function _modelForMixin(normalizedModelName) {
     // container.registry = 2.1
@@ -98919,11 +98924,11 @@ Store = Service.extend({
 
   /**
     Returns the model class for the particular `modelName`.
-     The class of a model might be useful if you want to get a list of all the
+      The class of a model might be useful if you want to get a list of all the
     relationship names of the model, see
     [`relationshipNames`](https://emberjs.com/api/data/classes/DS.Model.html#property_relationshipNames)
     for example.
-     @method modelFor
+      @method modelFor
     @param {String} modelName
     @return {DS.Model}
   */
@@ -98997,11 +99002,11 @@ Store = Service.extend({
 
   /**
     Push some data for a given type into the store.
-     This method expects normalized [JSON API](http://jsonapi.org/) document. This means you have to follow [JSON API specification](http://jsonapi.org/format/) with few minor adjustments:
+      This method expects normalized [JSON API](http://jsonapi.org/) document. This means you have to follow [JSON API specification](http://jsonapi.org/format/) with few minor adjustments:
     - record's `type` should always be in singular, dasherized form
     - members (properties) should be camelCased
-     [Your primary data should be wrapped inside `data` property](http://jsonapi.org/format/#document-top-level):
-     ```js
+      [Your primary data should be wrapped inside `data` property](http://jsonapi.org/format/#document-top-level):
+      ```js
     store.push({
       data: {
         // primary data for single record of type `Person`
@@ -99014,9 +99019,9 @@ Store = Service.extend({
       }
     });
     ```
-     [Demo.](http://ember-twiddle.com/fb99f18cd3b4d3e2a4c7)
-     `data` property can also hold an array (of records):
-     ```js
+      [Demo.](http://ember-twiddle.com/fb99f18cd3b4d3e2a4c7)
+      `data` property can also hold an array (of records):
+      ```js
     store.push({
       data: [
         // an array of records
@@ -99039,8 +99044,8 @@ Store = Service.extend({
       ]
     });
     ```
-     [Demo.](http://ember-twiddle.com/69cdbeaa3702159dc355)
-     There are some typical properties for `JSONAPI` payload:
+      [Demo.](http://ember-twiddle.com/69cdbeaa3702159dc355)
+      There are some typical properties for `JSONAPI` payload:
     * `id` - mandatory, unique record's key
     * `type` - mandatory string which matches `model`'s dasherized name in singular form
     * `attributes` - object which holds data for record attributes - `DS.attr`'s declared in model
@@ -99048,17 +99053,17 @@ Store = Service.extend({
       - [`links`](http://jsonapi.org/format/#document-links)
       - [`data`](http://jsonapi.org/format/#document-resource-object-linkage) - place for primary data
       - [`meta`](http://jsonapi.org/format/#document-meta) - object which contains meta-information about relationship
-     For this model:
-     ```app/models/person.js
+      For this model:
+      ```app/models/person.js
     import DS from 'ember-data';
-     export default DS.Model.extend({
+      export default DS.Model.extend({
       firstName: DS.attr('string'),
       lastName: DS.attr('string'),
-       children: DS.hasMany('person')
+        children: DS.hasMany('person')
     });
     ```
-     To represent the children as IDs:
-     ```js
+      To represent the children as IDs:
+      ```js
     {
       data: {
         id: '1',
@@ -99088,9 +99093,9 @@ Store = Service.extend({
       }
     }
     ```
-     [Demo.](http://ember-twiddle.com/343e1735e034091f5bde)
-     To represent the children relationship as a URL:
-     ```js
+      [Demo.](http://ember-twiddle.com/343e1735e034091f5bde)
+      To represent the children relationship as a URL:
+      ```js
     {
       data: {
         id: '1',
@@ -99109,17 +99114,17 @@ Store = Service.extend({
       }
     }
     ```
-     If you're streaming data or implementing an adapter, make sure
+      If you're streaming data or implementing an adapter, make sure
     that you have converted the incoming data into this form. The
     store's [normalize](#method_normalize) method is a convenience
     helper for converting a json payload into the form Ember Data
     expects.
-     ```js
+      ```js
     store.push(store.normalize('person', data));
     ```
-     This method can be used both to push in brand new
+      This method can be used both to push in brand new
     records, as well as to update existing records.
-     @method push
+      @method push
     @param {Object} data
     @return {DS.Model|Array} the record(s) that was created or
       updated.
@@ -99148,7 +99153,7 @@ Store = Service.extend({
   /*
     Push some data in the form of a json-api document into the store,
     without creating materialized records.
-     @method _push
+      @method _push
     @private
     @param {Object} jsonApiDoc
     @return {DS.InternalModel|Array<DS.InternalModel>} pushed InternalModel(s)
@@ -99272,16 +99277,16 @@ Store = Service.extend({
 
   /**
     Push some raw data into the store.
-     This method can be used both to push in brand new
+      This method can be used both to push in brand new
     records, as well as to update existing records. You
     can push in more than one type of object at once.
     All objects should be in the format expected by the
     serializer.
-     ```app/serializers/application.js
+      ```app/serializers/application.js
     import DS from 'ember-data';
-     export default DS.ActiveModelSerializer;
+      export default DS.ActiveModelSerializer;
     ```
-     ```js
+      ```js
     let pushData = {
       posts: [
         { id: 1, post_title: "Great post", comment_ids: [2] }
@@ -99290,25 +99295,25 @@ Store = Service.extend({
         { id: 2, comment_body: "Insightful comment" }
       ]
     }
-     store.pushPayload(pushData);
+      store.pushPayload(pushData);
     ```
-     By default, the data will be deserialized using a default
+      By default, the data will be deserialized using a default
     serializer (the application serializer if it exists).
-     Alternatively, `pushPayload` will accept a model type which
+      Alternatively, `pushPayload` will accept a model type which
     will determine which serializer will process the payload.
-     ```app/serializers/application.js
+      ```app/serializers/application.js
     import DS from 'ember-data';
-     export default DS.ActiveModelSerializer;
+      export default DS.ActiveModelSerializer;
     ```
-     ```app/serializers/post.js
+      ```app/serializers/post.js
     import DS from 'ember-data';
-     export default DS.JSONSerializer;
+      export default DS.JSONSerializer;
     ```
-     ```js
+      ```js
     store.pushPayload('comment', pushData); // Will use the application serializer
     store.pushPayload('post', pushData); // Will use the post serializer
     ```
-     @method pushPayload
+      @method pushPayload
     @param {String} modelName Optionally, a model type used to determine which serializer will be used
     @param {Object} inputPayload
   */
@@ -99337,15 +99342,15 @@ Store = Service.extend({
   /**
     `normalize` converts a json payload into the normalized form that
     [push](#method_push) expects.
-     Example
-     ```js
+      Example
+      ```js
     socket.on('message', function(message) {
       let modelName = message.model;
       let data = message.data;
       store.push(store.normalize(modelName, data));
     });
     ```
-     @method normalize
+      @method normalize
     @param {String} modelName The name of the model type for this payload
     @param {Object} payload
     @return {Object} The normalized payload
@@ -99364,7 +99369,7 @@ Store = Service.extend({
   /**
     Build a brand new record for a given type, ID, and
     initial data.
-     @method _buildInternalModel
+      @method _buildInternalModel
     @private
     @param {String} modelName
     @param {String} id
@@ -99419,7 +99424,7 @@ Store = Service.extend({
   /**
     When a record is destroyed, this un-indexes it and
     removes it from any record arrays so it can be GCed.
-     @method _removeFromIdMap
+      @method _removeFromIdMap
     @private
     @param {InternalModel} internalModel
   */
@@ -99439,12 +99444,12 @@ Store = Service.extend({
     Returns an instance of the adapter for a given type. For
     example, `adapterFor('person')` will return an instance of
     `App.PersonAdapter`.
-     If no `App.PersonAdapter` is found, this method will look
+      If no `App.PersonAdapter` is found, this method will look
     for an `App.ApplicationAdapter` (the default adapter for
     your entire application).
-     If no `App.ApplicationAdapter` is found, it will return
+      If no `App.ApplicationAdapter` is found, it will return
     the value of the `defaultAdapter`.
-     @method adapterFor
+      @method adapterFor
     @public
     @param {String} modelName
     @return DS.Adapter
@@ -99467,15 +99472,15 @@ Store = Service.extend({
     Returns an instance of the serializer for a given type. For
     example, `serializerFor('person')` will return an instance of
     `App.PersonSerializer`.
-     If no `App.PersonSerializer` is found, this method will look
+      If no `App.PersonSerializer` is found, this method will look
     for an `App.ApplicationSerializer` (the default serializer for
     your entire application).
-     if no `App.ApplicationSerializer` is found, it will attempt
+      if no `App.ApplicationSerializer` is found, it will attempt
     to get the `defaultSerializer` from the `PersonAdapter`
     (`adapterFor('person')`).
-     If a serializer cannot be found on the adapter, it will fall back
+      If a serializer cannot be found on the adapter, it will fall back
     to an instance of `DS.JSONSerializer`.
-     @method serializerFor
+      @method serializerFor
     @public
     @param {String} modelName the record to serialize
     @return {DS.Serializer}
@@ -99605,7 +99610,7 @@ function _commit(adapter, store, operation, snapshot) {
       Note to future spelunkers hoping to optimize.
       We rely on this `run` to create a run loop if needed
       that `store._push` and `store.didSaveRecord` will both share.
-       We use `join` because it is often the case that we
+        We use `join` because it is often the case that we
       have an outer run loop available still from the first
       call to `store._push`;
      */
@@ -100098,14 +100103,14 @@ var get$15 = Ember.get;
 var buildUrlMixin = Ember.Mixin.create({
   /**
     Builds a URL for a given type and optional ID.
-     By default, it pluralizes the type's name (for example, 'post'
+      By default, it pluralizes the type's name (for example, 'post'
     becomes 'posts' and 'person' becomes 'people'). To override the
     pluralization see [pathForType](#method_pathForType).
-     If an ID is specified, it adds the ID to the path generated
+      If an ID is specified, it adds the ID to the path generated
     for the type, separated by a `/`.
-     When called by RESTAdapter.findMany() the `id` and `snapshot` parameters
+      When called by RESTAdapter.findMany() the `id` and `snapshot` parameters
     will be arrays of ids and snapshots.
-     @method buildURL
+      @method buildURL
     @param {String} modelName
     @param {(String|Array|Object)} id single id or array of ids or query
     @param {(DS.Snapshot|Array)} snapshot single snapshot or array of snapshots
@@ -100179,22 +100184,22 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `store.findRecord(type, id)` call.
-    Example:
-    ```app/adapters/user.js
+     Example:
+     ```app/adapters/user.js
    import DS from 'ember-data';
-    export default DS.JSONAPIAdapter.extend({
+     export default DS.JSONAPIAdapter.extend({
      urlForFindRecord(id, modelName, snapshot) {
        let baseUrl = this.buildURL();
        return `${baseUrl}/users/${snapshot.adapterOptions.user_id}/playlists/${id}`;
      }
    });
    ```
-    @method urlForFindRecord
+     @method urlForFindRecord
    @param {String} id
    @param {String} modelName
    @param {DS.Snapshot} snapshot
    @return {String} url
-    */
+     */
   urlForFindRecord: function urlForFindRecord(id, modelName, snapshot) {
     return this._buildURL(modelName, id);
   },
@@ -100202,16 +100207,16 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `store.findAll(type)` call.
-    Example:
-    ```app/adapters/comment.js
+     Example:
+     ```app/adapters/comment.js
    import DS from 'ember-data';
-    export default DS.JSONAPIAdapter.extend({
+     export default DS.JSONAPIAdapter.extend({
      urlForFindAll(modelName, snapshot) {
        return 'data/comments.json';
      }
    });
    ```
-    @method urlForFindAll
+     @method urlForFindAll
    @param {String} modelName
    @param {DS.SnapshotRecordArray} snapshot
    @return {String} url
@@ -100223,10 +100228,10 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `store.query(type, query)` call.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      host: 'https://api.github.com',
      urlForQuery (query, modelName) {
        switch(modelName) {
@@ -100238,7 +100243,7 @@ var buildUrlMixin = Ember.Mixin.create({
      }
    });
    ```
-    @method urlForQuery
+     @method urlForQuery
    @param {Object} query
    @param {String} modelName
    @return {String} url
@@ -100250,17 +100255,17 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `store.queryRecord(type, query)` call.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      urlForQueryRecord({ slug }, modelName) {
        let baseUrl = this.buildURL();
        return `${baseUrl}/${encodeURIComponent(slug)}`;
      }
    });
    ```
-    @method urlForQueryRecord
+     @method urlForQueryRecord
    @param {Object} query
    @param {String} modelName
    @return {String} url
@@ -100274,17 +100279,17 @@ var buildUrlMixin = Ember.Mixin.create({
    Builds a URL for coalesceing multiple `store.findRecord(type, id)`
    records into 1 request when the adapter's `coalesceFindRequests`
    property is true.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      urlForFindMany(ids, modelName) {
        let baseUrl = this.buildURL();
        return `${baseUrl}/coalesce`;
      }
    });
    ```
-    @method urlForFindMany
+     @method urlForFindMany
    @param {Array} ids
    @param {String} modelName
    @param {Array} snapshots
@@ -100298,17 +100303,17 @@ var buildUrlMixin = Ember.Mixin.create({
   /**
    Builds a URL for fetching a async hasMany relationship when a url
    is not provided by the server.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.JSONAPIAdapter.extend({
+     export default DS.JSONAPIAdapter.extend({
      urlForFindHasMany(id, modelName, snapshot) {
        let baseUrl = this.buildURL(id, modelName);
        return `${baseUrl}/relationships`;
      }
    });
    ```
-    @method urlForFindHasMany
+     @method urlForFindHasMany
    @param {String} id
    @param {String} modelName
    @param {DS.Snapshot} snapshot
@@ -100322,17 +100327,17 @@ var buildUrlMixin = Ember.Mixin.create({
   /**
    Builds a URL for fetching a async belongsTo relationship when a url
    is not provided by the server.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.JSONAPIAdapter.extend({
+     export default DS.JSONAPIAdapter.extend({
      urlForFindBelongsTo(id, modelName, snapshot) {
        let baseUrl = this.buildURL(id, modelName);
        return `${baseUrl}/relationships`;
      }
    });
    ```
-    @method urlForFindBelongsTo
+     @method urlForFindBelongsTo
    @param {String} id
    @param {String} modelName
    @param {DS.Snapshot} snapshot
@@ -100346,16 +100351,16 @@ var buildUrlMixin = Ember.Mixin.create({
   /**
    Builds a URL for a `record.save()` call when the record was created
    locally using `store.createRecord()`.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      urlForCreateRecord(modelName, snapshot) {
        return this._super(...arguments) + '/new';
      }
    });
    ```
-    @method urlForCreateRecord
+     @method urlForCreateRecord
    @param {String} modelName
    @param {DS.Snapshot} snapshot
    @return {String} url
@@ -100367,16 +100372,16 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `record.save()` call when the record has been update locally.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      urlForUpdateRecord(id, modelName, snapshot) {
        return `/${id}/feed?access_token=${snapshot.adapterOptions.token}`;
      }
    });
    ```
-    @method urlForUpdateRecord
+     @method urlForUpdateRecord
    @param {String} id
    @param {String} modelName
    @param {DS.Snapshot} snapshot
@@ -100389,16 +100394,16 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
    Builds a URL for a `record.save()` call when the record has been deleted locally.
-    Example:
-    ```app/adapters/application.js
+     Example:
+     ```app/adapters/application.js
    import DS from 'ember-data';
-    export default DS.RESTAdapter.extend({
+     export default DS.RESTAdapter.extend({
      urlForDeleteRecord(id, modelName, snapshot) {
        return this._super(...arguments) + '/destroy';
      }
    });
    ```
-    @method urlForDeleteRecord
+     @method urlForDeleteRecord
    @param {String} id
    @param {String} modelName
    @param {DS.Snapshot} snapshot
@@ -100453,22 +100458,22 @@ var buildUrlMixin = Ember.Mixin.create({
 
   /**
     Determines the pathname for a given type.
-     By default, it pluralizes the type's name (for example,
+      By default, it pluralizes the type's name (for example,
     'post' becomes 'posts' and 'person' becomes 'people').
-     ### Pathname customization
-     For example if you have an object LineItem with an
+      ### Pathname customization
+      For example if you have an object LineItem with an
     endpoint of "/line_items/".
-     ```app/adapters/application.js
+      ```app/adapters/application.js
     import DS from 'ember-data';
     import { pluralize } from 'ember-inflector';
-     export default DS.RESTAdapter.extend({
+      export default DS.RESTAdapter.extend({
       pathForType: function(modelName) {
         var decamelized = Ember.String.decamelize(modelName);
         return pluralize(decamelized);
       }
     });
     ```
-     @method pathForType
+      @method pathForType
     @param {String} modelName
     @return {String} path
   **/
@@ -100715,16 +100720,16 @@ Object.defineProperty(exports, '__esModule', { value: true });
       If you would like your adapter to use a custom serializer you can
       set the `defaultSerializer` property to be the name of the custom
       serializer.
-       Note the `defaultSerializer` serializer has a lower priority than
+        Note the `defaultSerializer` serializer has a lower priority than
       a model specific serializer (i.e. `PostSerializer`) or the
       `application` serializer.
-       ```app/adapters/django.js
+        ```app/adapters/django.js
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         defaultSerializer: 'django'
       });
       ```
-       @property defaultSerializer
+        @property defaultSerializer
       @type {String}
     */
     defaultSerializer: '-default',
@@ -100735,11 +100740,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
       should query your persistence layer for a record with the given ID. The `findRecord`
       method should return a promise that will resolve to a JavaScript object that will be
       normalized by the serializer.
-       Here is an example `findRecord` implementation:
-       ```app/adapters/application.js
+        Here is an example `findRecord` implementation:
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         findRecord(store, type, id, snapshot) {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.getJSON(`/${type.modelName}/${id}`).then(function(data) {
@@ -100751,7 +100756,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method findRecord
+        @method findRecord
       @param {DS.Store} store
       @param {DS.Model} type
       @param {String} id
@@ -100762,14 +100767,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
     /**
       The `findAll()` method is used to retrieve all records for a given type.
-       Example
-       ```app/adapters/application.js
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         findAll(store, type, sinceToken) {
           let query = { since: sinceToken };
-           return new Ember.RSVP.Promise(function(resolve, reject) {
+            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
               resolve(data);
             }, function(jqXHR) {
@@ -100779,7 +100784,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method findAll
+        @method findAll
       @param {DS.Store} store
       @param {DS.Model} type
       @param {String} sinceToken
@@ -100790,11 +100795,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
     /**
       This method is called when you call `query` on the store.
-       Example
-       ```app/adapters/application.js
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         query(store, type, query) {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
@@ -100806,7 +100811,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method query
+        @method query
       @param {DS.Store} store
       @param {DS.Model} type
       @param {Object} query
@@ -100818,15 +100823,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       The `queryRecord()` method is invoked when the store is asked for a single
       record through a query object.
-       In response to `queryRecord()` being called, you should always fetch fresh
+        In response to `queryRecord()` being called, you should always fetch fresh
       data. Once found, you can asynchronously call the store's `push()` method
       to push the record into the store.
-       Here is an example `queryRecord` implementation:
-       Example
-       ```app/adapters/application.js
+        Here is an example `queryRecord` implementation:
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend(DS.BuildURLMixin, {
+        export default DS.Adapter.extend(DS.BuildURLMixin, {
         queryRecord(store, type, query) {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
@@ -100838,7 +100843,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method queryRecord
+        @method queryRecord
       @param {DS.Store} store
       @param {subclass of DS.Model} type
       @param {Object} query
@@ -100851,22 +100856,22 @@ Object.defineProperty(exports, '__esModule', { value: true });
       implement the `generateIdForRecord()` method. This method will be invoked
       each time you create a new record, and the value returned from it will be
       assigned to the record's `primaryKey`.
-       Most traditional REST-like HTTP APIs will not use this method. Instead, the ID
+        Most traditional REST-like HTTP APIs will not use this method. Instead, the ID
       of the record will be set by the server, and your adapter will update the store
       with the new ID when it calls `didCreateRecord()`. Only implement this method if
       you intend to generate record IDs on the client-side.
-       The `generateIdForRecord()` method will be invoked with the requesting store as
+        The `generateIdForRecord()` method will be invoked with the requesting store as
       the first parameter and the newly created record as the second parameter:
-       ```javascript
+        ```javascript
       import DS from 'ember-data';
       import { v4 } from 'uuid';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         generateIdForRecord(store, inputProperties) {
           return v4();
         }
       });
       ```
-       @method generateIdForRecord
+        @method generateIdForRecord
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the record
       @param {Object} inputProperties a hash of properties to set on the
@@ -100877,18 +100882,18 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
     /**
       Proxies to the serializer's `serialize` method.
-       Example
-       ```app/adapters/application.js
+        Example
+        ```app/adapters/application.js
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         createRecord(store, type, snapshot) {
           let data = this.serialize(snapshot, { includeId: true });
           let url = `/${type.modelName}`;
-           // ...
+            // ...
         }
       });
       ```
-       @method serialize
+        @method serialize
       @param {DS.Snapshot} snapshot
       @param {Object}   options
       @return {Object} serialized snapshot
@@ -100901,15 +100906,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Implement this method in a subclass to handle the creation of
       new records.
-       Serializes the record and sends it to the server.
-       Example
-       ```app/adapters/application.js
+        Serializes the record and sends it to the server.
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         createRecord(store, type, snapshot) {
           let data = this.serialize(snapshot, { includeId: true });
-           return new Ember.RSVP.Promise(function(resolve, reject) {
+            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'POST',
               url: `/${type.modelName}`,
@@ -100925,7 +100930,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method createRecord
+        @method createRecord
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the record
       @param {DS.Snapshot} snapshot
@@ -100936,23 +100941,23 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Implement this method in a subclass to handle the updating of
       a record.
-       Serializes the record update and sends it to the server.
-       The updateRecord method is expected to return a promise that will
+        Serializes the record update and sends it to the server.
+        The updateRecord method is expected to return a promise that will
       resolve with the serialized record. This allows the backend to
       inform the Ember Data store the current state of this record after
       the update. If it is not possible to return a serialized record
       the updateRecord promise can also resolve with `undefined` and the
       Ember Data store will assume all of the updates were successfully
       applied on the backend.
-       Example
-       ```app/adapters/application.js
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         updateRecord(store, type, snapshot) {
           let data = this.serialize(snapshot, { includeId: true });
           let id = snapshot.id;
-           return new Ember.RSVP.Promise(function(resolve, reject) {
+            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'PUT',
               url: `/${type.modelName}/${id}`,
@@ -100968,7 +100973,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method updateRecord
+        @method updateRecord
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the record
       @param {DS.Snapshot} snapshot
@@ -100979,16 +100984,16 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Implement this method in a subclass to handle the deletion of
       a record.
-       Sends a delete request for the record to the server.
-       Example
-       ```app/adapters/application.js
+        Sends a delete request for the record to the server.
+        Example
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         deleteRecord(store, type, snapshot) {
           let data = this.serialize(snapshot, { includeId: true });
           let id = snapshot.id;
-           return new Ember.RSVP.Promise(function(resolve, reject) {
+            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'DELETE',
               url: `/${type.modelName}/${id}`,
@@ -101004,7 +101009,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method deleteRecord
+        @method deleteRecord
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the record
       @param {DS.Snapshot} snapshot
@@ -101017,7 +101022,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
       into as few requests as possible by calling groupRecordsForFindMany and passing it into a findMany call.
       You can opt out of this behaviour by either not implementing the findMany hook or by setting
       coalesceFindRequests to false.
-       @property coalesceFindRequests
+        @property coalesceFindRequests
       @type {boolean}
     */
     coalesceFindRequests: true,
@@ -101026,10 +101031,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
       The store will call `findMany` instead of multiple `findRecord`
       requests to find multiple records at once if coalesceFindRequests
       is true.
-       ```app/adapters/application.js
+        ```app/adapters/application.js
       import Ember from 'ember';
       import DS from 'ember-data';
-       export default DS.Adapter.extend({
+        export default DS.Adapter.extend({
         findMany(store, type, ids, snapshots) {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
@@ -101047,7 +101052,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @method findMany
+        @method findMany
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the records
       @param {Array}    ids
@@ -101059,10 +101064,10 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Organize records into groups, each of which is to be passed to separate
       calls to `findMany`.
-       For example, if your api has nested URLs that depend on the parent, you will
+        For example, if your api has nested URLs that depend on the parent, you will
       want to group records by their parent.
-       The default implementation returns the records as a single group.
-       @method groupRecordsForFindMany
+        The default implementation returns the records as a single group.
+        @method groupRecordsForFindMany
       @param {DS.Store} store
       @param {Array} snapshots
       @return {Array}  an array of arrays of records, each of which is to be
@@ -101077,35 +101082,35 @@ Object.defineProperty(exports, '__esModule', { value: true });
       This method is used by the store to determine if the store should
       reload a record from the adapter when a record is requested by
       `store.findRecord`.
-       If this method returns `true`, the store will re-fetch a record from
+        If this method returns `true`, the store will re-fetch a record from
       the adapter. If this method returns `false`, the store will resolve
       immediately using the cached record.
-       For example, if you are building an events ticketing system, in which users
+        For example, if you are building an events ticketing system, in which users
       can only reserve tickets for 20 minutes at a time, and want to ensure that
       in each route you have data that is no more than 20 minutes old you could
       write:
-       ```javascript
+        ```javascript
       shouldReloadRecord(store, ticketSnapshot) {
         let lastAccessedAt = ticketSnapshot.attr('lastAccessedAt');
         let timeDiff = moment().diff(lastAccessedAt, 'minutes');
-         if (timeDiff > 20) {
+          if (timeDiff > 20) {
           return true;
         } else {
           return false;
         }
       }
       ```
-       This method would ensure that whenever you do `store.findRecord('ticket',
+        This method would ensure that whenever you do `store.findRecord('ticket',
       id)` you will always get a ticket that is no more than 20 minutes old. In
       case the cached version is more than 20 minutes old, `findRecord` will not
       resolve until you fetched the latest version.
-       By default this hook returns `false`, as most UIs should not block user
+        By default this hook returns `false`, as most UIs should not block user
       interactions while waiting on data update.
-       Note that, with default settings, `shouldBackgroundReloadRecord` will always
+        Note that, with default settings, `shouldBackgroundReloadRecord` will always
       re-fetch the records in the background even if `shouldReloadRecord` returns
       `false`. You can override `shouldBackgroundReloadRecord` if this does not
       suit your use case.
-       @since 1.13.0
+        @since 1.13.0
       @method shouldReloadRecord
       @param {DS.Store} store
       @param {DS.Snapshot} snapshot
@@ -101120,20 +101125,20 @@ Object.defineProperty(exports, '__esModule', { value: true });
       This method is used by the store to determine if the store should
       reload all records from the adapter when records are requested by
       `store.findAll`.
-       If this method returns `true`, the store will re-fetch all records from
+        If this method returns `true`, the store will re-fetch all records from
       the adapter. If this method returns `false`, the store will resolve
       immediately using the cached records.
-       For example, if you are building an events ticketing system, in which users
+        For example, if you are building an events ticketing system, in which users
       can only reserve tickets for 20 minutes at a time, and want to ensure that
       in each route you have data that is no more than 20 minutes old you could
       write:
-       ```javascript
+        ```javascript
       shouldReloadAll(store, snapshotArray) {
         let snapshots = snapshotArray.snapshots();
-         return snapshots.any((ticketSnapshot) => {
+          return snapshots.any((ticketSnapshot) => {
           let lastAccessedAt = ticketSnapshot.attr('lastAccessedAt');
           let timeDiff = moment().diff(lastAccessedAt, 'minutes');
-           if (timeDiff > 20) {
+            if (timeDiff > 20) {
             return true;
           } else {
             return false;
@@ -101141,18 +101146,18 @@ Object.defineProperty(exports, '__esModule', { value: true });
         });
       }
       ```
-       This method would ensure that whenever you do `store.findAll('ticket')` you
+        This method would ensure that whenever you do `store.findAll('ticket')` you
       will always get a list of tickets that are no more than 20 minutes old. In
       case a cached version is more than 20 minutes old, `findAll` will not
       resolve until you fetched the latest versions.
-       By default this methods returns `true` if the passed `snapshotRecordArray`
+        By default this methods returns `true` if the passed `snapshotRecordArray`
       is empty (meaning that there are no records locally available yet),
       otherwise it returns `false`.
-       Note that, with default settings, `shouldBackgroundReloadAll` will always
+        Note that, with default settings, `shouldBackgroundReloadAll` will always
       re-fetch all the records in the background even if `shouldReloadAll` returns
       `false`. You can override `shouldBackgroundReloadAll` if this does not suit
       your use case.
-       @since 1.13.0
+        @since 1.13.0
       @method shouldReloadAll
       @param {DS.Store} store
       @param {DS.SnapshotRecordArray} snapshotRecordArray
@@ -101167,26 +101172,26 @@ Object.defineProperty(exports, '__esModule', { value: true });
       This method is used by the store to determine if the store should
       reload a record after the `store.findRecord` method resolves a
       cached record.
-       This method is *only* checked by the store when the store is
+        This method is *only* checked by the store when the store is
       returning a cached record.
-       If this method returns `true` the store will re-fetch a record from
+        If this method returns `true` the store will re-fetch a record from
       the adapter.
-       For example, if you do not want to fetch complex data over a mobile
+        For example, if you do not want to fetch complex data over a mobile
       connection, or if the network is down, you can implement
       `shouldBackgroundReloadRecord` as follows:
-       ```javascript
+        ```javascript
       shouldBackgroundReloadRecord(store, snapshot) {
         let connection = window.navigator.connection;
-         if (connection === 'cellular' || connection === 'none') {
+          if (connection === 'cellular' || connection === 'none') {
           return false;
         } else {
           return true;
         }
       }
       ```
-       By default this hook returns `true` so the data for the record is updated
+        By default this hook returns `true` so the data for the record is updated
       in the background.
-       @since 1.13.0
+        @since 1.13.0
       @method shouldBackgroundReloadRecord
       @param {DS.Store} store
       @param {DS.Snapshot} snapshot
@@ -101201,26 +101206,26 @@ Object.defineProperty(exports, '__esModule', { value: true });
       This method is used by the store to determine if the store should
       reload a record array after the `store.findAll` method resolves
       with a cached record array.
-       This method is *only* checked by the store when the store is
+        This method is *only* checked by the store when the store is
       returning a cached record array.
-       If this method returns `true` the store will re-fetch all records
+        If this method returns `true` the store will re-fetch all records
       from the adapter.
-       For example, if you do not want to fetch complex data over a mobile
+        For example, if you do not want to fetch complex data over a mobile
       connection, or if the network is down, you can implement
       `shouldBackgroundReloadAll` as follows:
-       ```javascript
+        ```javascript
       shouldBackgroundReloadAll(store, snapshotArray) {
         let connection = window.navigator.connection;
-         if (connection === 'cellular' || connection === 'none') {
+          if (connection === 'cellular' || connection === 'none') {
           return false;
         } else {
           return true;
         }
       }
       ```
-       By default this method returns `true`, indicating that a background reload
+        By default this method returns `true`, indicating that a background reload
       should always be triggered.
-       @since 1.13.0
+        @since 1.13.0
       @method shouldBackgroundReloadAll
       @param {DS.Store} store
       @param {DS.SnapshotRecordArray} snapshotRecordArray
@@ -101475,8 +101480,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
       or from accessing a relationship separately to the server. If your server supports passing
       ids as a query string, you can set coalesceFindRequests to true to coalesce all find requests
       within a single runloop.
-       For example, if you have an initial payload of:
-       ```javascript
+        For example, if you have an initial payload of:
+        ```javascript
       {
         data: {
           id: 1,
@@ -101492,26 +101497,26 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       By default calling `post.get('comments')` will trigger the following requests(assuming the
+        By default calling `post.get('comments')` will trigger the following requests(assuming the
       comments haven't been loaded before):
-       ```
+        ```
       GET /comments/1
       GET /comments/2
       ```
-       If you set coalesceFindRequests to `true` it will instead trigger the following request:
-       ```
+        If you set coalesceFindRequests to `true` it will instead trigger the following request:
+        ```
       GET /comments?filter[id]=1,2
       ```
-       Setting coalesceFindRequests to `true` also works for `store.find` requests and `belongsTo`
+        Setting coalesceFindRequests to `true` also works for `store.find` requests and `belongsTo`
       relationships accessed within the same runloop. If you set `coalesceFindRequests: true`
-       ```javascript
+        ```javascript
       store.findRecord('comment', 1);
       store.findRecord('comment', 2);
       ```
-       will also send a request to: `GET /comments?filter[id]=1,2`
-       Note: Requests coalescing rely on URL building strategy. So if you override `buildURL` in your app
+        will also send a request to: `GET /comments?filter[id]=1,2`
+        Note: Requests coalescing rely on URL building strategy. So if you override `buildURL` in your app
       `groupRecordsForFindMany` more likely should be overridden as well in order for coalescing to work.
-       @property coalesceFindRequests
+        @property coalesceFindRequests
       @type {boolean}
     */
     coalesceFindRequests: false,
@@ -101914,8 +101919,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
       or from accessing a relationship separately to the server. If your server supports passing
       ids as a query string, you can set coalesceFindRequests to true to coalesce all find requests
       within a single runloop.
-       For example, if you have an initial payload of:
-       ```javascript
+        For example, if you have an initial payload of:
+        ```javascript
       {
         post: {
           id: 1,
@@ -101923,26 +101928,26 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       By default calling `post.get('comments')` will trigger the following requests(assuming the
+        By default calling `post.get('comments')` will trigger the following requests(assuming the
       comments haven't been loaded before):
-       ```
+        ```
       GET /comments/1
       GET /comments/2
       ```
-       If you set coalesceFindRequests to `true` it will instead trigger the following request:
-       ```
+        If you set coalesceFindRequests to `true` it will instead trigger the following request:
+        ```
       GET /comments?ids[]=1&ids[]=2
       ```
-       Setting coalesceFindRequests to `true` also works for `store.find` requests and `belongsTo`
+        Setting coalesceFindRequests to `true` also works for `store.find` requests and `belongsTo`
       relationships accessed within the same runloop. If you set `coalesceFindRequests: true`
-       ```javascript
+        ```javascript
       store.findRecord('comment', 1);
       store.findRecord('comment', 2);
       ```
-       will also send a request to: `GET /comments?ids[]=1&ids[]=2`
-       Note: Requests coalescing rely on URL building strategy. So if you override `buildURL` in your app
+        will also send a request to: `GET /comments?ids[]=1&ids[]=2`
+        Note: Requests coalescing rely on URL building strategy. So if you override `buildURL` in your app
       `groupRecordsForFindMany` more likely should be overridden as well in order for coalescing to work.
-       @property coalesceFindRequests
+        @property coalesceFindRequests
       @type {boolean}
     */
     coalesceFindRequests: false,
@@ -102303,7 +102308,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Generates a detailed ("friendly") error message, with plenty
       of information for debugging (good luck!)
-       @method generatedDetailedMessage
+        @method generatedDetailedMessage
       @private
       @param  {Number} status
       @param  {Object} headers
@@ -102991,8 +102996,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
       The `store` property is the application's `store` that contains
       all records. It can be used to look up serializers for other model
       types that may be nested inside the payload response.
-       Example:
-       ```js
+        Example:
+        ```js
       Serializer.extend({
         extractRelationship(relationshipModelName, relationshipHash) {
           var modelClass = this.store.modelFor(relationshipModelName);
@@ -103001,7 +103006,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @property store
+        @property store
       @type {DS.Store}
       @public
     */
@@ -103009,9 +103014,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       The `normalizeResponse` method is used to normalize a payload from the
       server to a JSON-API Document.
-       http://jsonapi.org/format/#document-structure
-       Example:
-       ```js
+        http://jsonapi.org/format/#document-structure
+        Example:
+        ```js
       Serializer.extend({
         normalizeResponse(store, primaryModelClass, payload, id, requestType) {
           if (requestType === 'findRecord') {
@@ -103027,7 +103032,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       });
       ```
-       @since 1.13.0
+        @since 1.13.0
       @method normalizeResponse
       @param {DS.Store} store
       @param {DS.Model} primaryModelClass
@@ -103041,31 +103046,31 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       The `serialize` method is used when a record is saved in order to convert
       the record into the form that your external data source expects.
-       `serialize` takes an optional `options` hash with a single option:
-       - `includeId`: If this is `true`, `serialize` should include the ID
+        `serialize` takes an optional `options` hash with a single option:
+        - `includeId`: If this is `true`, `serialize` should include the ID
         in the serialized object it builds.
-       Example:
-       ```js
+        Example:
+        ```js
       Serializer.extend({
         serialize(snapshot, options) {
           var json = {
             id: snapshot.id
           };
-           snapshot.eachAttribute((key, attribute) => {
+            snapshot.eachAttribute((key, attribute) => {
             json[key] = snapshot.attr(key);
           });
-           snapshot.eachRelationship((key, relationship) => {
+            snapshot.eachRelationship((key, relationship) => {
             if (relationship.kind === 'belongsTo') {
               json[key] = snapshot.belongsTo(key, { id: true });
             } else if (relationship.kind === 'hasMany') {
               json[key] = snapshot.hasMany(key, { ids: true });
             }
           });
-           return json;
+            return json;
         },
       });
       ```
-       @method serialize
+        @method serialize
       @param {DS.Snapshot} snapshot
       @param {Object} [options]
       @return {Object}
@@ -103077,8 +103082,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
       external data source into the normalized form `store.push()` expects. You
       should override this method, munge the hash and return the normalized
       payload.
-       Example:
-       ```js
+        Example:
+        ```js
       Serializer.extend({
         normalize(modelClass, resourceHash) {
           var data = {
@@ -103090,7 +103095,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       })
       ```
-       @method normalize
+        @method normalize
       @param {DS.Model} typeClass
       @param {Object} hash
       @return {Object}
@@ -103114,8 +103119,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       Normalize the record and recursively normalize/extract all the embedded records
       while pushing them into the store as they are encountered
-       A payload with an attr configured for embedded records needs to be extracted:
-       ```js
+        A payload with an attr configured for embedded records needs to be extracted:
+        ```js
       {
         "post": {
           "id": "1"
@@ -103151,30 +103156,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
     /**
       Serialize `belongsTo` relationship when it is configured as an embedded object.
-       This example of an author model belongs to a post model:
-       ```js
+        This example of an author model belongs to a post model:
+        ```js
       Post = DS.Model.extend({
         title:    DS.attr('string'),
         body:     DS.attr('string'),
         author:   DS.belongsTo('author')
       });
-       Author = DS.Model.extend({
+        Author = DS.Model.extend({
         name:     DS.attr('string'),
         post:     DS.belongsTo('post')
       });
       ```
-       Use a custom (type) serializer for the post model to configure embedded author
-       ```app/serializers/post.js
+        Use a custom (type) serializer for the post model to configure embedded author
+        ```app/serializers/post.js
       import DS from 'ember-data';
-       export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+        export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         attrs: {
           author: { embedded: 'always' }
         }
       })
       ```
-       A payload with an attribute configured for embedded records can serialize
+        A payload with an attribute configured for embedded records can serialize
       the records together under the root attribute's payload:
-       ```js
+        ```js
       {
         "post": {
           "id": "1"
@@ -103186,7 +103191,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       @method serializeBelongsTo
+        @method serializeBelongsTo
       @param {DS.Snapshot} snapshot
       @param {Object} json
       @param {Object} relationship
@@ -103241,30 +103246,30 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
     /**
       Serializes `hasMany` relationships when it is configured as embedded objects.
-       This example of a post model has many comments:
-       ```js
+        This example of a post model has many comments:
+        ```js
       Post = DS.Model.extend({
         title:    DS.attr('string'),
         body:     DS.attr('string'),
         comments: DS.hasMany('comment')
       });
-       Comment = DS.Model.extend({
+        Comment = DS.Model.extend({
         body:     DS.attr('string'),
         post:     DS.belongsTo('post')
       });
       ```
-       Use a custom (type) serializer for the post model to configure embedded comments
-       ```app/serializers/post.js
+        Use a custom (type) serializer for the post model to configure embedded comments
+        ```app/serializers/post.js
       import DS from 'ember-data;
-       export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+        export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         attrs: {
           comments: { embedded: 'always' }
         }
       })
       ```
-       A payload with an attribute configured for embedded records can serialize
+        A payload with an attribute configured for embedded records can serialize
       the records together under the root attribute's payload:
-       ```js
+        ```js
       {
         "post": {
           "id": "1"
@@ -103280,21 +103285,21 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       The attrs options object can use more specific instruction for extracting and
+        The attrs options object can use more specific instruction for extracting and
       serializing. When serializing, an option to embed `ids`, `ids-and-types` or `records` can be set.
       When extracting the only option is `records`.
-       So `{ embedded: 'always' }` is shorthand for:
+        So `{ embedded: 'always' }` is shorthand for:
       `{ serialize: 'records', deserialize: 'records' }`
-       To embed the `ids` for a related object (using a hasMany relationship):
-       ```app/serializers/post.js
+        To embed the `ids` for a related object (using a hasMany relationship):
+        ```app/serializers/post.js
       import DS from 'ember-data;
-       export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+        export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         attrs: {
           comments: { serialize: 'ids', deserialize: 'records' }
         }
       })
       ```
-       ```js
+        ```js
       {
         "post": {
           "id": "1"
@@ -103304,35 +103309,35 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       To embed the relationship as a collection of objects with `id` and `type` keys, set
+        To embed the relationship as a collection of objects with `id` and `type` keys, set
       `ids-and-types` for the related object.
-       This is particularly useful for polymorphic relationships where records don't share
+        This is particularly useful for polymorphic relationships where records don't share
       the same table and the `id` is not enough information.
-       By example having a user that has many pets:
-       ```js
+        By example having a user that has many pets:
+        ```js
       User = DS.Model.extend({
         name:    DS.attr('string'),
         pets: DS.hasMany('pet', { polymorphic: true })
       });
-       Pet = DS.Model.extend({
+        Pet = DS.Model.extend({
         name: DS.attr('string'),
       });
-       Cat = Pet.extend({
+        Cat = Pet.extend({
         // ...
       });
-       Parrot = Pet.extend({
+        Parrot = Pet.extend({
         // ...
       });
       ```
-       ```app/serializers/user.js
+        ```app/serializers/user.js
       import DS from 'ember-data;
-       export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+        export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         attrs: {
           pets: { serialize: 'ids-and-types', deserialize: 'records' }
         }
       });
       ```
-       ```js
+        ```js
       {
         "user": {
           "id": "1"
@@ -103344,7 +103349,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
         }
       }
       ```
-       @method serializeHasMany
+        @method serializeHasMany
       @param {DS.Snapshot} snapshot
       @param {Object} json
       @param {Object} relationship
@@ -103378,7 +103383,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
       keys.
       This has its use case on polymorphic hasMany relationships where the server is not storing
       all records in the same table using STI, and therefore the `id` is not enough information
-       TODO: Make the default in Ember-data 3.0??
+        TODO: Make the default in Ember-data 3.0??
     */
     _serializeHasManyAsIdsAndTypes: function _serializeHasManyAsIdsAndTypes(snapshot, json, relationship) {
       var serializedKey = this.keyForAttribute(relationship.key, 'serialize');
@@ -103427,11 +103432,11 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       When serializing an embedded record, modify the property (in the json payload)
       that refers to the parent record (foreign key for relationship).
-       Serializing a `belongsTo` relationship removes the property that refers to the
+        Serializing a `belongsTo` relationship removes the property that refers to the
       parent record
-       Serializing a `hasMany` relationship does not remove the property that refers to
+        Serializing a `hasMany` relationship does not remove the property that refers to
       the parent record.
-       @method removeEmbeddedForeignKey
+        @method removeEmbeddedForeignKey
       @param {DS.Snapshot} snapshot
       @param {DS.Snapshot} embeddedSnapshot
       @param {Object} relationship
@@ -104239,14 +104244,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
       convention. In these cases it is useful to override the
       `primaryKey` property to match the `primaryKey` of your external
       store.
-       Example
-       ```app/serializers/application.js
+        Example
+        ```app/serializers/application.js
       import DS from 'ember-data';
-       export default DS.JSONSerializer.extend({
+        export default DS.JSONSerializer.extend({
         primaryKey: '_id'
       });
       ```
-       @property primaryKey
+        @property primaryKey
       @type {String}
       @default 'id'
     */
@@ -104258,47 +104263,47 @@ Object.defineProperty(exports, '__esModule', { value: true });
       serialized JSON object representing the record. An object with the
       property `key` can also be used to designate the attribute's key on
       the response payload.
-       Example
-       ```app/models/person.js
+        Example
+        ```app/models/person.js
       import DS from 'ember-data';
-       export default DS.Model.extend({
+        export default DS.Model.extend({
         firstName: DS.attr('string'),
         lastName: DS.attr('string'),
         occupation: DS.attr('string'),
         admin: DS.attr('boolean')
       });
       ```
-       ```app/serializers/person.js
+        ```app/serializers/person.js
       import DS from 'ember-data';
-       export default DS.JSONSerializer.extend({
+        export default DS.JSONSerializer.extend({
         attrs: {
           admin: 'is_admin',
           occupation: { key: 'career' }
         }
       });
       ```
-       You can also remove attributes by setting the `serialize` key to
+        You can also remove attributes by setting the `serialize` key to
       `false` in your mapping object.
-       Example
-       ```app/serializers/person.js
+        Example
+        ```app/serializers/person.js
       import DS from 'ember-data';
-       export default DS.JSONSerializer.extend({
+        export default DS.JSONSerializer.extend({
         attrs: {
           admin: { serialize: false },
           occupation: { key: 'career' }
         }
       });
       ```
-       When serialized:
-       ```javascript
+        When serialized:
+        ```javascript
       {
         "firstName": "Harry",
         "lastName": "Houdini",
         "career": "magician"
       }
       ```
-       Note that the `admin` is now not included in the payload.
-       @property attrs
+        Note that the `admin` is now not included in the payload.
+        @property attrs
       @type {Object}
     */
     mergedProperties: ['attrs'],
@@ -104991,8 +104996,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
         /*
           If you want to provide sideloaded records of the same type that the
           primary data you can do that by prefixing the key with `_`.
-           Example
-           ```
+            Example
+            ```
           {
             users: [
               { id: 1, title: 'Tom', manager: 3 },
@@ -105003,7 +105008,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
             ]
           }
           ```
-           This forces `_users` to be added to `included` instead of `data`.
+            This forces `_users` to be added to `included` instead of `data`.
          */
         if (prop.charAt(0) === '_') {
           forcedSecondary = true;
@@ -105038,8 +105043,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
         /*
           Support primary data as an object instead of an array.
-           Example
-           ```
+            Example
+            ```
           {
             user: { id: 1, title: 'Tom', manager: 3 }
           }
@@ -105074,8 +105079,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
             /*
               Figures out if this is the primary record or not.
-               It's either:
-               1. The record with the same ID as the original request
+                It's either:
+                1. The record with the same ID as the original request
               2. If it's a newly created record without an ID, the first record
                  in the array
              */
@@ -105646,13 +105651,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       When given a deserialized value from a record attribute this
       method must return the serialized value.
-       Example
-       ```javascript
+        Example
+        ```javascript
       serialize(deserialized, options) {
         return Ember.isEmpty(deserialized) ? null : Number(deserialized);
       }
       ```
-       @method serialize
+        @method serialize
       @param deserialized The deserialized value
       @param options hash of options passed to `DS.attr`
       @return The serialized value
@@ -105662,13 +105667,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
     /**
       When given a serialize value from a JSON object this method must
       return the deserialized value for the record attribute.
-       Example
-       ```javascript
+        Example
+        ```javascript
       deserialize(serialized, options) {
         return empty(serialized) ? null : Number(serialized);
       }
       ```
-       @method deserialize
+        @method deserialize
       @param serialized The serialized value
       @param options hash of options passed to `DS.attr`
       @return The deserialized value
