@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
         window.location.reload(true);
       });
     },
-
     toggleBody(documentId) {
       this.toggleProperty('isShowingBody');
       var username = this.get("session.data.authenticated.username");
@@ -23,6 +22,18 @@ export default Ember.Controller.extend({
     },
     showDocument(documentId) {
       var oglas = this.get("oglasiService").getContent(username, documentId, newName)
+    },
+    sharingDocument: function(documentId, userId, type) {
+        this.get("oglasiService").podijeli(documentId, userId, type).then(x => {
+        self.set("serverSuccess", true);
+        self.set("serverError", false);
+        self.set("serverErrorText", "");
+        window.location.reload(true);
+      }).catch(err => {
+        self.set("serverSuccess", false);
+        self.set("serverError", true);
+        self.set("serverErrorText", err.responseText);
+      });
     }
   }
 });

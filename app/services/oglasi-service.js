@@ -35,5 +35,8 @@ export default BaseService.extend({
     },
     getContent: function(documentId) {
       return this.ajax({url: `content/show?id=${documentId}`, type: "GET"})
+    },
+    podijeli: function(documentId, userId, type){
+        return this.ajax({ url: `content/sharedocument?user=${userId}&document=${documentId}&type=${type}`, type: "POST"});
     }
 });

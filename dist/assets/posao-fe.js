@@ -997,7 +997,6 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
           window.location.reload(true);
         });
       },
-
       toggleBody: function toggleBody(documentId) {
         this.toggleProperty('isShowingBody');
         var username = this.get("session.data.authenticated.username");
@@ -1010,6 +1009,19 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
       },
       showDocument: function showDocument(documentId) {
         var oglas = this.get("oglasiService").getContent(username, documentId, newName);
+      },
+
+      sharingDocument: function sharingDocument(documentId, userId, type) {
+        this.get("oglasiService").podijeli(documentId, userId, type).then(function (x) {
+          self.set("serverSuccess", true);
+          self.set("serverError", false);
+          self.set("serverErrorText", "");
+          window.location.reload(true);
+        }).catch(function (err) {
+          self.set("serverSuccess", false);
+          self.set("serverError", true);
+          self.set("serverErrorText", err.responseText);
+        });
       }
     }
   });
@@ -1821,6 +1833,20 @@ define('posao-fe/models/oglas', ['exports', 'posao-fe/models/base-model'], funct
 		modelProperties: _modelProperties
 	});
 });
+define('posao-fe/models/sharedDocument', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+
+	var _modelProperties = ['owner', 'document', 'type'];
+
+	exports.default = _baseModel.default.extend({
+		modelProperties: _modelProperties
+	});
+});
 define('posao-fe/models/wrappedboolean', ['exports', 'posao-fe/models/base-model'], function (exports, _baseModel) {
 	'use strict';
 
@@ -2119,6 +2145,9 @@ define('posao-fe/services/oglasi-service', ['exports', 'posao-fe/services/base-s
         },
         getContent: function getContent(documentId) {
             return this.ajax({ url: 'content/show?id=' + documentId, type: "GET" });
+        },
+        podijeli: function podijeli(documentId, userId, type) {
+            return this.ajax({ url: 'content/sharedocument?user=' + userId + '&document=' + documentId + '&type=' + type, type: "POST" });
         }
     });
 });
