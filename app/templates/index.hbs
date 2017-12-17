@@ -37,6 +37,7 @@
             <td>{{#link-to "preview" (query-params id=oglas.id)}}
             <p>{{oglas.fileName}}</p>
             {{/link-to}}</td>
+            <td><p>{{oglas.owner.username}}</p></td>
             <td><button type="button" id="id_button" class="btn btn-primary"{{action "toggleBody" oglas.id}}>Rename</button></td>
           </tr>
           {{/each}}
