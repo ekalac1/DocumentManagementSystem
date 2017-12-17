@@ -1112,34 +1112,34 @@ define('posao-fe/controllers/registracija', ['exports'], function (exports) {
 	});
 });
 define('posao-fe/globals', ['exports'], function (exports) {
-    'use strict';
+  'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    var getTimeAgo = function getTimeAgo(timestamp) {
-        var date = new Date(timestamp);
-        var seconds = Math.floor((new Date() - date) / 1000);
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var getTimeAgo = function getTimeAgo(timestamp) {
+    var date = new Date(timestamp);
+    var seconds = Math.floor((new Date() - date) / 1000);
 
-        // manje od minute
-        if (seconds < 60) return 'Sada';
+    // manje od minute
+    if (seconds < 60) return 'Sada';
 
-        // manje od sata
-        if (seconds < 3600) return 'Prije ' + Math.floor(seconds / 60) + 'm';
+    // manje od sata
+    if (seconds < 3600) return 'Prije ' + Math.floor(seconds / 60) + 'm';
 
-        // manje od dana
-        if (seconds < 86400) {
-            return "Prije " + Math.floor(seconds / 3600) + 'h';
-        }
+    // manje od dana
+    if (seconds < 86400) {
+      return "Prije " + Math.floor(seconds / 3600) + 'h';
+    }
 
-        // manje od 2 dana
-        if (seconds < 172800) return "Jučer";
+    // manje od 2 dana
+    if (seconds < 172800) return "Jučer";
 
-        // vrati datum
-        return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.';
-    };
+    // vrati datum
+    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + '.';
+  };
 
-    exports.default = getTimeAgo;
+  exports.default = getTimeAgo;
 });
 define('posao-fe/helpers/and', ['exports', 'ember-truth-helpers/helpers/and'], function (exports, _and) {
   'use strict';
@@ -2237,6 +2237,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+14fc71e8"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+bdb7669e"});
 }
 //# sourceMappingURL=posao-fe.map
