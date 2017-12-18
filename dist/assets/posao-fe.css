@@ -397,6 +397,10 @@ margin-left:2%;
 .marginaWTF{
   margin-left: 4%;
 }
+.mybtn {
+  margin: 1%;
+  width: 155px;
+}
 /* ------------------ Navbar Breakpoints Stuff --------------*/
 @media (max-width: 1200px) {
     .navbar-header {

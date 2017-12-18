@@ -42,13 +42,12 @@
               Share <span class="caret"></span>
             {{/rl-dropdown-toggle}}
 
-            {{#rl-dropdown tagName="ul" class="dropdown-menu" closeOnChildClick="a:link"}}
+            {{#rl-dropdown tagName="ul" class="dropdown-menu" closeOnChildClick="button:click"}}
                   {{#each model.korisnik as |korisnik|}}
                     <li>
-                      <p>
-                        <input type="radio" id="question" name="question" value={{korisnik}} onselect={{action "sharingDocument" oglas.id korisnik.id NULL}}>
-                        <label for="question">{{korisnik.username}}</label>
-                      </p>
+                        <button type="button" id="question" class="btn btn-primary btn-xs mybtn" {{action "sharingDocument" oglas.id korisnik.idKorisnika NULL}}>
+                          <p>{{korisnik.username}}</p>
+                        </button>
                     </li>
                   {{/each}}
             {{/rl-dropdown}}

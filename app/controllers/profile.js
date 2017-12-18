@@ -35,9 +35,11 @@ export default Ember.Controller.extend({
         self.set("serverError", true);
         self.set("serverErrorText", err.responseText);
       });
+
+      window.location.reload(true);
     },
-    showUsers: function(){
-      this.get("korisnikService").all()
+    showUsers: function(username){
+      this.get("korisnikService").all(username)
     }
   }
 });

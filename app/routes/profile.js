@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 	model: function() {
 		let username = this.get("session.data.authenticated.username");
 		let _profil = this.get('oglasiService').all(username);
-		let _korisnici = this.get("korisnikService").all();
+		let _korisnici = this.get("korisnikService").all(username);
 
 		return Ember.RSVP.hash({
 			oglas: _profil,
