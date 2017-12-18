@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   oglasiService: Ember.inject.service('oglasi-service'),
+  korisnikService: Ember.inject.service('korisnik-service'),
   actions: {
     delete: function(documentId) {
       let korisnikId = this.get("session.data.authenticated.username");
@@ -34,6 +35,9 @@ export default Ember.Controller.extend({
         self.set("serverError", true);
         self.set("serverErrorText", err.responseText);
       });
+    },
+    showUsers: function(){
+      this.get("korisnikService").all()
     }
   }
 });

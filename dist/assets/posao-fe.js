@@ -24,6 +24,58 @@ define('posao-fe/app', ['exports', 'posao-fe/resolver', 'ember-load-initializers
 
   exports.default = App;
 });
+define('posao-fe/components/basic-dropdown', ['exports', 'ember-basic-dropdown/components/basic-dropdown'], function (exports, _basicDropdown) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function () {
+      return _basicDropdown.default;
+    }
+  });
+});
+define('posao-fe/components/basic-dropdown/content-element', ['exports', 'ember-basic-dropdown/components/basic-dropdown/content-element'], function (exports, _contentElement) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function () {
+      return _contentElement.default;
+    }
+  });
+});
+define('posao-fe/components/basic-dropdown/content', ['exports', 'ember-basic-dropdown/components/basic-dropdown/content'], function (exports, _content) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function () {
+      return _content.default;
+    }
+  });
+});
+define('posao-fe/components/basic-dropdown/trigger', ['exports', 'ember-basic-dropdown/components/basic-dropdown/trigger'], function (exports, _trigger) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function () {
+      return _trigger.default;
+    }
+  });
+});
 define('posao-fe/components/bs-accordion', ['exports', 'ember-bootstrap/components/bs-accordion'], function (exports, _bsAccordion) {
   'use strict';
 
@@ -843,6 +895,30 @@ define('posao-fe/components/radio-button', ['exports', 'ember-radio-buttons/comp
     }
   });
 });
+define('posao-fe/components/rl-dropdown-container', ['exports', 'ember-rl-dropdown/components/rl-dropdown-container'], function (exports, _rlDropdownContainer) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _rlDropdownContainer.default;
+});
+define('posao-fe/components/rl-dropdown-toggle', ['exports', 'ember-rl-dropdown/components/rl-dropdown-toggle'], function (exports, _rlDropdownToggle) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _rlDropdownToggle.default;
+});
+define('posao-fe/components/rl-dropdown', ['exports', 'ember-rl-dropdown/components/rl-dropdown'], function (exports, _rlDropdown) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _rlDropdown.default;
+});
 define('posao-fe/components/welcome-page', ['exports', 'ember-welcome-page/components/welcome-page'], function (exports, _welcomePage) {
   'use strict';
 
@@ -990,6 +1066,7 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
   exports.default = Ember.Controller.extend({
     session: Ember.inject.service('session'),
     oglasiService: Ember.inject.service('oglasi-service'),
+    korisnikService: Ember.inject.service('korisnik-service'),
     actions: {
       delete: function _delete(documentId) {
         var korisnikId = this.get("session.data.authenticated.username");
@@ -1022,6 +1099,9 @@ define('posao-fe/controllers/profile', ['exports'], function (exports) {
           self.set("serverError", true);
           self.set("serverErrorText", err.responseText);
         });
+      },
+      showUsers: function showUsers() {
+        this.get("korisnikService").all();
       }
     }
   });
@@ -1970,6 +2050,7 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 	exports.default = Ember.Route.extend({
 		oglasiService: Ember.inject.service('oglasi-service'),
 		session: Ember.inject.service('session'),
+		korisnikService: Ember.inject.service('korisnik-service'),
 
 		beforeModel: function beforeModel() {
 
@@ -1981,9 +2062,11 @@ define('posao-fe/routes/profile', ['exports'], function (exports) {
 		model: function model() {
 			var username = this.get("session.data.authenticated.username");
 			var _profil = this.get('oglasiService').all(username);
+			var _korisnici = this.get("korisnikService").all();
 
 			return Ember.RSVP.hash({
-				oglas: _profil
+				oglas: _profil,
+				korisnik: _korisnici
 			});
 		}
 	});
@@ -2092,8 +2175,8 @@ define('posao-fe/services/file-queue', ['exports', 'ember-file-upload/services/f
     }
   });
 });
-define("posao-fe/services/korisnik-service", ["exports", "posao-fe/services/base-service"], function (exports, _baseService) {
-    "use strict";
+define('posao-fe/services/korisnik-service', ['exports', 'posao-fe/services/base-service', 'posao-fe/models/korisnik'], function (exports, _baseService, _korisnik) {
+    'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
@@ -2101,7 +2184,16 @@ define("posao-fe/services/korisnik-service", ["exports", "posao-fe/services/base
     exports.default = _baseService.default.extend({
 
         register: function register(korisnik) {
-            return this.ajax({ url: "korisnici/register", type: "POST", data: JSON.stringify(korisnik) });
+            return this.ajax({ url: 'korisnici/register', type: "POST", data: JSON.stringify(korisnik) });
+        },
+        all: function all() {
+            var korisnici = [];
+            this.ajax({ url: 'korisnici', type: "GET" }).then(function (data) {
+                data.forEach(function (korisnik) {
+                    korisnici.addObject(_korisnik.default.create(korisnik));
+                });
+            });
+            return korisnici;
         }
     });
 });
@@ -2196,6 +2288,14 @@ define("posao-fe/templates/components/file-picker", ["exports"], function (expor
   });
   exports.default = Ember.HTMLBars.template({ "id": "19sYRA+Q", "block": "{\"statements\":[[6,[\"if\"],[[28,[\"dropzone\"]]],null,{\"statements\":[[0,\"  \"],[11,\"div\",[]],[15,\"class\",\"file-picker__dropzone\"],[13],[0,\"\\n    \"],[18,\"default\"],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},{\"statements\":[[0,\"  \"],[18,\"default\"],[0,\"\\n\"]],\"locals\":[]}],[0,\"\\n\"],[6,[\"if\"],[[28,[\"preview\"]]],null,{\"statements\":[[0,\"  \"],[11,\"div\",[]],[15,\"class\",\"file-picker__preview\"],[13],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"\\n\"],[6,[\"if\"],[[28,[\"progress\"]]],null,{\"statements\":[[6,[\"if\"],[[28,[\"showProgress\"]]],null,{\"statements\":[[6,[\"if\"],[[28,[\"isProgressSupported\"]]],null,{\"statements\":[[0,\"      \"],[11,\"progress\",[]],[16,\"value\",[26,[\"progressValue\"]],null],[15,\"max\",\"100\"],[15,\"class\",\"file-picker__progress\"],[13],[1,[26,[\"progress\"]],false],[0,\" %\"],[14],[0,\"\\n\"]],\"locals\":[]},{\"statements\":[[0,\"      \"],[11,\"div\",[]],[15,\"class\",\"file-picker__progress\"],[13],[0,\"\\n        \"],[11,\"span\",[]],[15,\"class\",\"file-picker__progress__value\"],[16,\"style\",[26,[\"progressStyle\"]],null],[13],[14],[0,\"\\n      \"],[14],[0,\"\\n\"]],\"locals\":[]}]],\"locals\":[]},null]],\"locals\":[]},null],[0,\"\\n\"],[1,[33,[\"input\"],null,[[\"type\",\"value\",\"accept\",\"multiple\",\"class\"],[\"file\",[28,[\"file\"]],[28,[\"accept\"]],[28,[\"multiple\"]],\"file-picker__input\"]]],false],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[\"default\"],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/components/file-picker.hbs" } });
 });
+define("posao-fe/templates/components/rl-dropdown-container", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "7jLi8mBW", "block": "{\"statements\":[[18,\"default\",[[28,[\"dropdownExpanded\"]]]],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[\"default\"],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/components/rl-dropdown-container.hbs" } });
+});
 define("posao-fe/templates/error", ["exports"], function (exports) {
   "use strict";
 
@@ -2234,7 +2334,7 @@ define("posao-fe/templates/profile", ["exports"], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "bpk9h+bj", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"form\",[]],[16,\"onsubmit\",[33,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]],null],null],[13],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"              \"],[11,\"td\",[]],[15,\"class\",\"imeInputP\"],[13],[11,\"p\",[]],[13],[0,\"Unesite novo ime dokumenta:\"],[14],[14],[0,\"\\n              \"],[11,\"td\",[]],[15,\"class\",\"imeInput\"],[13],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control input-sm\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"        \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/other.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}],[0,\"          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[6,[\"link-to\"],[\"preview\",[33,[\"query-params\"],null,[[\"id\"],[[28,[\"oglas\",\"id\"]]]]]],null,{\"statements\":[[0,\"\\n          \"],[11,\"p\",[]],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n          \"]],\"locals\":[]},null],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[0,\"\\n          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary\"],[5,[\"action\"],[[28,[null]],\"delete\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Delete\"],[14],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "k0Nvg7T5", "block": "{\"statements\":[[11,\"div\",[]],[15,\"class\",\"profilePage\"],[13],[0,\"\\n\\n  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"div\",[]],[15,\"class\",\"col-xs-12 text-center\"],[13],[0,\"\\n      \"],[11,\"h1\",[]],[13],[0,\"Dobrodošli \"],[1,[28,[\"session\",\"data\",\"authenticated\",\"username\"]],false],[14],[0,\"\\n      \"],[11,\"p\",[]],[13],[0,\"Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite \\\"Drag here or click to upload a file\\\".\"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\\n\"],[6,[\"if\"],[[28,[\"model\",\"oglas\",\"length\"]]],null,{\"statements\":[[0,\"  \"],[11,\"form\",[]],[15,\"class\",\"distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 \"],[13],[0,\"\\n    \"],[11,\"table\",[]],[13],[0,\"\\n      \"],[11,\"tbody\",[]],[13],[0,\"\\n        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"form\",[]],[16,\"onsubmit\",[33,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]],null],null],[13],[0,\"\\n\"],[6,[\"if\"],[[28,[\"isShowingBody\"]]],null,{\"statements\":[[0,\"              \"],[11,\"td\",[]],[15,\"class\",\"imeInputP\"],[13],[11,\"p\",[]],[13],[0,\"Unesite novo ime dokumenta:\"],[14],[14],[0,\"\\n              \"],[11,\"td\",[]],[15,\"class\",\"imeInput\"],[13],[1,[33,[\"input\"],null,[[\"type\",\"class\",\"id\",\"placeholder\",\"value\"],[\"text\",\"form-control input-sm\",\"newName\",\"Novo ime\",[28,[\"ime\"]]]]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"        \"],[14],[0,\"\\n        \"],[14],[0,\"\\n\"],[6,[\"each\"],[[28,[\"model\",\"oglas\"]]],null,{\"statements\":[[0,\"        \"],[11,\"tr\",[]],[13],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n            \"],[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"text/plain\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/txt.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/png\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/png.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/pdf\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/pdf.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpeg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"image/jpg\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/jpg.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/doc.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[6,[\"if\"],[[33,[\"eq\"],[[28,[\"oglas\",\"datatype\"]],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"],null]],null,{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/xls.png\"],[15,\"alt\",\"txt\"],[13],[14],[0,\"\\n            \"]],\"locals\":[]},{\"statements\":[[11,\"img\",[]],[15,\"class\",\"img-responsive\"],[15,\"src\",\"../assets/images/other.png\"],[15,\"alt\",\"txt\"],[13],[14]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}]],\"locals\":[]}],[0,\"          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n\"],[6,[\"link-to\"],[\"preview\",[33,[\"query-params\"],null,[[\"id\"],[[28,[\"oglas\",\"id\"]]]]]],null,{\"statements\":[[0,\"              \"],[11,\"p\",[]],[13],[1,[28,[\"oglas\",\"fileName\"]],false],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[0,\"\\n\"],[6,[\"rl-dropdown-container\"],null,[[\"class\"],[\"dropdown\"]],{\"statements\":[[6,[\"rl-dropdown-toggle\"],null,[[\"class\"],[\"btn btn-primary\"]],{\"statements\":[[0,\"              Share \"],[11,\"span\",[]],[15,\"class\",\"caret\"],[13],[14],[0,\"\\n\"]],\"locals\":[]},null],[0,\"\\n\"],[6,[\"rl-dropdown\"],null,[[\"tagName\",\"class\",\"closeOnChildClick\"],[\"ul\",\"dropdown-menu\",\"a:link\"]],{\"statements\":[[6,[\"each\"],[[28,[\"model\",\"korisnik\"]]],null,{\"statements\":[[0,\"                    \"],[11,\"li\",[]],[13],[0,\"\\n                      \"],[11,\"p\",[]],[13],[0,\"\\n                        \"],[11,\"input\",[]],[15,\"type\",\"radio\"],[15,\"id\",\"question\"],[15,\"name\",\"question\"],[16,\"value\",[28,[\"korisnik\"]],null],[16,\"onselect\",[33,[\"action\"],[[28,[null]],\"sharingDocument\",[28,[\"oglas\",\"id\"]],[28,[\"korisnik\",\"id\"]],[28,[\"NULL\"]]],null],null],[13],[14],[0,\"\\n                        \"],[11,\"label\",[]],[15,\"for\",\"question\"],[13],[1,[28,[\"korisnik\",\"username\"]],false],[14],[0,\"\\n                      \"],[14],[0,\"\\n                    \"],[14],[0,\"\\n\"]],\"locals\":[\"korisnik\"]},null]],\"locals\":[]},null]],\"locals\":[]},null],[0,\"          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary\"],[5,[\"action\"],[[28,[null]],\"toggleBody\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Rename\"],[14],[0,\"\\n          \"],[14],[0,\"\\n          \"],[11,\"td\",[]],[13],[11,\"button\",[]],[15,\"type\",\"button\"],[15,\"class\",\"btn btn-primary\"],[5,[\"action\"],[[28,[null]],\"delete\",[28,[\"oglas\",\"id\"]]]],[13],[0,\"Delete\"],[14],[14],[0,\"\\n        \"],[14],[0,\"\\n\"]],\"locals\":[\"oglas\"]},null],[0,\"      \"],[14],[0,\"\\n    \"],[14],[0,\"\\n  \"],[14],[0,\"\\n\"]],\"locals\":[]},null],[14],[0,\"\\n\"]],\"locals\":[],\"named\":[],\"yields\":[],\"hasPartials\":false}", "meta": { "moduleName": "posao-fe/templates/profile.hbs" } });
 });
 define("posao-fe/templates/registracija", ["exports"], function (exports) {
   "use strict";
@@ -2266,6 +2366,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+bdb7669e"});
+  require("posao-fe/app")["default"].create({"LOG_ACTIVE_GENERATION":true,"LOG_TRANSITIONS":true,"LOG_TRANSITIONS_INTERNAL":true,"LOG_VIEW_LOOKUPS":true,"name":"posao-fe","version":"0.0.0+fc51c6d4"});
 }
 //# sourceMappingURL=posao-fe.map

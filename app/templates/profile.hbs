@@ -31,9 +31,29 @@
             {{else if (eq oglas.datatype "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}}<img class="img-responsive" src="../assets/images/xls.png" alt="txt">
             {{else}}<img class="img-responsive" src="../assets/images/other.png" alt="txt">{{/if}}
           </td>
-          <td>{{#link-to "preview" (query-params id=oglas.id)}}
-          <p>{{oglas.fileName}}</p>
-          {{/link-to}}</td>
+          <td>
+            {{#link-to "preview" (query-params id=oglas.id)}}
+              <p>{{oglas.fileName}}</p>
+            {{/link-to}}
+          </td>
+          <td>
+            {{#rl-dropdown-container class="dropdown"}}
+            {{#rl-dropdown-toggle class="btn btn-primary"}}
+              Share <span class="caret"></span>
+            {{/rl-dropdown-toggle}}
+
+            {{#rl-dropdown tagName="ul" class="dropdown-menu" closeOnChildClick="a:link"}}
+                  {{#each model.korisnik as |korisnik|}}
+                    <li>
+                      <p>
+                        <input type="radio" id="question" name="question" value={{korisnik}} onselect={{action "sharingDocument" oglas.id korisnik.id NULL}}>
+                        <label for="question">{{korisnik.username}}</label>
+                      </p>
+                    </li>
+                  {{/each}}
+            {{/rl-dropdown}}
+            {{/rl-dropdown-container}}
+          </td>
           <td><button type="button" class="btn btn-primary" {{action "toggleBody" oglas.id}}>Rename</button>
           </td>
           <td><button type="button" class="btn btn-primary"{{action 'delete' oglas.id}}>Delete</button></td>
