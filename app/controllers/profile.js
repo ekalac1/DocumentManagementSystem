@@ -11,12 +11,11 @@ export default Ember.Controller.extend({
         window.location.reload(true);
       });
     },
-    toggleBody(documentId) {
-      this.toggleProperty('isShowingBody');
+    preimenuj(documentId) {
       var username = this.get("session.data.authenticated.username");
       var newName= this.get("ime") ;
       if (newName != null){
-        this.get("oglasiService").rename(username, documentId, newName).then(x => {
+         this.get("oglasiService").rename(username, documentId, newName).then(x => {
          window.location.reload(true);
         });
       }

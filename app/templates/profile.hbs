@@ -3,7 +3,8 @@
   <form class="distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 ">
     <div class="col-xs-12 text-center">
       <h1>Dobrodošli {{session.data.authenticated.username}}</h1>
-      <p>Ovo je vaš profil, na kojem možete vidjeti sve fajlove koje ste unijeli do sada. Da bi unijeli fajl, u gornjem desnom uglu izaberite "Drag here or click to upload a file".</p>
+      <br>
+      <p>Ovo je vaš profil na kojem možete vidjeti sve fajlove koje ste učitali do sada. Kako bi učitali novi fajl, koristite opciju "Drag here or click to upload a file" u gornjem desnom uglu.</p>
     </div>
   </form>
 
@@ -11,14 +12,14 @@
   <form class="distinct-page-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 ">
     <table >
       <tbody>
-        <tr>
+        <!--<tr>
           <form onsubmit = {{action "toggleBody" oglas.id}}>
           {{#if isShowingBody}}
               <td class = "imeInputP"><p>Unesite novo ime dokumenta:</p></td>
-              <td class = "imeInput">{{input type="text" class="form-control input-sm" id="newName" placeholder="Novo ime" value=ime}}</td>
+              <td class = "imeInput">{{input type="text" class="form-control input-sm my" id="newName" placeholder="Novo ime dokumenta" value=ime}}</td>
           {{/if}}
         </form>
-        </tr>
+      </tr>-->
         {{#each model.oglas as |oglas|}}
         <tr>
           <td>
@@ -39,7 +40,7 @@
           <td>
             {{#rl-dropdown-container class="dropdown"}}
             {{#rl-dropdown-toggle class="btn btn-primary"}}
-              Share <span class="caret"></span>
+              Podijeli <span class="caret"></span>
             {{/rl-dropdown-toggle}}
 
             {{#rl-dropdown tagName="ul" class="dropdown-menu" closeOnChildClick="button:click"}}
@@ -53,9 +54,10 @@
             {{/rl-dropdown}}
             {{/rl-dropdown-container}}
           </td>
-          <td><button type="button" class="btn btn-primary" {{action "toggleBody" oglas.id}}>Rename</button>
+          <td>{{input type="text" value=ime class = "form-control" placeholder = "Novo ime dokumenta"}}</td>
+          <td><button type="button" class="btn btn-primary" {{action "preimenuj" oglas.id}}>Preimenuj</button>
           </td>
-          <td><button type="button" class="btn btn-primary"{{action 'delete' oglas.id}}>Delete</button></td>
+          <td><button type="button" class="btn btn-primary" {{action 'delete' oglas.id}}>Obriši</button></td>
         </tr>
         {{/each}}
       </tbody>

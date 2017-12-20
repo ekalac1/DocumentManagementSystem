@@ -24,7 +24,7 @@
             {{#if usernameError}}
             <span class="greskaUnosa">{{imeVarijable}}</span>
             {{/if}}
-            {{input type="text" class="form-control" id="inputUsername1" placeholder="Username" value=username}}
+            {{input type="text" class="form-control" id="inputUsername1" placeholder="Korisničko ime" value=username}}
           </div>
 
           <div class="form-group pomjereniTextBox">
@@ -32,15 +32,15 @@
             {{#if passwordError}}
             <span class="greskaUnosa">Password mora imati minimalno 6 karaktera i to samo slova, brojeve i znakove +-_*:.,;?!$#!</span>
             {{/if}}
-            {{input type="password" class="form-control" id="inputPassword3" placeholder="Password" value=password}}
+            {{input type="password" class="form-control" id="inputPassword3" placeholder="Lozinka" value=password}}
           </div>
 
           <div class="form-group pomjereniTextBox">
-            <label for="inputEmail3">Email:</label><br>
+            <label for="inputEmail3">Email adresa:</label><br>
             {{#if emailError}}
             <span class="greskaUnosa">Morate unijeti validan email!</span>
             {{/if}}
-            {{input type="email" class="form-control" id="inputEmail3" placeholder="Email" value=email}}
+            {{input type="email" class="form-control" id="inputEmail3" placeholder="Email adresa" value=email}}
           </div>
 
           <div class="form-group pomjereniTextBox">
@@ -48,9 +48,9 @@
             {{#if ponovljeniPassError}}
             <span class="greskaUnosa">Unosi lozinke se ne podudaraju.</span>
             {{/if}}
-            {{input type="password" class="form-control" id="inputPassword3_pon" placeholder="Password" value=ponovljeniPass}}
+            {{input type="password" class="form-control" id="inputPassword3_pon" placeholder="Ponovljena lozinka" value=ponovljeniPass}}
           </div>
-          
+
           {{#if serverSuccess}}
             <p>Uspješno ste registrovani!</p>
           {{/if}}
@@ -58,7 +58,7 @@
             <p>Nažalost, došlo je do greške prilikom registracije.</p>
             <p>{{serverErrorText}}</p>
           {{/if}}
-                    
+
           <div class="form-group text-center">
               <button type="submit" class="btn btn-success" {{action 'register'}}>Registruj se</button>
           </div>
